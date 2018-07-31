@@ -1,0 +1,13 @@
+.box {
+	width: 200px;
+    border: 1px solid green;
+    border-color: #b272b0; 
+    background-color: #c97ac6;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+.box:hover {
+   background-color: #845283;
+}
