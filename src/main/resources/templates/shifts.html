@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -7,16 +7,10 @@
 	<title>Page Title</title>
 </head>
 <body>
-
-	<h1>Fejléc</h1>
-
-	
 	<p>Műszakok</p>
 	<article class="box blue" th:each="shift : ${shifts}">
 		<span th:utext="${#dates.format(shift.date, 'yyyy-MM-dd')}">Dátum</span>
 		<span th:utext="${shift.start}">Kezdődik</span>-<span th:utext="${shift.end}">Vége</span>
 	</article>
-
-
 </body>
 </html>
