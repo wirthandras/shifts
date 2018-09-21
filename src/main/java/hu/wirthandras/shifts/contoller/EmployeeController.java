@@ -19,5 +19,11 @@ public class EmployeeController {
 		model.addAttribute("employee", service.getEmployee(id));
 		return "employee";
 	}
+	
+	@RequestMapping("/employees")
+	public String employee(Model model) {
+		model.addAttribute("employees", service.getEmployees());
+		return "employees";
+	}
 
 }

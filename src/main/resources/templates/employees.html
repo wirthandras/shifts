@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/button.css">
+<title>Page Title</title>
+</head>
+<body>
+	<h1>Employees</h1>
+	<article th:each="employee : ${employees}" class="box blue">
+		<span th:utext="${employee.name}">Name</span><br>
+		<span th:utext="${employee.job}">Job</span><br>
+		<a th:href="@{/employee/} + ${employee.id}">Link</a>			
+	</article>
+</body>
+</html>
