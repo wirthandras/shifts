@@ -4,23 +4,24 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class AmbulanceCar {
+public class Car {
 
-	@GeneratedValue
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String licensePlateNumber;
 	@Enumerated(EnumType.STRING)
 	private CarType carType;
 
-	public AmbulanceCar() {
+	public Car() {
 
 	}
 
-	public AmbulanceCar(String licensePlateNumber, CarType carType) {
+	public Car(String licensePlateNumber, CarType carType) {
 		super();
 		this.licensePlateNumber = licensePlateNumber;
 		this.carType = carType;
