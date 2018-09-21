@@ -1,6 +1,8 @@
 package hu.wirthandras.shifts.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -9,18 +11,17 @@ import javax.persistence.Id;
 public class Employee {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	//TODO change type
-	private String job;
-	
-	
+	@Enumerated(EnumType.STRING)
+	private Job job;
+
 	public Employee() {
-		
+
 	}
 
-	public Employee(String name, String job) {
+	public Employee(String name, Job job) {
 		super();
 		this.name = name;
 		this.job = job;
@@ -42,12 +43,12 @@ public class Employee {
 		this.name = name;
 	}
 
-	public String getJob() {
+	public Job getJob() {
 		return job;
 	}
 
-	public void setJob(String job) {
+	public void setJob(Job job) {
 		this.job = job;
 	}
-	
+
 }
