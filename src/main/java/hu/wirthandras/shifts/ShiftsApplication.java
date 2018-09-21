@@ -9,4 +9,5 @@ public class ShiftsApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ShiftsApplication.class, args);
 	}
+	
 }

@@ -6,20 +6,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Emloyee {
+public class Employee {
 
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private Job job;
+	//TODO change type
+	private String job;
 	
 	
-	public Emloyee() {
-		super();
+	public Employee() {
+		
 	}
 
-	public Emloyee(String name, Job job) {
+	public Employee(String name, String job) {
 		super();
 		this.name = name;
 		this.job = job;
@@ -41,11 +42,11 @@ public class Emloyee {
 		this.name = name;
 	}
 
-	public Job getJob() {
+	public String getJob() {
 		return job;
 	}
 
-	public void setJob(Job job) {
+	public void setJob(String job) {
 		this.job = job;
 	}
 	
