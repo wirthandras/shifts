@@ -7,7 +7,7 @@
 	<groupId>hu.wirthandras.shifts</groupId>
 	<artifactId>Shifts</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>Shifts</name>
 	<description>This a web application which helps scheduling the paramedic shifts</description>
@@ -53,11 +53,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
 		</dependency>
 
 
