@@ -21,6 +21,10 @@ public class ShiftService {
 	public List<Shift> getAll() {
 		return shiftRepository.findAll();
 	}
-	
+
+	public Shift getShift(String idAsString) {
+		Long id = Long.parseLong(idAsString);
+		return shiftRepository.findById(id).get();
+	}
 	
 }

@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<link rel="stylesheet" type="text/css" href="css/button.css">
-	<title>Shifts</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<link rel="stylesheet" type="text/css" href="/css/button.css">
+	<title>Shift</title>
 </head>
 <body>
-	<p>Shifts</p>
-	<article class="box blue" th:each="shift : ${shifts}">
+	<p>Shift</p>
+	<article class="box blue">
 		<span th:utext="${#dates.format(shift.date, 'yyyy-MM-dd')}">Date</span>
 		<span th:utext="${shift.start}">Start</span>-<span th:utext="${shift.end}">Finish</span>
 	</article>
