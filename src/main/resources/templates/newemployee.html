@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/button.css">
+<title th:utext="#{NewEmployee}">New Employee</title>
+</head>
+<body>
+	<h1 th:utext="#{NewEmployee}">New Employee</h1>
+	<form th:action="@{/newemployeesave}" th:object="${newemployee}" method="post">
+		Name:<br> <input type="text" name="name" id="name"
+			placeholder="Name"> <br> Job:<br> <input
+			type="text" name="job" id="job" placeholder="Job"> <br>
+		<br> <input type="submit" value="Submit">
+	</form>
+</body>
+</html>

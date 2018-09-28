@@ -11,8 +11,12 @@ import hu.wirthandras.shifts.repository.EmployeeRepository;
 @Service
 public class EmployeeService {
 
-	@Autowired
 	private EmployeeRepository repository;
+	
+	@Autowired
+	public void setEmployeeRepository(EmployeeRepository repo) {
+		this.repository = repo;
+	}
 
 	public Employee getEmployee(String idAsString) {
 		long id = Long.parseLong(idAsString);
@@ -21,6 +25,10 @@ public class EmployeeService {
 
 	public List<Employee> getEmployees() {
 		return repository.findAll();
+	}
+	
+	public void save(Employee e) {
+		repository.save(e);
 	}
 
 }

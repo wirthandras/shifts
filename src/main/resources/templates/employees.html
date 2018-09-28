@@ -8,6 +8,8 @@
 </head>
 <body>
 	<h1 th:utext="#{Employees}">Employees</h1>
+	<a href="newemployee" class="box blue">New			
+	</a>
 	<article th:each="employee : ${employees}" class="box blue">
 		<span th:utext="${employee.name}">Name</span><br>
 		<span th:utext="#{${employee.job}}">Job</span><br>
