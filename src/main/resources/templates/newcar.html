@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/button.css">
+<title th:utext="#{NewCar}">New Car</title>
+</head>
+<body>
+	<h1 th:utext="#{NewCar}">New Car</h1>
+	<form th:action="@{/newcarsave}" th:object="${newcar}" method="post">
+		Rendszám:<br> <input type="text" name="licensePlateNumber" id="licensePlateNumber"
+			placeholder="Rendszam"> <br> Típus:<br> <input
+			type="text" name="carType" id="carType" placeholder="Típus"> <br>
+		<br> <input type="submit" value="Submit">
+	</form>
+</body>
+</html>
