@@ -10,7 +10,7 @@
 	<h1>Kocsik</h1>
 	<a href="newcar" class="box blue">New Car</a>
 	<article th:each="car : ${cars}" class="box blue">
-		<span th:utext="${car.licensePlateNumber}">Rendszám</span><br>
+		<span th:utext="${car.plateNumber}">Rendszám</span><br>
 		<span th:utext="${car.carType}">Típus</span><br>
 		<a th:href="@{/car/} + ${car.id}">Link</a>			
 	</article>

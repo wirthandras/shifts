@@ -10,6 +10,8 @@ import hu.wirthandras.shifts.services.ShiftService;
 
 @Controller
 public class ShiftController {
+	
+	private static final String templateFolder = "shift/";
 
 	private ShiftService shiftService;
 
@@ -21,12 +23,12 @@ public class ShiftController {
 	@RequestMapping("shifts")
 	public String shifts(Model model) {
 		model.addAttribute("shifts", shiftService.getAll());
-		return "shifts";
+		return templateFolder + "shifts";
 	}
 	
 	@RequestMapping("shift/{id}")
 	public String shift(@PathVariable String id, Model model) {
 		model.addAttribute("shift", shiftService.getShift(id));
-		return "shift";
+		return templateFolder + "shift";
 	}
 }

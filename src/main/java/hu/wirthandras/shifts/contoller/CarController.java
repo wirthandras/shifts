@@ -14,30 +14,32 @@ import hu.wirthandras.shifts.services.CarService;
 @Controller
 public class CarController {
 	
+	private static final String templateFolder = "car/";
+	
 	@Autowired
 	private CarService service;
 
 	@GetMapping("/car/{id}")
 	public String car(@PathVariable String id, Model model) {
 		model.addAttribute("car", service.getCar(id));
-		return "car";
+		return templateFolder + "car";
 	}
 	
 	@GetMapping("/cars")
 	public String car(Model model) {
 		model.addAttribute("cars", service.getCars());
-		return "cars";
+		return templateFolder + "cars";
 	}
 	
 	@GetMapping("/newcar")
 	public String newCar(@ModelAttribute("newcar") Car car) {
-		return "newcar";
+		return templateFolder + "newcar";
 	}
 	
 	@PostMapping(value="/newcar")
 	public String newCarSave(@ModelAttribute Car car) {
 		service.save(car);
-		return "redirect:newcar";
+		return "redirect:" + templateFolder + "newcar";
 	}
 	
 }

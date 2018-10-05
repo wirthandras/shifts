@@ -14,30 +14,32 @@ import hu.wirthandras.shifts.services.EmployeeService;
 @Controller
 public class EmployeeController {
 	
+	private static final String templateFolder = "employee/";
+	
 	@Autowired
 	private EmployeeService service;
 	
 	@GetMapping("employee/{id}")
 	public String employee(@PathVariable String id, Model model) {
 		model.addAttribute("employee", service.getEmployee(id));
-		return "employee";
+		return templateFolder + "employee";
 	}
 	
 	@GetMapping("employees")
 	public String employee(Model model) {
 		model.addAttribute("employees", service.getEmployees());
-		return "employees";
+		return templateFolder + "employees";
 	}
 	
 	@GetMapping("/newemployee")
 	public String newEmployee(@ModelAttribute("newemployee") Employee e) {
-		return "newemployee";
+		return templateFolder + "newemployee";
 	}
 	
 	@PostMapping(value="/newemployee")
 	public String newEmployeeSave(@ModelAttribute Employee e) {
 		service.save(e);
-		return "redirect:newemployee";
+		return "redirect:" + templateFolder + "newemployee";
 	}
 
 }
