@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1 th:utext="#{NewEmployee}">New Employee</h1>
-	<form th:action="@{/newemployeesave}" th:object="${newemployee}" method="post">
+	<form th:action="@{/newemployee}" th:object="${newemployee}" method="post">
 		Name:<br> <input type="text" name="name" id="name"
 			placeholder="Name"> <br> Job:<br> <input
 			type="text" name="job" id="job" placeholder="Job"> <br>
