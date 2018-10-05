@@ -7,4 +7,4 @@ insert into EMPLOYEE (name,job) values ('marci','DRIVER')
 insert into EMPLOYEE (name,job) values ('Józsi','DOCTOR')
 insert into EMPLOYEE (name,job) values ('Béla','MEDIC')
 
-insert into CAR (license_plate_number,car_type) values ('HHH-001','KIM')
+insert into CAR (plate_number,car_type) values ('HHH-001','KIM')

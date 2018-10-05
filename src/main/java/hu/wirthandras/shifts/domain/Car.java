@@ -13,7 +13,7 @@ public class Car {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	private String licensePlateNumber;
+	private String plateNumber;
 	@Enumerated(EnumType.STRING)
 	private CarType carType;
 
@@ -21,9 +21,9 @@ public class Car {
 
 	}
 
-	public Car(String licensePlateNumber, CarType carType) {
+	public Car(String plateNumber, CarType carType) {
 		super();
-		this.licensePlateNumber = licensePlateNumber;
+		this.plateNumber = plateNumber;
 		this.carType = carType;
 	}
 
@@ -35,12 +35,12 @@ public class Car {
 		this.id = id;
 	}
 
-	public String getLicensePlateNumber() {
-		return licensePlateNumber;
+	public String getPlateNumber() {
+		return plateNumber;
 	}
 
-	public void setLicensePlateNumber(String licensePlateNumber) {
-		this.licensePlateNumber = licensePlateNumber;
+	public void setPlateNumber(String plateNumber) {
+		this.plateNumber = plateNumber;
 	}
 
 	public CarType getCarType() {
