@@ -1,4 +1,4 @@
-package hu.wirthandras.shifts.domain;
+package hu.wirthandras.shifts.domain.car;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -6,6 +6,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Car {
@@ -13,6 +14,8 @@ public class Car {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	@NotBlank
+	@PlateNumberConstraint
 	private String plateNumber;
 	@Enumerated(EnumType.STRING)
 	private CarType carType;

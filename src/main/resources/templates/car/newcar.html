@@ -13,7 +13,7 @@
 		<br>
 		<span th:utext="#{Type}">Type</span>:<br>
 		<select name="carType">
-			<option th:each="state : ${T(hu.wirthandras.shifts.domain.CarType).values()}"
+			<option th:each="state : ${T(hu.wirthandras.shifts.domain.car.CarType).values()}"
 				th:value="${state}"	th:text="${state}">
 			</option>
 		</select>

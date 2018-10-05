@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import hu.wirthandras.shifts.domain.Car;
+import hu.wirthandras.shifts.domain.car.Car;
 import hu.wirthandras.shifts.repository.CarRepository;
 
 @Service
