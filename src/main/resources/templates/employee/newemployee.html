@@ -9,10 +9,15 @@
 <body>
 	<h1 th:utext="#{NewEmployee}">New Employee</h1>
 	<form th:action="@{/newemployee}" th:object="${newemployee}" method="post">
-		Name:<br> <input type="text" name="name" id="name"
-			placeholder="Name"> <br> Job:<br> <input
-			type="text" name="job" id="job" placeholder="Job"> <br>
-		<br> <input type="submit" value="Submit">
+		<input type="text" name="name" th:placeholder="#{Name}">
+		<br>
+		<select name="job">
+			<option th:each="state : ${T(hu.wirthandras.shifts.domain.Job).values()}"
+				th:value="${state}"	th:text="#{${state}}">
+			</option>
+		</select>
+		<br>
+		<input type="submit" value="Submit">
 	</form>
 </body>
 </html>

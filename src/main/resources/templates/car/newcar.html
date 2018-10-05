@@ -9,10 +9,16 @@
 <body>
 	<h1 th:utext="#{NewCar}">New Car</h1>
 	<form th:action="@{/newcar}" th:object="${newcar}" method="post">
-		Rendszám:<br> <input type="text" name="licensePlateNumber" id="licensePlateNumber"
-			placeholder="Rendszam"> <br> Típus:<br> <input
-			type="text" name="carType" id="carType" placeholder="Típus"> <br>
-		<br> <input type="submit" value="Submit">
+		<input type="text" name="plateNumber" th:placeholder="#{PlateNumber}">
+		<br>
+		<span th:utext="#{Type}">Type</span>:<br>
+		<select name="carType">
+			<option th:each="state : ${T(hu.wirthandras.shifts.domain.CarType).values()}"
+				th:value="${state}"	th:text="${state}">
+			</option>
+		</select>
+		<br>
+		<input type="submit" value="Submit">
 	</form>
 </body>
 </html>
