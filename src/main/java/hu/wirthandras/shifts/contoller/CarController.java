@@ -39,7 +39,7 @@ public class CarController {
 	@PostMapping(value="/newcar")
 	public String newCarSave(@ModelAttribute Car car) {
 		service.save(car);
-		return "redirect:" + templateFolder + "newcar";
+		return "redirect:newcar";
 	}
 	
 }
