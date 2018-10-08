@@ -3,12 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/css/style.css">
-<link rel="stylesheet" type="text/css" href="/css/button.css">
 <title th:utext="#{car}">Car</title>
 </head>
 <body>
 	<div th:insert="/fragments/nav.html"></div>
-	<article class="box blue">
+	<article class="box">
 		<span th:utext="${car.plateNumber}">Plate number</span> <span
 			th:utext="${car.carType}">Type</span>
 	</article>

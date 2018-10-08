@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/css/style.css">
-<link rel="stylesheet" type="text/css" href="/css/button.css">
 <title th:utext="#{employees}">Employees</title>
 </head>
 <body>
 	<div th:insert="/fragments/nav.html"></div>
 	<div>
-		<article th:each="employee : ${employees}" class="box blue">
+		<article th:each="employee : ${employees}" class="box">
 			<span th:utext="${employee.name}">Name</span><br> <span
 				th:utext="#{${employee.job}}">Job</span><br> <a
 				th:href="@{/employee/} + ${employee.id}">Link</a>

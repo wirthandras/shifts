@@ -3,12 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/css/style.css">
-<link rel="stylesheet" type="text/css" href="/css/button.css">
 <title th:utext="#{newCar}">New Car</title>
 </head>
 <body>
 	<div th:insert="/fragments/nav.html"></div>
-	<form th:action="@{/newcar}" th:object="${newcar}" method="post">
+	<form class="box" th:action="@{/newcar}" th:object="${newcar}" method="post">
 		<input type="text" name="plateNumber" th:placeholder="#{plateNumber}">
 		<br>
 		<span th:utext="#{type}">Type</span>:<br>

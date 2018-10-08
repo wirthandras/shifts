@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/css/style.css">
-<link rel="stylesheet" type="text/css" href="/css/button.css">
 <title th:utext="#{newEmployee}">New Employee</title>
 </head>
 <body>
 	<div th:insert="/fragments/nav.html"></div>
-	<form th:action="@{/newemployee}" th:object="${newemployee}" method="post">
-		<input type="text" name="name" th:placeholder="#{name}">
+	<form class="box" th:action="@{/newemployee}" th:object="${newemployee}" method="post">
+		<input type="text" name="name" th:placeholder="#{name}" autocomplete="off" autofocus="autofocus">
 		<br>
 		<select name="job">
 			<option th:each="state : ${T(hu.wirthandras.shifts.domain.Job).values()}"

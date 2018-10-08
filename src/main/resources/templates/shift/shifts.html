@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/css/style.css">
-<link rel="stylesheet" type="text/css" href="/css/button.css">
 <title th:utext="#{shifts}">Shifts</title>
 </head>
 <body>
 	<div th:insert="/fragments/nav.html"></div>
 	<div class="main">
-		<article class="box blue" th:each="shift : ${shifts}">
+		<article class="box" th:each="shift : ${shifts}">
 			<span th:utext="${#dates.format(shift.date, 'yyyy-MM-dd')}">Date</span>
 			<span th:utext="${shift.start}">Start</span>-<span
 				th:utext="${shift.end}">Finish</span>
