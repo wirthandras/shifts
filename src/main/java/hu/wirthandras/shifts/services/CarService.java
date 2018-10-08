@@ -11,8 +11,12 @@ import hu.wirthandras.shifts.repository.CarRepository;
 @Service
 public class CarService {
 	
-	@Autowired
 	private CarRepository repository;
+
+	@Autowired
+	public void setRepository(CarRepository repository) {
+		this.repository = repository;
+	}	
 
 	public Car getCar(String idAsString) {
 		long id = Long.parseLong(idAsString);
