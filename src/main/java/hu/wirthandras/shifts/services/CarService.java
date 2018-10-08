@@ -1,5 +1,6 @@
 package hu.wirthandras.shifts.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,14 @@ public class CarService {
 
 	public void save(Car car) {
 		repository.save(car);
+	}
+	
+	public List<String> getEvents(String day) {
+		List<String> events = new ArrayList<>();
+		events.add("cara" + day);
+		events.add("carb" + day);
+		events.add("carc" + day);
+		return events;
 	}
 
 }
