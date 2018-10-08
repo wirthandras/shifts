@@ -1,7 +1,6 @@
 .cal {
 	width: 400px;
 	background-color: #d2efdb;
-	border-radius: 5px;
 	overflow: auto;
 	border: 1px thin;
 	border-color: #bad3c2;
@@ -13,8 +12,8 @@
 }
 
 .tile {
-	background-color: #2d964d;
-	border-radius: 5px;
+	background-color: gray;
+	color: black;
 	min-width: 40px;
 	min-height: 40px;
 	padding: 10px;

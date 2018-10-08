@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/css/style.css">
+<link rel="stylesheet" type="text/css" href="/css/calendar.css">
 <title th:utext="#{car}">Car</title>
 </head>
 <body>
@@ -11,5 +12,6 @@
 		<span th:utext="${car.plateNumber}">Plate number</span> <span
 			th:utext="${car.carType}">Type</span>
 	</article>
+	<div th:insert="/fragments/calendar.html"></div>
 </body>
 </html>

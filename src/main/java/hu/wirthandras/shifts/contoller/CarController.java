@@ -13,16 +13,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import hu.wirthandras.shifts.domain.car.Car;
 import hu.wirthandras.shifts.services.CarService;
+import hu.wirthandras.shifts.services.MonthService;
 
 @Controller
 public class CarController extends AbstractControllerBase {
 		
 	@Autowired
 	private CarService service;
+	@Autowired
+	private MonthService serviceMonth;
 
 	@GetMapping("/car/{id}")
 	public String car(@PathVariable String id, Model model) {
 		model.addAttribute("car", service.getCar(id));
+		model.addAttribute("month", serviceMonth.getMonthName());
+		model.addAttribute("days", serviceMonth.getDaysInCurrentMonth());
 		return getTempateFolder() + "car";
 	}
 	

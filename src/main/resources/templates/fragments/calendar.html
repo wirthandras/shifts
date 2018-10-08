@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+	<div class="box cal">
+		<span>Calendar</span>
+		<div th:utext="${month}">January</div>
+		<div class="flow tile" th:each="day : ${days}">
+			<span th:utext="${day}">Day</span>
+		</div>
+	</div>
+</body>
