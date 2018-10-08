@@ -10,36 +10,44 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import hu.wirthandras.shifts.domain.Employee;
 import hu.wirthandras.shifts.services.EmployeeService;
+import hu.wirthandras.shifts.services.MonthService;
 
 @Controller
-public class EmployeeController {
-	
-	private static final String templateFolder = "employee/";
+public class EmployeeController extends AbstractControllerBase {
 	
 	@Autowired
 	private EmployeeService service;
+	@Autowired
+	private MonthService serviceMonth;
 	
 	@GetMapping("employee/{id}")
 	public String employee(@PathVariable String id, Model model) {
 		model.addAttribute("employee", service.getEmployee(id));
-		return templateFolder + "employee";
+		model.addAttribute("month", serviceMonth.getMonthName());
+		model.addAttribute("days", serviceMonth.getDaysInCurrentMonth());
+		return getTempateFolder() + "employee";
 	}
 	
 	@GetMapping("employees")
 	public String employee(Model model) {
 		model.addAttribute("employees", service.getEmployees());
-		return templateFolder + "employees";
+		return getTempateFolder() + "employees";
 	}
 	
 	@GetMapping("/newemployee")
 	public String newEmployee(@ModelAttribute("newemployee") Employee e) {
-		return templateFolder + "newemployee";
+		return getTempateFolder() + "newemployee";
 	}
 	
 	@PostMapping(value="/newemployee")
 	public String newEmployeeSave(@ModelAttribute Employee e) {
 		service.save(e);
 		return "redirect:newemployee";
+	}
+
+	@Override
+	protected String getTempateFolder() {
+		return "employee/";
 	}
 
 }

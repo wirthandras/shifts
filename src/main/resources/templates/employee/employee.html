@@ -2,18 +2,26 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" type="text/css" href="css/button.css">
-<title th:text="#{Employee}">Employee</title>
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<link rel="stylesheet" type="text/css" href="/css/button.css">
+<link rel="stylesheet" type="text/css" href="/css/calendar.css">
+<title th:text="#{employee}">Employee</title>
 </head>
 <body>
-
-	<h1 th:text="#{Employee}">Employee</h1>
-	<article class="box blue">
-		<span th:utext="${employee.name}">Name</span> <span
-			th:utext="#{${employee.job}}">Job</span>
+	<div th:insert="/fragments/nav.html"></div>
+	<h1 th:text="#{employee}">Employee</h1>
+	<article class="cal text">
+		<div class="tile" th:utext="${employee.name}">Name</div>
+		<div class="tile" th:utext="#{${employee.job}}">Job</div>
 	</article>
-
-
+	
+	
+	<div class="cal flow">
+		<span>Calendar</span>
+		<div th:utext="${month}" class="tile text">January</div>
+		<div class="tile  text flow" th:each="day : ${days}">
+			<span th:utext="${day}">Day</span>
+		</div>
+	</div>
 </body>
 </html>

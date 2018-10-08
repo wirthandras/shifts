@@ -2,23 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" type="text/css" href="css/button.css">
-<title th:utext="#{NewCar}">New Car</title>
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<link rel="stylesheet" type="text/css" href="/css/button.css">
+<title th:utext="#{newCar}">New Car</title>
 </head>
 <body>
-	<h1 th:utext="#{NewCar}">New Car</h1>
+	<div th:insert="/fragments/nav.html"></div>
 	<form th:action="@{/newcar}" th:object="${newcar}" method="post">
-		<input type="text" name="plateNumber" th:placeholder="#{PlateNumber}">
+		<input type="text" name="plateNumber" th:placeholder="#{plateNumber}">
 		<br>
-		<span th:utext="#{Type}">Type</span>:<br>
+		<span th:utext="#{type}">Type</span>:<br>
 		<select name="carType">
 			<option th:each="state : ${T(hu.wirthandras.shifts.domain.car.CarType).values()}"
 				th:value="${state}"	th:text="${state}">
 			</option>
 		</select>
 		<br>
-		<input type="submit" value="Submit">
+		<input type="submit" th:value="#{submit}">
 	</form>
 </body>
 </html>

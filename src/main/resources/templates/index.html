@@ -2,14 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" type="text/css" href="css/button.css">
-<title>Main menu</title>
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<title th:utext="#{home}">Home</title>
 </head>
 <body>
-	<h1>Main menu</h1>
-	<a href="employees">Employee</a>
-	<a href="cars">Cars</a>
-	<a href="shifts">Shifts</a>
+	<div th:insert="/fragments/nav.html"></div>
 </body>
 </html>

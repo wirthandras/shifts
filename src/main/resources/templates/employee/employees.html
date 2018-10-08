@@ -2,18 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" type="text/css" href="css/button.css">
-<title th:utext="#{Employees}">Employees</title>
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<link rel="stylesheet" type="text/css" href="/css/button.css">
+<title th:utext="#{employees}">Employees</title>
 </head>
 <body>
-	<h1 th:utext="#{Employees}">Employees</h1>
-	<a href="newemployee" class="box blue">New			
-	</a>
-	<article th:each="employee : ${employees}" class="box blue">
-		<span th:utext="${employee.name}">Name</span><br>
-		<span th:utext="#{${employee.job}}">Job</span><br>
-		<a th:href="@{/employee/} + ${employee.id}">Link</a>			
-	</article>
+	<div th:insert="/fragments/nav.html"></div>
+	<div>
+		<article th:each="employee : ${employees}" class="box blue">
+			<span th:utext="${employee.name}">Name</span><br> <span
+				th:utext="#{${employee.job}}">Job</span><br> <a
+				th:href="@{/employee/} + ${employee.id}">Link</a>
+		</article>
+	</div>
 </body>
 </html>

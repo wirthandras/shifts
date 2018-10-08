@@ -4,12 +4,9 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<link rel="stylesheet" type="text/css" href="/css/button.css">
-	<title th:utext="#{shifts}">Shift</title>
+	<title th:utext="#{generate}">Generate</title>
 </head>
 <body>
-	<article class="box blue">
-		<span th:utext="${#dates.format(shift.date, 'yyyy-MM-dd')}">Date</span>
-		<span th:utext="${shift.start}">Start</span>-<span th:utext="${shift.end}">Finish</span>
-	</article>
+	<div th:insert="/fragments/nav.html"></div>
 </body>
 </html>

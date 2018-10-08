@@ -2,14 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" type="text/css" href="css/button.css">
-<title th:utext="#{NewEmployee}">New Employee</title>
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<link rel="stylesheet" type="text/css" href="/css/button.css">
+<title th:utext="#{newEmployee}">New Employee</title>
 </head>
 <body>
-	<h1 th:utext="#{NewEmployee}">New Employee</h1>
+	<div th:insert="/fragments/nav.html"></div>
 	<form th:action="@{/newemployee}" th:object="${newemployee}" method="post">
-		<input type="text" name="name" th:placeholder="#{Name}">
+		<input type="text" name="name" th:placeholder="#{name}">
 		<br>
 		<select name="job">
 			<option th:each="state : ${T(hu.wirthandras.shifts.domain.Job).values()}"
@@ -17,7 +17,7 @@
 			</option>
 		</select>
 		<br>
-		<input type="submit" value="Submit">
+		<input type="submit" th:value="#{submit}">
 	</form>
 </body>
 </html>

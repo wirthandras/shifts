@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="/css/login.css">
+<title>Main menu</title>
+</head>
+<body>
+	<div class="center">
+		<form>
+			<span th:utext="#{loginMessage}">Log in to your account</span>
+			<input type="text" name="email" placeholder="E-mail address" th:placeholder="#{emailAddress}">
+			<input type="text" name="password" placeholder="Password" th:placeholder="#{password}">
+			<input type="submit" th:value="#{login}">
+		</form>
+	</div>
+</body>
+</html>

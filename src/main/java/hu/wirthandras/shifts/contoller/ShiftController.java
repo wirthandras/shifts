@@ -9,10 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import hu.wirthandras.shifts.services.ShiftService;
 
 @Controller
-public class ShiftController {
+public class ShiftController extends AbstractControllerBase {
 	
-	private static final String templateFolder = "shift/";
-
 	private ShiftService shiftService;
 
 	@Autowired
@@ -23,12 +21,17 @@ public class ShiftController {
 	@RequestMapping("shifts")
 	public String shifts(Model model) {
 		model.addAttribute("shifts", shiftService.getAll());
-		return templateFolder + "shifts";
+		return getTempateFolder() + "shifts";
 	}
 	
 	@RequestMapping("shift/{id}")
 	public String shift(@PathVariable String id, Model model) {
 		model.addAttribute("shift", shiftService.getShift(id));
-		return templateFolder + "shift";
+		return getTempateFolder() + "shift";
+	}
+
+	@Override
+	protected String getTempateFolder() {
+		return "shift/";
 	}
 }

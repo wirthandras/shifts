@@ -1,0 +1,34 @@
+.cal {
+	width: 400px;
+	background-color: #d2efdb;
+	border-radius: 5px;
+	overflow: auto;
+	border: 1px thin;
+	border-color: #bad3c2;
+	padding: 5px;
+}
+
+.text {
+	color: #ced6a9;
+}
+
+.tile {
+	background-color: #2d964d;
+	border-radius: 5px;
+	min-width: 40px;
+	min-height: 40px;
+	padding: 10px;
+	margin: 3px;
+}
+
+.tile:hover {
+	box-shadow: 2px 2px 2px 1px #77a886;
+}
+
+.flow {
+	float: left;
+}
+
+body {
+	background-color: #ededed
+}

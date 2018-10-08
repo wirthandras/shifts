@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<link rel="stylesheet" type="text/css" href="css/button.css">
-	<title>Shifts</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<link rel="stylesheet" type="text/css" href="/css/button.css">
+<title th:utext="#{shifts}">Shifts</title>
 </head>
 <body>
-	<p>Shifts</p>
-	<article class="box blue" th:each="shift : ${shifts}">
-		<span th:utext="${#dates.format(shift.date, 'yyyy-MM-dd')}">Date</span>
-		<span th:utext="${shift.start}">Start</span>-<span th:utext="${shift.end}">Finish</span>
-	</article>
+	<div th:insert="/fragments/nav.html"></div>
+	<div class="main">
+		<article class="box blue" th:each="shift : ${shifts}">
+			<span th:utext="${#dates.format(shift.date, 'yyyy-MM-dd')}">Date</span>
+			<span th:utext="${shift.start}">Start</span>-<span
+				th:utext="${shift.end}">Finish</span>
+		</article>
+	</div>
 </body>
 </html>
