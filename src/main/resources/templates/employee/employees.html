@@ -6,7 +6,7 @@
 <title th:utext="#{employees}">Employees</title>
 </head>
 <body>
-	<div th:insert="/fragments/nav.html"></div>
+	<div th:insert="fragments/nav.html"></div>
 	<div>
 		<article th:each="employee : ${employees}" class="box">
 			<span th:utext="${employee.name}">Name</span><br>
