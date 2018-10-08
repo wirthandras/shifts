@@ -9,9 +9,9 @@
 	<div th:insert="/fragments/nav.html"></div>
 	<div>
 		<article th:each="employee : ${employees}" class="box">
-			<span th:utext="${employee.name}">Name</span><br> <span
-				th:utext="#{${employee.job}}">Job</span><br> <a
-				th:href="@{/employee/} + ${employee.id}">Link</a>
+			<span th:utext="${employee.name}">Name</span><br>
+			<span th:utext="#{${employee.job}}">Job</span>
+			<a th:href="@{/employee/} + ${employee.id}" th:utext="#{details}">Details</a>
 		</article>
 	</div>
 </body>

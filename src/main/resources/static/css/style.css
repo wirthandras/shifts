@@ -6,7 +6,16 @@
     color: white;
 }
 
+.box a {
+	text-decoration: none;
+	color: #333;
+	background-color: white;
+	padding: 2px;
+}
 
+.box a:hover {
+	background-color: #ddd;
+}
 
 input[type=text] {
     width: 100%;
