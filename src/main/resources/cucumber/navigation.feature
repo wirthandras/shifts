@@ -1,6 +1,6 @@
 @tag
-Feature: Menu
-  I want to use this template to check the Menu structure is accessible
+Feature: Menu Check
+  Testing the navigation bar.
 
   @tag1
   Scenario: Home page
