@@ -49,6 +49,24 @@ public class NavigationCucumberTest {
 		WebElement findElement = driver.findElement(By.id("generate"));
 		assertThat(true, is(findElement.isDisplayed()));
 	}
+	
+	@Then("^The Employees button is hidden$")
+	public void the_Employees_button_is_hidden() throws Throwable {
+		WebElement findElement = driver.findElement(By.id("employees"));
+		assertThat(false, is(findElement.isDisplayed()));
+	}
+
+	@Then("^The Cars button is hidden$")
+	public void the_Cars_button_is_hidden() throws Throwable {
+		WebElement findElement = driver.findElement(By.id("cars"));
+		assertThat(false, is(findElement.isDisplayed()));
+	}
+
+	@Then("^The Shifts button is hidden$")
+	public void the_Shifts_button_is_hidden() throws Throwable {
+		WebElement findElement = driver.findElement(By.id("shifts"));
+		assertThat(false, is(findElement.isDisplayed()));
+	}	
 
 	@After
 	public static void tearDown() {
