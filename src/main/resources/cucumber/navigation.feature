@@ -15,6 +15,8 @@ Feature: Menu
     When The Details button is pressed
     Then The Employees button is visible
     And The Cars button is visible
-    And The Shifts button is visible 
-    
-    
+    And The Shifts button is visible
+    When The New button is pressed
+    Then The New Car button is visible
+    And The New Employee button is visible
+
