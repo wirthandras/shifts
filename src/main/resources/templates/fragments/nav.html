@@ -6,7 +6,7 @@
 </head>
 <body>
 	<nav class="navbar">
-		<a href="/" th:utext="#{home}">Home</a>
+		<a id="home" href="/" th:utext="#{home}">Home</a>
 		<div class="dropdown">
 			<button class="dropbtn" th:utext="#{details}">Details<i class="fa fa-caret-down"></i>
 			</button><div class="dropdown-content">
@@ -22,6 +22,6 @@
 				<a href="/newcar" th:utext="#{car}">Car</a>
 			</div>
 		</div>
-		<a href="/generate" th:utext="#{generate}">Generate</a>
+		<a id="generate" href="/generate" th:utext="#{generate}">Generate</a>
 	</nav>
 </body>
