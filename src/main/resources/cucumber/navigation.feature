@@ -7,4 +7,8 @@ Feature: Menu
     Given Open the application
     Then The Home button is available
     And The Generate button is available
+    And The Employees button is hidden
+    And The Cars button is hidden
+    And The Shifts button is hidden
+    
     
