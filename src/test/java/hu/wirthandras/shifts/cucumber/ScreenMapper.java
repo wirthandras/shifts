@@ -18,6 +18,10 @@ public class ScreenMapper {
 		map.put("New Employee", "newEmployee");
 		map.put("Details", "details");
 		map.put("New", "newsDropdown");
+		map.put("Shiftplanner", "shiftplanner");
+		map.put("Planning", "planning");
+		
+		
 	}
 	
 	public String getId(String screenName) {

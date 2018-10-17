@@ -12,6 +12,7 @@ Feature: Menu Check
     And The Shifts button is hidden
     And The New Car button is hidden
     And The New Employee button is hidden
+    And The Shiftplanner button is hidden
     When The Details button is pressed
     Then The Employees button is visible
     And The Cars button is visible
@@ -19,4 +20,6 @@ Feature: Menu Check
     When The New button is pressed
     Then The New Car button is visible
     And The New Employee button is visible
+    When The Planning button is pressed
+    Then The Shiftplanner button is visible
 
