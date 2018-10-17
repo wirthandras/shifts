@@ -22,6 +22,12 @@
 				<a id="newCar" href="/newcar" th:utext="#{car}">Car</a>
 			</div>
 		</div>
+		<div class="dropdown">
+			<button id="planning" class="dropbtn" th:utext="#{planning}">Planning<i class="fa fa-caret-down"></i>
+			</button><div class="dropdown-content">
+				<a id="shiftplanner" href="/shiftplanner" th:utext="#{dailyShifts}">Daily Shifts</a>
+			</div>
+		</div>
 		<a id="generate" href="/generate" th:utext="#{generate}">Generate</a>
 	</nav>
 </body>

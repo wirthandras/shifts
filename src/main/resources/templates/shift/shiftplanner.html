@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<title th:utext="#{dailyShifts}">Daily Shifts</title>
+</head>
+<body>
+	<div th:insert="fragments/nav.html"></div>
+	<div class="main">
+		<form class="box" th:action="@{/shiftplanner}" th:object="${shiftinterval}" method="post">
+			<ul>
+				<li><span th:utext="#{start}">Start</span>:<input type="number" name="from" min="0" max="24" value="6"></li>
+				<li><span th:utext="#{end}">Finish</span>:<input type="number" name="to" min="0" max="24" value="18"></li>
+				<li><input type="submit"></li>
+			</ul>
+		</form>
+		<article class="box" th:each="interval : ${intervals}">
+			<span th:utext="${interval.from}">Start</span>-<span
+				th:utext="${interval.to}">Finish</span>
+		</article>
+	</div>
+</body>
+</html>
