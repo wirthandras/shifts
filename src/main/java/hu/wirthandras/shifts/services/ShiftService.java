@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import hu.wirthandras.shifts.domain.Shift;
+import hu.wirthandras.shifts.domain.car.Car;
 import hu.wirthandras.shifts.domain.shift.ShiftInterval;
 import hu.wirthandras.shifts.repository.ShiftRepository;
 
@@ -14,6 +15,9 @@ import hu.wirthandras.shifts.repository.ShiftRepository;
 public class ShiftService {
 
 	private ShiftRepository shiftRepository;
+	
+	@Autowired
+	private CarService carService;
 
 	private List<ShiftInterval> intervals = new ArrayList<>();
 
@@ -37,6 +41,11 @@ public class ShiftService {
 
 	public List<ShiftInterval> getIntervals() {
 		return intervals;
+	}
+	
+	public List<Car> getFreeCars() {
+		//TODO remove assigned cars from list
+		return carService.getCars();
 	}
 
 }

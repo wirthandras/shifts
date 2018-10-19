@@ -42,6 +42,7 @@ public class ShiftController extends AbstractControllerBase {
 	@GetMapping("shiftplanner")
 	public String shiftPlanner(@ModelAttribute("shiftinterval") ShiftInterval interval, Model model) {
 		model.addAttribute("intervals", shiftService.getIntervals());
+		model.addAttribute("cars", shiftService.getFreeCars());
 		return getTempateFolder() + "shiftplanner";
 	}
 	

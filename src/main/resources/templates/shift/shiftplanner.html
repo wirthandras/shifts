@@ -12,12 +12,18 @@
 			<ul>
 				<li><span th:utext="#{start}">Start</span>:<input type="number" name="from" min="0" max="24" value="6"></li>
 				<li><span th:utext="#{end}">Finish</span>:<input type="number" name="to" min="0" max="24" value="18"></li>
+				<li><select th:field="*{car}">
+					<option th:each="c : ${cars}"
+				th:value="${c.id}" th:text="${c.plateNumber}">
+					</option>
+				</select></li>
 				<li><input type="submit"></li>
 			</ul>
 		</form>
 		<article class="box" th:each="interval : ${intervals}">
 			<span th:utext="${interval.from}">Start</span>-<span
 				th:utext="${interval.to}">Finish</span>
+				<span th:utext="${interval.car.plateNumber}">Car</span>
 		</article>
 	</div>
 </body>
