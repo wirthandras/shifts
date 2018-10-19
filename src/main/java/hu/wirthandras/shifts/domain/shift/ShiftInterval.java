@@ -7,14 +7,15 @@ import org.springframework.stereotype.Component;
 import hu.wirthandras.shifts.domain.car.Car;
 
 @Component
-public class ShiftInterval {
+public class ShiftInterval implements Comparable<ShiftInterval> {
 
+	private static final int HOUR24 = 24;
 	@NotNull
 	private int from = 6;
 	@NotNull
 	private int to = 18;
 	private Car car;
-	
+
 	public ShiftInterval() {
 		this.from = 6;
 		this.to = 18;
@@ -26,8 +27,6 @@ public class ShiftInterval {
 		this.to = to;
 		this.car = car;
 	}
-
-
 
 	public int getFrom() {
 		return from;
@@ -52,5 +51,26 @@ public class ShiftInterval {
 	public void setCar(Car car) {
 		this.car = car;
 	}
-	
+
+	@Override
+	public int compareTo(ShiftInterval o) {
+		if (this.from != o.getFrom()) {
+			return Integer.compare(this.from, o.from);
+		} else {
+			return Integer.compare(this.getDuration(), o.getDuration());
+		}
+	}
+
+	public int getDuration() {
+		if (from == to) {
+			return HOUR24;
+		} else {
+			if (from > to) {
+				return from - to;
+			} else {
+				return to - from;
+			}
+		}
+	}
+
 }
