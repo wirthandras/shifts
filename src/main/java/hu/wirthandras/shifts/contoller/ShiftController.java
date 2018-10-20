@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import hu.wirthandras.shifts.domain.shift.ShiftInterval;
+import hu.wirthandras.shifts.services.ShiftIntervalAlreadyExistException;
 import hu.wirthandras.shifts.services.ShiftService;
 
 @Controller
 public class ShiftController extends AbstractControllerBase {
-	
+
 	private ShiftService shiftService;
 
 	@Autowired
@@ -27,7 +28,7 @@ public class ShiftController extends AbstractControllerBase {
 		model.addAttribute("shifts", shiftService.getAll());
 		return getTempateFolder() + "shifts";
 	}
-	
+
 	@RequestMapping("shift/{id}")
 	public String shift(@PathVariable String id, Model model) {
 		model.addAttribute("shift", shiftService.getShift(id));
@@ -38,17 +39,24 @@ public class ShiftController extends AbstractControllerBase {
 	protected String getTempateFolder() {
 		return "shift/";
 	}
-	
+
 	@GetMapping("shiftplanner")
 	public String shiftPlanner(@ModelAttribute("shiftinterval") ShiftInterval interval, Model model) {
 		model.addAttribute("intervals", shiftService.getIntervals());
 		model.addAttribute("cars", shiftService.getFreeCars());
 		return getTempateFolder() + "shiftplanner";
 	}
-	
+
 	@PostMapping("shiftplanner")
-	public String shiftPlannerAdd(@ModelAttribute("shiftinterval") ShiftInterval interval) {
-		shiftService.addInterval(interval);
+	public String shiftPlannerAdd(@ModelAttribute("shiftinterval") ShiftInterval interval, Model model) {
+		try {
+			shiftService.addInterval(interval);
+		} catch (ShiftIntervalAlreadyExistException e) {
+			model.addAttribute("cars", shiftService.getFreeCars());
+			model.addAttribute("intervals", shiftService.getIntervals());
+			model.addAttribute("errorKey", "shiftIsAlreadyExist");
+			return getTempateFolder() + "shiftplanner";
+		}
 		return "redirect:shiftplanner";
 	}
 	

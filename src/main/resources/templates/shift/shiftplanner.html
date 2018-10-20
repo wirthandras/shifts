@@ -19,7 +19,9 @@
 				</select></li>
 				<li><input type="submit"></li>
 			</ul>
+			<span th:if="${errorKey != null}" th:text="#{${errorKey}}">Shift is already exist!</span>
 		</form>
+		
 		<article class="box" th:each="interval : ${intervals}">
 			<span th:utext="${interval.from}">Start</span>-<span
 				th:utext="${interval.to}">Finish</span>

@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 public class Car {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotBlank
 	@PlateNumberConstraint
@@ -52,6 +52,16 @@ public class Car {
 
 	public void setCarType(CarType carType) {
 		this.carType = carType;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Car) {
+			Car c = (Car) obj;
+			return plateNumber.equals(c.getPlateNumber()) && carType.equals(c.getCarType());
+		} else {
+			return false;
+		}
 	}
 
 }

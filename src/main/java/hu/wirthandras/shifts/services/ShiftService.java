@@ -1,7 +1,5 @@
 package hu.wirthandras.shifts.services;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +17,8 @@ public class ShiftService {
 	
 	@Autowired
 	private CarService carService;
-
-	private List<ShiftInterval> intervals = new ArrayList<>();
+	@Autowired
+	private IntervalService intervalService;
 
 	@Autowired
 	public void setShiftRepository(ShiftRepository shiftRepository) {
@@ -36,14 +34,12 @@ public class ShiftService {
 		return shiftRepository.findById(id).get();
 	}
 
-	public void addInterval(ShiftInterval interval) {
-		intervals.add(interval);
+	public void addInterval(ShiftInterval interval) throws ShiftIntervalAlreadyExistException{
+		intervalService.addInterval(interval);
 	}
 
 	public List<ShiftInterval> getIntervals() {
-		List<ShiftInterval> copy = new ArrayList<>(intervals);
-		Collections.sort(copy);
-		return copy;
+		return intervalService.getIntervals();
 	}
 	
 	public List<Car> getFreeCars() {
