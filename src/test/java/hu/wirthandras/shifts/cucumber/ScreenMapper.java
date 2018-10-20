@@ -20,6 +20,11 @@ public class ScreenMapper {
 		map.put("New", "newsDropdown");
 		map.put("Shiftplanner", "shiftplanner");
 		map.put("Planning", "planning");
+		map.put("Submit", "submit");
+		map.put("Shift", "formShift");
+		map.put("new shift element", "shiftElement");
+		map.put("Error", "errorMessage");
+		
 		
 		
 	}
