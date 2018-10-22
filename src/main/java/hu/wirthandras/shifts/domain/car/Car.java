@@ -17,7 +17,7 @@ public class Car {
 	private Long id;
 	@NotBlank
 	@Column(unique=true)
-	@PlateNumberConstraint(message="error.platenumber.format")
+	@PlateNumberConstraint
 	private String plateNumber;
 	@Enumerated(EnumType.STRING)
 	private CarType carType;

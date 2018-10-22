@@ -14,7 +14,7 @@ import javax.validation.Payload;
 @Target( { ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PlateNumberConstraint {
-	String message() default "Invalid plate number";
+	String message() default "error.platenumber.format";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
