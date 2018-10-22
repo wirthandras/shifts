@@ -9,6 +9,9 @@
 	<div th:insert="fragments/nav.html"></div>
 	<form class="box" th:action="@{/newcar}" th:object="${newcar}" method="post">
 		<input type="text" name="plateNumber" th:placeholder="#{plateNumber}">
+		<span th:if="${#fields.hasErrors('plateNumber')}">
+  			<span th:each="err : ${#fields.errors('plateNumber')}" th:text="#{${err}}">Input plate number format</span>
+		</span>
 		<br>
 		<span th:utext="#{type}">Type</span>:<br>
 		<select name="carType">

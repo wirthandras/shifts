@@ -1,5 +1,6 @@
 package hu.wirthandras.shifts.domain.car;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -15,7 +16,8 @@ public class Car {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotBlank
-	@PlateNumberConstraint
+	@Column(unique=true)
+	@PlateNumberConstraint(message="error.platenumber.format")
 	private String plateNumber;
 	@Enumerated(EnumType.STRING)
 	private CarType carType;

@@ -22,7 +22,7 @@ import hu.wirthandras.shifts.services.MonthService;
 
 @Controller
 public class CarController extends AbstractControllerBase {
-		
+
 	@Autowired
 	private CarService service;
 	@Autowired
@@ -36,27 +36,28 @@ public class CarController extends AbstractControllerBase {
 		model.addAttribute("method", "UpdateCar(\"#container\", this.id)");
 		return getTempateFolder() + "car";
 	}
-	
+
 	@GetMapping("/cars")
 	public String car(Model model) {
 		model.addAttribute("cars", service.getCars());
 		return getTempateFolder() + "cars";
 	}
-	
+
 	@GetMapping("/newcar")
 	public String newCar(@ModelAttribute("newcar") Car car) {
 		return getTempateFolder() + "newcar";
 	}
-	
+
 	@PostMapping("/newcar")
-	public String newCarSave(@Valid @ModelAttribute Car car, BindingResult br) {
-		if(br.hasErrors()) {
+	public String newCarSave(@Valid @ModelAttribute(name="newcar") Car car, BindingResult result) {
+		if (result.hasErrors()) {
 			return getTempateFolder() + "newcar";
+		} else {
+			service.save(car);
+			return "redirect:newcar";
 		}
-		service.save(car);
-		return "redirect:newcar";
 	}
-	
+
 	@PostMapping("/api/cars")
 	public ResponseEntity<AjaxResponseBody> api(@RequestParam("dayId") String dayId) {
 		List<String> events = service.getEvents(dayId);
@@ -68,5 +69,5 @@ public class CarController extends AbstractControllerBase {
 	protected String getTempateFolder() {
 		return "car/";
 	}
-	
+
 }
