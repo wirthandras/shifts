@@ -7,20 +7,20 @@
 </head>
 <body>
 	<div th:insert="fragments/nav.html"></div>
-	<form class="box" th:action="@{/newcar}" th:object="${newcar}" method="post">
-		<input type="text" name="plateNumber" th:placeholder="#{plateNumber}">
-		<span th:if="${#fields.hasErrors('plateNumber')}">
+	<form id="newCarForm" class="box" th:action="@{/newcar}" th:object="${newcar}" method="post">
+		<input id="plateNumber" type="text" name="plateNumber" th:placeholder="#{plateNumber}">
+		<span id="errorMessage" th:if="${#fields.hasErrors('plateNumber')}">
   			<span th:each="err : ${#fields.errors('plateNumber')}" th:text="#{${err}}">Input plate number format</span>
 		</span>
 		<br>
 		<span th:utext="#{type}">Type</span>:<br>
-		<select name="carType">
+		<select id="carTypeDropdown" name="carType">
 			<option th:each="state : ${T(hu.wirthandras.shifts.domain.car.CarType).values()}"
 				th:value="${state}"	th:text="${state}">
 			</option>
 		</select>
 		<br>
-		<input type="submit" th:value="#{submit}">
+		<input id="submit" type="submit" th:value="#{submit}">
 	</form>
 </body>
 </html>

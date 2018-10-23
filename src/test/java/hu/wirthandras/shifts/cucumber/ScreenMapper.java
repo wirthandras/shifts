@@ -24,9 +24,8 @@ public class ScreenMapper {
 		map.put("Shift", "formShift");
 		map.put("new shift element", "shiftElement");
 		map.put("Error", "errorMessage");
-		
-		
-		
+		map.put("Plate Number", "plateNumber");
+		map.put("NewCarForm", "newCarForm");
 	}
 	
 	public String getId(String screenName) {

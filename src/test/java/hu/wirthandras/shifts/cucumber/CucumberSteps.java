@@ -26,11 +26,13 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 //TODO find the correct solution
 @Ignore("Restrict to run with JUnit")
-public class NavigationCucumberTest {
+public class CucumberSteps {
 
 	private static WebDriver driver;
 	private static ScreenMapper screenMapper;
 	private static WebDriverWait wait;
+	
+	private static final String HOST = "http://localhost:9000";
 
 	@Before
 	public static void setUp() {
@@ -41,7 +43,7 @@ public class NavigationCucumberTest {
 
 	@Given("^Open the application$")
 	public void open_the_application() throws Throwable {
-		driver.get("http://localhost:9000");
+		driver.get(HOST);
 	}
 
 	@Then("^The (.*) button is visible$")
@@ -99,6 +101,34 @@ public class NavigationCucumberTest {
 		Actions action = new Actions(driver);
 		action.moveToElement(element).build().perform();
 	}
+	
+	@Then("^The (.*) input field is visible$")
+	public void thePlateNumberInputFieldIsVisible(String inputField) throws Throwable {
+		WebElement findElement = driver.findElement(By.id(screenMapper.getId(inputField)));
+		assertThat(true, is(findElement.isDisplayed()));
+	}
+
+	@Then("^The Car type dropdown list is visible$")
+	public void theCarTypeDropdownListIsVisible() throws Throwable {
+		WebElement findElement = driver.findElement(By.id("carTypeDropdown"));
+		assertThat(true, is(findElement.isDisplayed()));
+	}
+
+	@When("^Set \"([^\"]*)\" to Plate Number input field$")
+	public void setToPlateNumberInputField(String arg1) throws Throwable {
+		WebElement findElement = driver.findElement(By.id("plateNumber"));
+		assertThat(true, is(findElement.isDisplayed()));
+	}
+	
+	@Given("^The user is on the create new car page$")
+	public void theUserIsOnTheCreateNewCarPage() throws Throwable {
+		driver.get(HOST + "/newcar");
+	}
+	
+	@Given("^The user is on the shift planner page$")
+	public void the_user_is_on_the_create_new_car_page() throws Throwable {
+		driver.get(HOST + "/shiftplanner");
+	}	
 
 	@After
 	public static void tearDown() {
