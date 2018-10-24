@@ -1,4 +1,4 @@
-package hu.wirthandras.shifts.services;
+package hu.wirthandras.shifts.services.interval;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,12 +15,25 @@ public class IntervalService {
 
 	private Set<ShiftInterval> intervals = new HashSet<>();
 
-	public void addInterval(ShiftInterval interval) throws ShiftIntervalAlreadyExistException{
+	public void addInterval(ShiftInterval interval) throws ShiftIntervalAlreadyExistException, CarLockedException{
+		
+		if(carAlreadyLocked(interval)) {
+			throw new CarLockedException();
+		}
 		if(!intervals.add(interval)) {
 			throw new ShiftIntervalAlreadyExistException();
 		};
 	}
 	
+	private boolean carAlreadyLocked(ShiftInterval interval) {
+		for(ShiftInterval i : intervals) {
+			if (i.isCarLocked(interval)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public List<ShiftInterval> getIntervals() {
 		List<ShiftInterval> copy = new ArrayList<>(intervals);
 		Collections.sort(copy);

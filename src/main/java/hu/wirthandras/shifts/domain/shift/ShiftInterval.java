@@ -1,14 +1,15 @@
 package hu.wirthandras.shifts.domain.shift;
 
-import javax.validation.constraints.NotNull;
+import java.util.NavigableSet;
+import java.util.TreeSet;
 
-import org.springframework.stereotype.Component;
+import javax.validation.constraints.NotNull;
 
 import hu.wirthandras.shifts.domain.car.Car;
 
-@Component
 public class ShiftInterval implements Comparable<ShiftInterval> {
 
+	private static final int ACCEPTABLE_BOUND_LIMIT = 1;
 	private static final int HOUR24 = 24;
 	@NotNull
 	private int from = 6;
@@ -78,7 +79,7 @@ public class ShiftInterval implements Comparable<ShiftInterval> {
 		if (obj instanceof ShiftInterval) {
 			ShiftInterval s = (ShiftInterval) obj;
 			if (s.from == this.from && s.to == this.to) {
-				if (car == null && s.getCar() == null || car.equals(s.getCar()) ) {
+				if (car == null && s.getCar() == null || car.equals(s.getCar())) {
 					return true;
 				} else {
 					return false;
@@ -93,11 +94,41 @@ public class ShiftInterval implements Comparable<ShiftInterval> {
 
 	@Override
 	public int hashCode() {
-		int hashCode = this.from * 24 + this.to;
+		int hashCode = this.from * HOUR24 + this.to;
 		if (car != null) {
 			hashCode += car.getPlateNumber().hashCode();
 		}
 		return hashCode;
+	}
+
+	public boolean isCarLocked(ShiftInterval interval) {
+		if (interval.getCar().equals(car)) {
+			return hasConflict(interval);
+		}
+		return false;
+	}
+
+	private boolean hasConflict(ShiftInterval other) {
+		if (hasSameEndPoint(other)) {
+			return true;
+		}
+		return checkBoundaries(other);
+	}
+
+	private boolean checkBoundaries(ShiftInterval other) {
+		NavigableSet<Integer> set = new TreeSet<>();
+		set.add(from);
+		set.add(from + getDuration());
+
+		int of = other.getFrom();
+		int od = other.getDuration();
+
+		return set.subSet(of, of + od).size() > ACCEPTABLE_BOUND_LIMIT;
+	}
+
+	private boolean hasSameEndPoint(ShiftInterval other) {
+		return from == other.getFrom() || to == other.getTo();
+
 	}
 
 }

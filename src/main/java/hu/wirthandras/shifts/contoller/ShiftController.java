@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import hu.wirthandras.shifts.domain.shift.ShiftInterval;
-import hu.wirthandras.shifts.services.ShiftIntervalAlreadyExistException;
 import hu.wirthandras.shifts.services.ShiftService;
+import hu.wirthandras.shifts.services.interval.CarLockedException;
+import hu.wirthandras.shifts.services.interval.ShiftIntervalAlreadyExistException;
 
 @Controller
 public class ShiftController extends AbstractControllerBase {
@@ -55,6 +56,11 @@ public class ShiftController extends AbstractControllerBase {
 			model.addAttribute("cars", shiftService.getFreeCars());
 			model.addAttribute("intervals", shiftService.getIntervals());
 			model.addAttribute("errorKey", "shiftIsAlreadyExist");
+			return getTempateFolder() + "shiftplanner";
+		} catch (CarLockedException e) {
+			model.addAttribute("cars", shiftService.getFreeCars());
+			model.addAttribute("intervals", shiftService.getIntervals());
+			model.addAttribute("errorKey", "carIsLocked");
 			return getTempateFolder() + "shiftplanner";
 		}
 		return "redirect:shiftplanner";

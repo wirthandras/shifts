@@ -15,4 +15,6 @@ public interface CarRepository extends CrudRepository<Car, Long> {
 	
 	public List<Car> findAll();
 
+	public Optional<Car> findByPlateNumber(String plateNumber);
+
 }

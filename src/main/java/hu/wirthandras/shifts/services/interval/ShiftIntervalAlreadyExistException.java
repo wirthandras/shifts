@@ -1,4 +1,4 @@
-package hu.wirthandras.shifts.services;
+package hu.wirthandras.shifts.services.interval;
 
 public class ShiftIntervalAlreadyExistException extends Exception {
 

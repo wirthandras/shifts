@@ -9,6 +9,9 @@ import hu.wirthandras.shifts.domain.Shift;
 import hu.wirthandras.shifts.domain.car.Car;
 import hu.wirthandras.shifts.domain.shift.ShiftInterval;
 import hu.wirthandras.shifts.repository.ShiftRepository;
+import hu.wirthandras.shifts.services.interval.CarLockedException;
+import hu.wirthandras.shifts.services.interval.IntervalService;
+import hu.wirthandras.shifts.services.interval.ShiftIntervalAlreadyExistException;
 
 @Service
 public class ShiftService {
@@ -34,7 +37,7 @@ public class ShiftService {
 		return shiftRepository.findById(id).get();
 	}
 
-	public void addInterval(ShiftInterval interval) throws ShiftIntervalAlreadyExistException{
+	public void addInterval(ShiftInterval interval) throws ShiftIntervalAlreadyExistException, CarLockedException {
 		intervalService.addInterval(interval);
 	}
 

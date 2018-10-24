@@ -2,6 +2,7 @@ package hu.wirthandras.shifts.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,8 +29,13 @@ public class CarService {
 		return repository.findAll();
 	}
 
-	public void save(Car car) {
-		repository.save(car);
+	public void save(Car car) throws PlateNumberAlreadyExist {
+		Optional<Car> o = repository.findByPlateNumber(car.getPlateNumber());
+		if(!o.isPresent()) {
+			repository.save(car);
+		} else {
+			throw new PlateNumberAlreadyExist();
+		}
 	}
 	
 	public List<String> getEvents(String day) {

@@ -115,9 +115,9 @@ public class CucumberSteps {
 	}
 
 	@When("^Set \"([^\"]*)\" to Plate Number input field$")
-	public void setToPlateNumberInputField(String arg1) throws Throwable {
-		WebElement findElement = driver.findElement(By.id("plateNumber"));
-		assertThat(true, is(findElement.isDisplayed()));
+	public void setToPlateNumberInputField(String value) throws Throwable {
+		WebElement inputField = driver.findElement(By.id("plateNumber"));
+		inputField.sendKeys(value);
 	}
 	
 	@Given("^The user is on the create new car page$")

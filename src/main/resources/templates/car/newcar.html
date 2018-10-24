@@ -12,6 +12,7 @@
 		<span id="errorMessage" th:if="${#fields.hasErrors('plateNumber')}">
   			<span th:each="err : ${#fields.errors('plateNumber')}" th:text="#{${err}}">Input plate number format</span>
 		</span>
+		<span id="errorMessage" th:if="${errorKey != null}" th:text="#{${errorKey}}">Shift is already exist!</span>
 		<br>
 		<span th:utext="#{type}">Type</span>:<br>
 		<select id="carTypeDropdown" name="carType">

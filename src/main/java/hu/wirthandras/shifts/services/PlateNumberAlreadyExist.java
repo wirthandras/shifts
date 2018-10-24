@@ -1,6 +1,6 @@
 package hu.wirthandras.shifts.services;
 
-public class PlateNumberAlreadyExistExist extends Exception {
+public class PlateNumberAlreadyExist extends Exception {
 
 	/**
 	 * 

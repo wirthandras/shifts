@@ -19,6 +19,7 @@ import hu.wirthandras.shifts.domain.car.Car;
 import hu.wirthandras.shifts.domain.day.AjaxResponseBody;
 import hu.wirthandras.shifts.services.CarService;
 import hu.wirthandras.shifts.services.MonthService;
+import hu.wirthandras.shifts.services.PlateNumberAlreadyExist;
 
 @Controller
 public class CarController extends AbstractControllerBase {
@@ -49,12 +50,17 @@ public class CarController extends AbstractControllerBase {
 	}
 
 	@PostMapping("/newcar")
-	public String newCarSave(@Valid @ModelAttribute(name="newcar") Car car, BindingResult result) {
+	public String newCarSave(@Valid @ModelAttribute(name="newcar") Car car, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return getTempateFolder() + "newcar";
 		} else {
-			service.save(car);
-			return "redirect:newcar";
+			try {
+				service.save(car);
+				return "redirect:newcar";
+			} catch (PlateNumberAlreadyExist e) {
+				model.addAttribute("errorKey", "plateNumberAlreadyExist");
+				return getTempateFolder() + "newcar";
+			}
 		}
 	}
 
