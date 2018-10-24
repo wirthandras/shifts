@@ -79,11 +79,7 @@ public class ShiftInterval implements Comparable<ShiftInterval> {
 		if (obj instanceof ShiftInterval) {
 			ShiftInterval s = (ShiftInterval) obj;
 			if (s.from == this.from && s.to == this.to) {
-				if (car == null && s.getCar() == null || car.equals(s.getCar())) {
-					return true;
-				} else {
-					return false;
-				}
+				return car == null && s.getCar() == null || car.equals(s.getCar());
 			} else {
 				return false;
 			}
