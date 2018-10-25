@@ -8,24 +8,43 @@
 <body>
 	<div th:insert="fragments/nav.html"></div>
 	<div class="main">
-		<form id="formShift" class="box" th:action="@{/shiftplanner}" th:object="${shiftinterval}" method="post">
+		<form id="formShift" class="box" th:action="@{/shiftplanner}"
+			th:object="${shiftinterval}" method="post">
 			<ul>
-				<li><span th:utext="#{start}">Start</span>:<input type="number" name="from" min="0" max="24" value="6"></li>
-				<li><span th:utext="#{end}">Finish</span>:<input type="number" name="to" min="0" max="24" value="18"></li>
+				<li><span th:utext="#{start}">Start</span>:<input type="number"
+					name="from" min="0" max="24" value="6"></li>
+				<li><span th:utext="#{end}">Finish</span>:<input type="number"
+					name="to" min="0" max="24" value="18"></li>
 				<li><select th:field="*{car}">
-					<option th:each="c : ${cars}"
-				th:value="${c.id}" th:text="${c.plateNumber}">
-					</option>
+						<option th:each="c : ${cars}" th:value="${c.id}"
+							th:text="${c.plateNumber}"></option>
 				</select></li>
 				<li><input id="submit" type="submit"></li>
 			</ul>
-			<span id="errorMessage" th:if="${errorKey != null}" th:text="#{${errorKey}}">Shift is already exist!</span>
+			<span id="errorMessage" th:if="${errorKey != null}"
+				th:text="#{${errorKey}}">Shift is already exist!</span>
 		</form>
-		
-		<article th:id="shiftElement" class="box" th:each="interval : ${intervals}">
+
+		<form id="generate" class="box" th:action="@{/shiftplannergenerate}"
+			method="post">
+			<fieldset>
+				<legend>Generate</legend>
+				<input id="submit" type="submit">
+			</fieldset>
+		</form>
+		<form id="clear" class="box" th:action="@{/shiftplannerclear}"
+			method="post">
+			<fieldset>
+				<legend>Clear</legend>
+				<input id="submit" type="submit">
+			</fieldset>
+		</form>
+
+		<article th:id="shiftElement" class="box"
+			th:each="interval : ${intervals}">
 			<span th:utext="${interval.from}">Start</span>-<span
-				th:utext="${interval.to}">Finish</span>
-				<span th:utext="${interval.car.plateNumber}">Car</span>
+				th:utext="${interval.to}">Finish</span> <span
+				th:utext="${interval.car.plateNumber}">Car</span>
 		</article>
 	</div>
 </body>

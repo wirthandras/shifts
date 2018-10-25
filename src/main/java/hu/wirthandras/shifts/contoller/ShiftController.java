@@ -65,5 +65,17 @@ public class ShiftController extends AbstractControllerBase {
 		}
 		return "redirect:shiftplanner";
 	}
+
+	@PostMapping("shiftplannergenerate")
+	public String shiftGenerate() {
+		shiftService.generate();
+		return "redirect:shiftplanner";
+	}
 	
+	@PostMapping("shiftplannerclear")
+	public String shiftClear() {
+		shiftService.clear();
+		return "redirect:shiftplanner";
+	}
+
 }

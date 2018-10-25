@@ -12,4 +12,6 @@ public interface ShiftRepository extends CrudRepository<Shift, Long> {
 
 	List<Shift> findAll();
 	
+	Shift save(Shift shift);
+	
 }
