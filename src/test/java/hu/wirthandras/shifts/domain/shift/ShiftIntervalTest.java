@@ -21,6 +21,7 @@ public class ShiftIntervalTest {
 	private ShiftInterval partial;
 	private ShiftInterval day;
 	private ShiftInterval day2;
+	private ShiftInterval day3;
 	private ShiftInterval night;
 	private ShiftInterval h24;
 	
@@ -37,6 +38,7 @@ public class ShiftIntervalTest {
 		partial = new ShiftInterval(6, 14, carMock);
 		day = new ShiftInterval(6, 18, carMock);
 		day2 = new ShiftInterval(6, 18, carMock2);
+		day3 = new ShiftInterval(7, 19, carMock);
 		night = new ShiftInterval(18, 6, carMock);
 		h24 = new ShiftInterval(12, 12, carMock);
 	}
@@ -82,6 +84,7 @@ public class ShiftIntervalTest {
 	public void testIsCarLockedHasConflict() {
 		assertThat(true, is(day.isCarLocked(partial)));
 		assertThat(true, is(partial.isCarLocked(day)));
+		assertThat(true, is(day.isCarLocked(day3)));
 	}
 	
 	@Test
