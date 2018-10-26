@@ -15,7 +15,7 @@
 			<span th:utext="${shift.start}">Start</span>-<span
 				th:utext="${shift.end}">Finish</span>
 		<form th:action="@{/shift/} + ${shift.id} + @{/action/remove}" method="post">
-			<button type="submit"><i class="fa fa-trash w3-xxxtiny"></i></button>
+			<button type="submit"><i class="fa fa-calendar-minus-o w3-xxxtiny"></i></button>
 		</form>
 		
 		</article>

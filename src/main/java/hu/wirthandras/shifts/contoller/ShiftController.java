@@ -31,9 +31,15 @@ public class ShiftController extends AbstractControllerBase {
 	}
 	
 	@RequestMapping("shift/{id}/action/remove")
-	public String removeSpecifiedShift(@PathVariable("id") String id, Model model) {
+	public String removeSpecifiedShift(@PathVariable("id") String id) {
 		shiftService.remove(id);
 		return "redirect:/shifts";
+	}
+	
+	@RequestMapping("shiftplanner/{id}/action/remove")
+	public String removeSpecifiedShiftInterval(@PathVariable("id") String id) {
+		shiftService.removeInterval(id);
+		return "redirect:/shiftplanner";
 	}
 
 	@RequestMapping("shift/{id}")

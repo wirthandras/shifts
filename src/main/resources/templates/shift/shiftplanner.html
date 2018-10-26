@@ -3,12 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/css/style.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title th:utext="#{dailyShifts}">Daily Shifts</title>
 </head>
 <body>
 	<div th:insert="fragments/nav.html"></div>
 	<div class="main">
-		<form id="formShift" class="box" th:action="@{/shiftplanner}"
+		<form class="box" id="formShift" th:action="@{/shiftplanner}"
 			th:object="${shiftinterval}" method="post">
 			<ul>
 				<li><span th:utext="#{start}">Start</span>:<input type="number"
@@ -19,7 +21,9 @@
 						<option th:each="c : ${cars}" th:value="${c.id}"
 							th:text="${c.plateNumber}"></option>
 				</select></li>
-				<li><input id="submit" type="submit"></li>
+				<li>
+					<button id="submit" type="submit"><i class="fa fa fa-calendar-plus-o w3-xxxtiny"></i></button>
+				</li>
 			</ul>
 			<span id="errorMessage" th:if="${errorKey != null}"
 				th:text="#{${errorKey}}">Shift is already exist!</span>
@@ -29,22 +33,27 @@
 			method="post">
 			<fieldset>
 				<legend>Generate</legend>
-				<input id="submit" type="submit">
+				<button id="generate" type="submit"><i class="fa fa-plus w3-xxxtiny"></i></button>
 			</fieldset>
 		</form>
 		<form id="clear" class="box" th:action="@{/shiftplannerclear}"
 			method="post">
 			<fieldset>
 				<legend>Clear</legend>
-				<input id="submit" type="submit">
+				<button id="clear" type="submit"><i class="fa fa-trash w3-xxxtiny"></i></button>
 			</fieldset>
 		</form>
 
 		<article th:id="shiftElement" class="box"
 			th:each="interval : ${intervals}">
+			<span th:utext="${interval.dayId}">DayId</span>
 			<span th:utext="${interval.from}">Start</span>-<span
 				th:utext="${interval.to}">Finish</span> <span
 				th:utext="${interval.car.plateNumber}">Car</span>
+				
+			<form th:action="@{/shiftplanner/} + ${interval.dayId} + @{/action/remove}" method="post">
+				<button type="submit"><i class="fa fa fa-calendar-minus-o w3-xxxtiny"></i></button>
+			</form>
 		</article>
 	</div>
 </body>

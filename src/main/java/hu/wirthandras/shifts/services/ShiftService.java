@@ -101,4 +101,8 @@ public class ShiftService {
 
 	}
 
+	public void removeInterval(String id) {
+		intervalService.remove(id);
+	}
+
 }

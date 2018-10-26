@@ -12,6 +12,8 @@ public class ShiftInterval implements Comparable<ShiftInterval> {
 
 	private static final int ACCEPTABLE_BOUND_LIMIT = 1;
 	private static final int HOUR24 = 24;
+
+	private int dayId;
 	@NotNull
 	private int from = 6;
 	@NotNull
@@ -28,6 +30,14 @@ public class ShiftInterval implements Comparable<ShiftInterval> {
 		this.from = from;
 		this.to = to;
 		this.car = car;
+	}
+
+	public int getDayId() {
+		return dayId;
+	}
+
+	public void setDayId(int dayId) {
+		this.dayId = dayId;
 	}
 
 	public int getFrom() {
