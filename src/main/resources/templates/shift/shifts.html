@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/css/style.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title th:utext="#{shifts}">Shifts</title>
 </head>
 <body>
@@ -12,6 +14,10 @@
 			<span th:utext="${#dates.format(shift.date, 'yyyy-MM-dd')}">Date</span>
 			<span th:utext="${shift.start}">Start</span>-<span
 				th:utext="${shift.end}">Finish</span>
+		<form th:action="@{/shift/} + ${shift.id} + @{/action/remove}" method="post">
+			<button type="submit"><i class="fa fa-trash w3-xxxtiny"></i></button>
+		</form>
+		
 		</article>
 	</div>
 </body>

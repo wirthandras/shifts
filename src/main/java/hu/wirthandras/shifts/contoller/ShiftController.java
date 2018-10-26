@@ -29,6 +29,12 @@ public class ShiftController extends AbstractControllerBase {
 		model.addAttribute("shifts", shiftService.getAll());
 		return getTempateFolder() + "shifts";
 	}
+	
+	@RequestMapping("shift/{id}/action/remove")
+	public String removeSpecifiedShift(@PathVariable("id") String id, Model model) {
+		shiftService.remove(id);
+		return "redirect:/shifts";
+	}
 
 	@RequestMapping("shift/{id}")
 	public String shift(@PathVariable String id, Model model) {

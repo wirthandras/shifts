@@ -1,15 +1,21 @@
 package hu.wirthandras.shifts.services;
 
+import static java.time.temporal.TemporalAdjusters.firstDayOfMonth;
+import static java.time.temporal.TemporalAdjusters.firstDayOfNextMonth;
+import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
+
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import static java.time.temporal.TemporalAdjusters.*;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import hu.wirthandras.shifts.domain.Shift;
 import hu.wirthandras.shifts.domain.car.Car;
@@ -81,6 +87,18 @@ public class ShiftService {
 		long numOfDaysBetween = ChronoUnit.DAYS.between(startDate, endDate);
 		return IntStream.iterate(0, i -> i + 1).limit(numOfDaysBetween).mapToObj(i -> startDate.plusDays(i))
 				.collect(Collectors.toList());
+	}
+
+	@Transactional
+	public void remove(String id) {
+		long idValue = Long.parseLong(id);
+		Optional<Shift> shift = shiftRepository.findById(idValue);
+		if (shift.isPresent()) {
+			shiftRepository.delete(shift.get());
+		} else {
+			throw new NoSuchElementException();
+		}
+
 	}
 
 }
