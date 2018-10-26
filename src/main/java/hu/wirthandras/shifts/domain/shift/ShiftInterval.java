@@ -1,6 +1,7 @@
 package hu.wirthandras.shifts.domain.shift;
 
 import java.util.NavigableSet;
+import java.util.Set;
 import java.util.TreeSet;
 
 import javax.validation.constraints.NotNull;
@@ -113,13 +114,22 @@ public class ShiftInterval implements Comparable<ShiftInterval> {
 
 	private boolean checkBoundaries(ShiftInterval other) {
 		NavigableSet<Integer> set = new TreeSet<>();
-		set.add(from);
-		set.add(from + getDuration());
+		set.addAll(generateIntervalInnerHours(from, getDuration()));
 
 		int of = other.getFrom();
 		int od = other.getDuration();
 
-		return set.subSet(of, of + od).size() > ACCEPTABLE_BOUND_LIMIT;
+		Set<Integer> sorted = set.subSet(of, of + od);
+
+		return sorted.size() > ACCEPTABLE_BOUND_LIMIT;
+	}
+	
+	private Set<Integer> generateIntervalInnerHours(int from, int duration) {
+		Set<Integer> result = new TreeSet<>();
+		for(int i = from; i < from + duration; i++) {
+			result.add(i);
+		}
+		return result;
 	}
 
 	private boolean hasSameEndPoint(ShiftInterval other) {
