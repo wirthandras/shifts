@@ -12,10 +12,10 @@
 			th:object="${shiftinterval}" method="post">
 			<ul>
 				<li><span th:utext="#{start}">Start</span>:<input type="number"
-					name="from" min="0" max="24" value="6"></li>
-				<li><span th:utext="#{end}">Finish</span>:<input type="number"
-					name="to" min="0" max="24" value="18"></li>
-				<li><select th:field="*{car}">
+					name="from" min="0" max="24" value="6" /><span th:text="#{unit.hour}">Hour</span></li>
+				<li><span><span th:utext="#{end}">Finish</span>:<input type="number"
+					name="to" min="0" max="24" value="18"><span th:text="#{unit.hour}">Hour</span></span></li>
+				<li><span th:text="#{plateNumber}">Plate number</span>:<select th:field="*{car}">
 						<option th:each="c : ${cars}" th:value="${c.id}"
 							th:text="${c.plateNumber}"></option>
 				</select></li>
