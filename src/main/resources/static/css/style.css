@@ -7,6 +7,10 @@
     color: white;
 }
 
+.red {
+	color:red
+}
+
 .box a {
 	text-decoration: none;
 	color: #333;

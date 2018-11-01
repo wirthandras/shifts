@@ -36,6 +36,18 @@ public class ShiftController extends AbstractControllerBase {
 		return "redirect:/shifts";
 	}
 	
+	@RequestMapping("shift/{id}/action/wish")
+	public String addShiftWish(@PathVariable("id") String id) {
+		shiftService.addWish(id);
+		return "redirect:/shifts";
+	}
+
+	@RequestMapping("shift/{id}/action/wishclear")
+	public String removeShiftWish(@PathVariable("id") String id) {
+		shiftService.removeWish(id);
+		return "redirect:/shifts";
+	}
+
 	@RequestMapping("shiftplanner/{id}/action/remove")
 	public String removeSpecifiedShiftInterval(@PathVariable("id") String id) {
 		shiftService.removeInterval(id);

@@ -7,6 +7,7 @@ import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import hu.wirthandras.shifts.domain.Shift;
+import hu.wirthandras.shifts.domain.ShiftForDisplay;
 import hu.wirthandras.shifts.domain.car.Car;
 import hu.wirthandras.shifts.domain.shift.ShiftInterval;
 import hu.wirthandras.shifts.repository.ShiftRepository;
@@ -34,14 +36,25 @@ public class ShiftService {
 	private CarService carService;
 	@Autowired
 	private IntervalService intervalService;
+	@Autowired
+	private ShiftWishService shiftWishService;
 
 	@Autowired
 	public void setShiftRepository(ShiftRepository shiftRepository) {
 		this.shiftRepository = shiftRepository;
 	}
 
-	public List<Shift> getAll() {
-		return shiftRepository.findAll();
+	public List<ShiftForDisplay> getAll() {
+		List<Shift> shifts = shiftRepository.findAll();
+		List<ShiftForDisplay> shiftDisplayed = new ArrayList<>();
+
+		for (Shift s : shifts) {
+			boolean wished = shiftWishService.contains(s);
+			ShiftForDisplay o = new ShiftForDisplay(s);
+			o.setWish(wished);
+			shiftDisplayed.add(o);
+		}
+		return shiftDisplayed;
 	}
 
 	public Shift getShift(String idAsString) {
@@ -95,6 +108,7 @@ public class ShiftService {
 		Optional<Shift> shift = shiftRepository.findById(idValue);
 		if (shift.isPresent()) {
 			shiftRepository.delete(shift.get());
+			removeWish(id);
 		} else {
 			throw new NoSuchElementException();
 		}
@@ -103,6 +117,22 @@ public class ShiftService {
 
 	public void removeInterval(String id) {
 		intervalService.remove(id);
+	}
+
+	public void addWish(String id) {
+		long idValue = Long.parseLong(id);
+		Optional<Shift> shift = shiftRepository.findById(idValue);
+		if (shift.isPresent()) {
+			shiftWishService.add(shift.get());
+		}
+	}
+
+	public void removeWish(String id) {
+		long idValue = Long.parseLong(id);
+		Optional<Shift> shift = shiftRepository.findById(idValue);
+		if (shift.isPresent()) {
+			shiftWishService.remove(shift.get());
+		}
 	}
 
 }
