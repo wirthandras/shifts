@@ -91,4 +91,8 @@ public class Shift {
 		return true;
 	}
 	
+	public Object[] toObjectArray() {
+		return new Object[] {date, start, end};
+	}
+
 }

@@ -45,7 +45,7 @@ public class ShiftService {
 	}
 
 	public List<ShiftForDisplay> getAll() {
-		List<Shift> shifts = shiftRepository.findAll();
+		List<Shift> shifts = getPersistedShifts();
 		List<ShiftForDisplay> shiftDisplayed = new ArrayList<>();
 
 		for (Shift s : shifts) {
@@ -133,6 +133,10 @@ public class ShiftService {
 		if (shift.isPresent()) {
 			shiftWishService.remove(shift.get());
 		}
+	}
+
+	public List<Shift> getPersistedShifts() {
+		return shiftRepository.findAll();
 	}
 
 }
