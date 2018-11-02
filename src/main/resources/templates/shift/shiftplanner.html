@@ -15,9 +15,9 @@
 					name="from" min="0" max="24" value="6" /><span th:text="#{unit.hour}">Hour</span></li>
 				<li><span><span th:utext="#{end}">Finish</span>:<input type="number"
 					name="to" min="0" max="24" value="18"><span th:text="#{unit.hour}">Hour</span></span></li>
-				<li><span th:text="#{plateNumber}">Plate number</span>:<select th:field="*{car}">
+				<li><span th:text="#{typeAndPlateNumber}">Type and (Plate number)</span>:<select th:field="*{car}">
 						<option th:each="c : ${cars}" th:value="${c.id}"
-							th:text="${c.plateNumber}"></option>
+							th:text="${c.carType} + '(' + ${c.plateNumber} + ')'"></option>
 				</select></li>
 				<li>
 					<button id="submit" type="submit"><i class="fa fa fa-calendar-plus-o w3-xxxtiny"></i></button>

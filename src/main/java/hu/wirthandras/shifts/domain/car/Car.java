@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-public class Car {
+public class Car implements Comparable<Car>{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,12 +57,46 @@ public class Car {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((carType == null) ? 0 : carType.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((plateNumber == null) ? 0 : plateNumber.hashCode());
+		return result;
+	}
+
+	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof Car) {
-			Car c = (Car) obj;
-			return plateNumber.equals(c.getPlateNumber()) && carType.equals(c.getCarType());
-		} else {
+		if (this == obj)
+			return true;
+		if (obj == null)
 			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Car other = (Car) obj;
+		if (carType != other.carType)
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (plateNumber == null) {
+			if (other.plateNumber != null)
+				return false;
+		} else if (!plateNumber.equals(other.plateNumber))
+			return false;
+		return true;
+	}
+
+	@Override
+	public int compareTo(Car o) {
+		int carCompare = this.carType.compareTo(o.getCarType());
+		if(carCompare == 0) {
+			return this.plateNumber.compareTo(o.getPlateNumber());
+		}else {
+			return carCompare;
 		}
 	}
 

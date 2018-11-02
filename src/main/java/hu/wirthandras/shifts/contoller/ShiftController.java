@@ -68,7 +68,7 @@ public class ShiftController extends AbstractControllerBase {
 	@GetMapping("shiftplanner")
 	public String shiftPlanner(@ModelAttribute("shiftinterval") ShiftInterval interval, Model model) {
 		model.addAttribute("intervals", shiftService.getIntervals());
-		model.addAttribute("cars", shiftService.getFreeCars());
+		model.addAttribute("cars", shiftService.getCars());
 		return getTempateFolder() + "shiftplanner";
 	}
 
@@ -77,12 +77,12 @@ public class ShiftController extends AbstractControllerBase {
 		try {
 			shiftService.addInterval(interval);
 		} catch (ShiftIntervalAlreadyExistException e) {
-			model.addAttribute("cars", shiftService.getFreeCars());
+			model.addAttribute("cars", shiftService.getCars());
 			model.addAttribute("intervals", shiftService.getIntervals());
 			model.addAttribute("errorKey", "shiftIsAlreadyExist");
 			return getTempateFolder() + "shiftplanner";
 		} catch (CarLockedException e) {
-			model.addAttribute("cars", shiftService.getFreeCars());
+			model.addAttribute("cars", shiftService.getCars());
 			model.addAttribute("intervals", shiftService.getIntervals());
 			model.addAttribute("errorKey", "carIsLocked");
 			return getTempateFolder() + "shiftplanner";

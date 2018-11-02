@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -32,16 +33,28 @@ public class ShiftService {
 
 	private ShiftRepository shiftRepository;
 
-	@Autowired
 	private CarService carService;
-	@Autowired
 	private IntervalService intervalService;
-	@Autowired
 	private ShiftWishService shiftWishService;
 
 	@Autowired
 	public void setShiftRepository(ShiftRepository shiftRepository) {
 		this.shiftRepository = shiftRepository;
+	}
+
+	@Autowired
+	public void setCarService(CarService carService) {
+		this.carService = carService;
+	}
+
+	@Autowired
+	public void setIntervalService(IntervalService intervalService) {
+		this.intervalService = intervalService;
+	}
+
+	@Autowired
+	public void setShiftWishService(ShiftWishService shiftWishService) {
+		this.shiftWishService = shiftWishService;
 	}
 
 	public List<ShiftForDisplay> getAll() {
@@ -70,9 +83,10 @@ public class ShiftService {
 		return intervalService.getIntervals();
 	}
 
-	public List<Car> getFreeCars() {
-		// TODO remove assigned cars from list
-		return carService.getCars();
+	public List<Car> getCars() {
+		List<Car> cars = carService.getCars();
+		Collections.sort(cars);
+		return cars;
 	}
 
 	public void generate() {
