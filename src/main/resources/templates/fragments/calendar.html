@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div class="box cal flow">
-		<span>Calendar</span>
+		<span th:text="#{calendar}">Calendar</span>
 		<div th:utext="${month}">January</div>
 		<div th:id="${day.id}" th:onclick="${method}" class="flow tile"
 			th:each="day : ${days}">
@@ -18,6 +18,6 @@
 		
 		
 	</div>
-	<div class="box flow" id="container">Container</div>
+	<div class="box flow" id="container" th:text="#{events}">Events</div>
 	<div class="flow" id="userInfo"></div>
 </body>
