@@ -63,12 +63,21 @@ public class SpreadSheetService {
 
 	private void createExcelFile(Map<Employee, List<Shift>> plan) {
 
+		removePreviousIfExist();
+
 		XSSFWorkbook workbook = new XSSFWorkbook();
 		for (Employee e : plan.keySet()) {
 			createSheet(workbook, e, plan.get(e));
 		}
 
 		save(workbook);
+	}
+
+	private void removePreviousIfExist() {
+		File f = new File(EXCEL_FILE_NAME);
+		if (f.exists()) {
+			f.delete();
+		}
 	}
 
 	private void save(XSSFWorkbook workbook) {
