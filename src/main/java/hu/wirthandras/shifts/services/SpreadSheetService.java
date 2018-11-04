@@ -28,7 +28,7 @@ import hu.wirthandras.shifts.domain.Shift;
 @Service
 public class SpreadSheetService {
 
-	private static String EXCEL_FILE_NAME = "output.xls";
+	private static String EXCEL_FILE_NAME = "output.xlsx";
 
 	private static Logger LOGGER = Logger.getLogger(SpreadSheetService.class.getName());
 
@@ -82,7 +82,7 @@ public class SpreadSheetService {
 			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 		}
 
-		LOGGER.log(Level.INFO, "Excel is created");
+		LOGGER.log(Level.INFO, "Spreadsheet is created");
 	}
 
 	private void createSheet(XSSFWorkbook workbook, Employee e, List<Shift> list) {
