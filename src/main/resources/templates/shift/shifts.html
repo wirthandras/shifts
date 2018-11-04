@@ -13,7 +13,7 @@
 			<span th:utext="${shift.start}">Start</span>-<span
 				th:utext="${shift.end}">Finish</span>
 		<form th:action="@{/shift/} + ${shift.id} + @{/action/remove}" method="post">
-			<button type="submit"><i class="fa fa-calendar-minus-o w3-xxxtiny"></i></button>
+			<button type="submit"><i class="fa fa-calendar-minus-o w3-xxxtiny" th:text="remove">Remove</i></button>
 		</form>
 		<form th:action="@{/shift/} + ${shift.id} + @{/action/} + (${shift.wish} ? @{wishclear} : @{wish})" method="post">
 			<button type="submit"><i class="fa fa-heart w3-xxxtiny" th:classappend="${shift.wish} ? red"></i></button>

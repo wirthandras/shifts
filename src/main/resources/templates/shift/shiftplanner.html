@@ -11,16 +11,16 @@
 		<form class="box" id="formShift" th:action="@{/shiftplanner}"
 			th:object="${shiftinterval}" method="post">
 			<ul>
-				<li><span th:utext="#{start}">Start</span>:<input type="number"
+				<li><span th:utext="#{start}">Start</span>:<input class="number-input" type="number"
 					name="from" min="0" max="24" value="6" /><span th:text="#{unit.hour}">Hour</span></li>
-				<li><span><span th:utext="#{end}">Finish</span>:<input type="number"
+				<li><span><span th:utext="#{end}">Finish</span>:<input class="number-input" type="number"
 					name="to" min="0" max="24" value="18"><span th:text="#{unit.hour}">Hour</span></span></li>
 				<li><span th:text="#{typeAndPlateNumber}">Type and (Plate number)</span>:<select th:field="*{car}">
 						<option th:each="c : ${cars}" th:value="${c.id}"
 							th:text="${c.carType} + '(' + ${c.plateNumber} + ')'"></option>
 				</select></li>
 				<li>
-					<button id="submit" type="submit"><i class="fa fa fa-calendar-plus-o w3-xxxtiny"></i></button>
+					<button id="submit" type="submit"><i class="fa fa fa-calendar-plus-o w3-xxxtiny" th:text="#{add}">Add</i></button>
 				</li>
 			</ul>
 			<span id="errorMessage" th:if="${errorKey != null}"
@@ -30,27 +30,39 @@
 		<form id="generate" class="box" th:action="@{/shiftplannergenerate}"
 			method="post">
 			<fieldset>
-				<legend>Generate</legend>
+				<legend th:text="#{shifts.generate}">Generate</legend>
 				<button id="generate" type="submit"><i class="fa fa-plus w3-xxxtiny"></i></button>
 			</fieldset>
 		</form>
 		<form id="clear" class="box" th:action="@{/shiftplannerclear}"
 			method="post">
 			<fieldset>
-				<legend>Clear</legend>
+				<legend th:text="#{shifts.clear}">Clear</legend>
 				<button id="clear" type="submit"><i class="fa fa-trash w3-xxxtiny"></i></button>
 			</fieldset>
 		</form>
 
 		<article th:id="shiftElement" class="box"
 			th:each="interval : ${intervals}">
-			<span th:utext="${interval.dayId}">DayId</span>
-			<span th:utext="${interval.from}">Start</span>-<span
-				th:utext="${interval.to}">Finish</span> <span
-				th:utext="${interval.car.plateNumber}">Car</span>
-				
+			<div>
+				<span th:text="#{shiftplanner.dayid}">Shift Id:</span>
+				<span th:utext="${interval.dayId}">1</span>
+			</div>
+			<div>
+				<span th:text="#{shiftplanner.interval}">Interval:</span>
+				<span th:utext="${interval.from}">Start</span>-<span
+				th:utext="${interval.to}">Finish</span>
+			</div>
+			<div>
+				<span th:utext="#{type}">Type</span>:
+				<span th:utext="${interval.car.carType}">Roko</span>
+			</div>
+			<div>
+				<span th:utext="#{plateNumber}">Plate number</span>:
+				<span th:utext="${interval.car.plateNumber}">Car</span>
+			</div>
 			<form th:action="@{/shiftplanner/} + ${interval.dayId} + @{/action/remove}" method="post">
-				<button type="submit"><i class="fa fa fa-calendar-minus-o w3-xxxtiny"></i></button>
+				<button type="submit"><i class="fa fa fa-calendar-minus-o w3-xxxtiny" th:text="#{remove}">Remove</i></button>
 			</form>
 		</article>
 	</div>
