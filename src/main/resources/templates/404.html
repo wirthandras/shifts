@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title th:text="#{error.title}">Error</title>
+
+</head>
+<body>
+	<div th:insert="fragments/nav.html"></div>
+	<div class="container">
+		<article>
+			<header>
+				<h2 th:text="#{error.page-not-found}">Sorry, but the requested
+					page does not found</h2>
+			</header>
+		</article>
+	</div>
+</body>
+</html>
