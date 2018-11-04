@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import hu.wirthandras.shifts.domain.car.Car;
 
 @Entity
 public class Shift {
@@ -16,12 +19,15 @@ public class Shift {
 	protected Date date;
 	protected int start;
 	protected int end;
+	@ManyToOne(optional=false)
+	protected Car car;
 	
-	public Shift(Date date, int start, int end) {
+	public Shift(Date date, int start, int end, Car car) {
 		super();
 		this.date = date;
 		this.start = start;
 		this.end = end;
+		this.car = car;
 	}
 
 	public Shift() {

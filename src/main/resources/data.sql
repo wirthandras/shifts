@@ -1,8 +1,3 @@
-insert into SHIFT (date,start,end) values (CURRENT_DATE(),8,16)
-insert into SHIFT (date,start,end) values (CURRENT_DATE(),9,17)
-insert into SHIFT (date,start,end) values (CURRENT_DATE(),6,18)
-insert into SHIFT (date,start,end) values (CURRENT_DATE(),18,6)
-
 insert into EMPLOYEE (name,job) values ('Vizi Marci','DRIVER')
 insert into EMPLOYEE (name,job) values ('Hegyi Józsi','DOCTOR')
 insert into EMPLOYEE (name,job) values ('Kuti Béla','MEDIC')
@@ -14,3 +9,8 @@ insert into CAR (plate_number,car_type) values ('HHH-001','KIM')
 insert into CAR (plate_number,car_type) values ('KKK-002','ROKO')
 insert into CAR (plate_number,car_type) values ('RRR-987','ESETKOCSI')
 insert into CAR (plate_number,car_type) values ('HHH-002','KIM')
+
+insert into SHIFT (date,start,end,car_id) values (CURRENT_DATE(),8,16, select id from CAR where plate_number='HHH-001')
+insert into SHIFT (date,start,end,car_id) values (CURRENT_DATE(),9,17, select id from CAR where plate_number='KKK-002')
+insert into SHIFT (date,start,end,car_id) values (CURRENT_DATE(),6,18, select id from CAR where plate_number='RRR-987')
+insert into SHIFT (date,start,end,car_id) values (CURRENT_DATE(),18,6, select id from CAR where plate_number='HHH-002')

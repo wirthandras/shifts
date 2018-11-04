@@ -9,11 +9,25 @@
 	<div th:insert="fragments/nav.html"></div>
 	<div class="main">
 		<article class="box" th:each="shift : ${shifts}">
-			<span th:utext="${#dates.format(shift.date, 'yyyy-MM-dd')}">Date</span>
-			<span th:utext="${shift.start}">Start</span>-<span
+			<div>
+				<span th:utext="#{date}">Date</span>:
+				<span th:utext="${#dates.format(shift.date, 'yyyy-MM-dd')}">Date</span>
+			</div>
+			<div>
+				<span th:text="#{shiftplanner.interval}">Interval:</span>
+				<span th:utext="${shift.start}">Start</span>-<span
 				th:utext="${shift.end}">Finish</span>
+			</div>
+			<div>
+				<span th:text="#{plateNumber}">Plate number</span>:
+				<span th:utext="${shift.car.plateNumber}">HHH-444</span>
+			</div>
+			<div>
+				<span th:text="#{type}">Car type</span>:
+				<span th:utext="${shift.car.carType}">Car type</span>
+			</div>
 		<form th:action="@{/shift/} + ${shift.id} + @{/action/remove}" method="post">
-			<button type="submit"><i class="fa fa-calendar-minus-o w3-xxxtiny" th:text="remove">Remove</i></button>
+			<button type="submit"><i class="fa fa-calendar-minus-o w3-xxxtiny" th:text="#{remove}">Remove</i></button>
 		</form>
 		<form th:action="@{/shift/} + ${shift.id} + @{/action/} + (${shift.wish} ? @{wishclear} : @{wish})" method="post">
 			<button type="submit"><i class="fa fa-heart w3-xxxtiny" th:classappend="${shift.wish} ? red"></i></button>

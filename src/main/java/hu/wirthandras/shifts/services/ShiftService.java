@@ -94,7 +94,7 @@ public class ShiftService {
 		LocalDate nextMonth = now.with(firstDayOfNextMonth());
 		for (LocalDate d : getD(nextMonth)) {
 			for (ShiftInterval i : intervalService.getIntervals()) {
-				shiftRepository.save(new Shift(Date.valueOf(d), i.getFrom(), i.getTo()));
+				shiftRepository.save(new Shift(Date.valueOf(d), i.getFrom(), i.getTo(), i.getCar()));
 			}
 		}
 	}
