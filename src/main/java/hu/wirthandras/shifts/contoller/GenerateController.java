@@ -1,8 +1,6 @@
 package hu.wirthandras.shifts.contoller;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import hu.wirthandras.shifts.services.SpreadSheetService;
 
 @Controller
-public class GenerateController extends AbstractControllerBase {
+public class GenerateController {
 
 	private static Logger LOGGER = Logger.getLogger(GenerateController.class.getName());
 
@@ -26,27 +24,18 @@ public class GenerateController extends AbstractControllerBase {
 
 	@GetMapping("/generate")
 	public String generateScreen() {
-		return getTempateFolder() + "generate";
-	}
-
-	@Override
-	protected String getTempateFolder() {
-		return "generate/";
+		return "generate/generate";
 	}
 
 	@GetMapping(value = "/spreadsheet", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	@ResponseBody
 	public FileSystemResource downloadPlan(HttpServletResponse response) {
+
 		FileSystemResource resource = new FileSystemResource(excelService.downloadPlan());
 
-		try {
-			String fileName = URLEncoder.encode(resource.getFilename(), "UTF-8");
-			fileName = URLDecoder.decode(fileName, "ISO8859_1");
-			response.setContentType("application/x-msdownload");
-			response.setHeader("Content-disposition", "attachment; filename=" + fileName);
-		} catch (UnsupportedEncodingException e) {
-			LOGGER.severe(e.getMessage());
-		}
+		response.setHeader("Content-disposition", "attachment; filename=" + resource.getFilename());
+		LOGGER.log(Level.INFO, "File Download: " + resource.getFilename());
 		return resource;
 	}
+
 }
