@@ -1,0 +1,22 @@
+Nyelvi fájl egységesítée
+Handlebars alkalmzása a js-ben
+Thymeleaf kitalálja a mezőnév alapján a gettert
+EventService az Car és Employeehoz
+PlanService concurrenthasmap vagy session annotáció
+Random helyett valami irányított összerendelés
+ReflectionTestUtils a Service setterek helyett
+getTemplateFolder függvény helyett final String field
+Car és Employee lehetőségek összevonásra
+
+ControllerAdvice
+Error kezelés átnézése
+Download ISO8859_1 átnézée - csak a response setheader elég lenen
+
+BindingResult global
+ModelAttribute használata
+
+Domain objektumokat nem annyira tesztelünk
+Inkább a Service-eken lenne a hangsúly
+
+
+
