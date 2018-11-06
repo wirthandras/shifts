@@ -8,7 +8,6 @@ Car és Employee lehetőségek összevonásra
 
 ControllerAdvice
 Error kezelés átnézése
-Download ISO8859_1 átnézée - csak a response setheader elég lenen
 
 BindingResult global
 ModelAttribute használata
