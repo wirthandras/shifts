@@ -6,10 +6,6 @@ getTemplateFolder függvény helyett final String field
 Car és Employee lehetőségek összevonásra
 
 ControllerAdvice
-Error kezelés átnézése
-
-BindingResult global
-ModelAttribute használata
 
 Domain objektumokat nem annyira tesztelünk
 Inkább a Service-eken lenne a hangsúly
