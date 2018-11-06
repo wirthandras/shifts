@@ -53,7 +53,7 @@ public class CarController extends AbstractControllerBase {
 	}
 
 	@PostMapping("/newcar")
-	public String newCarSave(@Valid @ModelAttribute(name="newcar") Car car, BindingResult result, Model model) {
+	public String newCarSave(@Valid @ModelAttribute(name="newcar") Car car, BindingResult result) {
 		if (result.hasErrors()) {
 			return getTempateFolder() + "newcar";
 		} else {
@@ -61,7 +61,7 @@ public class CarController extends AbstractControllerBase {
 				service.save(car);
 				return "redirect:newcar";
 			} catch (PlateNumberAlreadyExist e) {
-				model.addAttribute("errorKey", "error.plateNumberAlreadyExist");
+				result.reject("error.plateNumberAlreadyExist");
 				return getTempateFolder() + "newcar";
 			}
 		}
