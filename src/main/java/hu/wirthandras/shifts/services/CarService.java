@@ -1,6 +1,5 @@
 package hu.wirthandras.shifts.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,14 +35,6 @@ public class CarService {
 		} else {
 			throw new PlateNumberAlreadyExist();
 		}
-	}
-	
-	public List<String> getEvents(String day) {
-		List<String> events = new ArrayList<>();
-		events.add("cara" + day);
-		events.add("carb" + day);
-		events.add("carc" + day);
-		return events;
 	}
 
 }

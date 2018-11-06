@@ -13,13 +13,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import hu.wirthandras.shifts.domain.Employee;
 import hu.wirthandras.shifts.domain.day.AjaxResponseBody;
 import hu.wirthandras.shifts.services.EmployeeService;
+import hu.wirthandras.shifts.services.EventService;
 import hu.wirthandras.shifts.services.MonthService;
 
 @Controller
 public class EmployeeController extends AbstractControllerBase {
 
 	@Autowired
+	private EventService eventService;
+
+	@Autowired
 	private EmployeeService service;
+
 	@Autowired
 	private MonthService serviceMonth;
 
@@ -52,7 +57,7 @@ public class EmployeeController extends AbstractControllerBase {
 
 	@PostMapping(value = "/api/employees")
 	public ResponseEntity<?> api(@RequestParam("dayId") String dayId) {
-		AjaxResponseBody result = new AjaxResponseBody(service.getEvents(dayId));
+		AjaxResponseBody result = new AjaxResponseBody(eventService.getEmployeeEvents(dayId));
 		return ResponseEntity.ok(result);
 	}
 

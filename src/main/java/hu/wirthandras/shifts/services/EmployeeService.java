@@ -1,6 +1,5 @@
 package hu.wirthandras.shifts.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,14 +29,6 @@ public class EmployeeService {
 	
 	public void save(Employee e) {
 		repository.save(e);
-	}
-	
-	public List<String> getEvents(String day) {
-		List<String> events = new ArrayList<>();
-		events.add("empa" + day);
-		events.add("empb" + day);
-		events.add("empc" + day);
-		return events;
 	}
 
 }

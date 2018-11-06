@@ -1,7 +1,5 @@
 package hu.wirthandras.shifts.contoller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import hu.wirthandras.shifts.domain.car.Car;
 import hu.wirthandras.shifts.domain.day.AjaxResponseBody;
 import hu.wirthandras.shifts.services.CarService;
+import hu.wirthandras.shifts.services.EventService;
 import hu.wirthandras.shifts.services.MonthService;
 import hu.wirthandras.shifts.services.PlateNumberAlreadyExist;
 
@@ -26,6 +25,10 @@ public class CarController extends AbstractControllerBase {
 
 	@Autowired
 	private CarService service;
+
+	@Autowired
+	private EventService eventService;
+
 	@Autowired
 	private MonthService serviceMonth;
 
@@ -66,8 +69,7 @@ public class CarController extends AbstractControllerBase {
 
 	@PostMapping("/api/cars")
 	public ResponseEntity<AjaxResponseBody> api(@RequestParam("dayId") String dayId) {
-		List<String> events = service.getEvents(dayId);
-		AjaxResponseBody result = new AjaxResponseBody(events);
+		AjaxResponseBody result = new AjaxResponseBody(eventService.getCarEvents(dayId));
 		return ResponseEntity.ok(result);
 	}
 
