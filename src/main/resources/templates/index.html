@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/css/style.css">
-<title th:utext="#{home}">Home</title>
+<title th:utext="#{navigation.home}">Home</title>
 </head>
 <body>
 	<div th:insert="fragments/nav.html"></div>
 	<h1 class="home-center">Shifts</h1>
 	<div class="home-center">
-		<span th:text="#{welcome}">Welcome message</span>
+		<span th:text="#{home.welcome}">Welcome message</span>
 	</div>
 	<div class="home-center">
 		<img src="https://image.freepik.com/free-vector/two-paramedics-workers-in-front-of-ambulance-car_3446-539.jpg"><br>
 	</div>
 	<footer class="home-center">
-		<a href='https://www.freepik.com/free-vector/two-paramedics-workers-in-front-of-ambulance-car_1311439.htm' th:text="#{designedby}">Designed by Iconicbestiary</a>
+		<a href='https://www.freepik.com/free-vector/two-paramedics-workers-in-front-of-ambulance-car_1311439.htm' th:text="#{home.designedby}">Designed by Iconicbestiary</a>
 	</footer>
 </body>
 </html>

@@ -9,26 +9,26 @@
 </head>
 <body>
 	<nav class="navbar">
-		<a id="home" href="/" th:utext="#{home}">Home</a>
+		<a id="home" href="/" th:utext="#{navigation.home}">Home</a>
 		<div class="dropdown">
-			<button id="details" class="dropbtn" th:utext="#{details}">Details<i class="fa fa-caret-down"></i>
+			<button id="details" class="dropbtn" th:utext="#{common.details}">Details<i class="fa fa-caret-down"></i>
 			</button><div class="dropdown-content">
-				<a id="employees" href="/employees" th:utext="#{employees}">Employee</a>
-				<a id="cars" href="/cars" th:utext="#{cars}">Cars</a>
+				<a id="employees" href="/employees" th:utext="#{navigation.employees}">Employee</a>
+				<a id="cars" href="/cars" th:utext="#{navigation.cars}">Cars</a>
 				<a id="shifts" href="/shifts" th:utext="#{shifts}">Shifts</a>
 			</div>
 		</div>
 		<div class="dropdown">
-			<button id="newsDropdown" class="dropbtn" th:utext="#{new..}">New..<i class="fa fa-caret-down"></i>
+			<button id="newsDropdown" class="dropbtn" th:utext="#{navigation.new..}">New..<i class="fa fa-caret-down"></i>
 			</button><div class="dropdown-content">
-				<a id="newEmployee" href="/newemployee" th:utext="#{employee}">Employee</a>
-				<a id="newCar" href="/newcar" th:utext="#{car}">Car</a>
+				<a id="newEmployee" href="/newemployee" th:utext="#{title.employee}">Employee</a>
+				<a id="newCar" href="/newcar" th:utext="#{title.car}">Car</a>
 			</div>
 		</div>
 		<div class="dropdown">
-			<button id="planning" class="dropbtn" th:utext="#{planning}">Planning<i class="fa fa-caret-down"></i>
+			<button id="planning" class="dropbtn" th:utext="#{navigation.planning}">Planning<i class="fa fa-caret-down"></i>
 			</button><div class="dropdown-content">
-				<a id="shiftplanner" href="/shiftplanner" th:utext="#{dailyShifts}">Daily Shifts</a>
+				<a id="shiftplanner" href="/shiftplanner" th:utext="#{navigation.dailyShifts}">Daily Shifts</a>
 			</div>
 		</div>
 		<a id="generate" href="/generate" th:utext="#{scheduling}">Scheduling</a>

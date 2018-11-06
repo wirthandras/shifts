@@ -2,12 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 <meta charset="UTF-8">
-<title th:utext="#{newEmployee}">New Employee</title>
+<title th:utext="#{title.newEmployee}">New Employee</title>
 </head>
 <body>
 	<div th:insert="fragments/nav.html"></div>
 	<form class="box" th:action="@{/newemployee}" th:object="${newemployee}" method="post">
-		<input type="text" name="name" th:placeholder="#{name}" autocomplete="off" autofocus="autofocus">
+		<input type="text" name="name" th:placeholder="#{employee.name}" autocomplete="off" autofocus="autofocus">
 		<br>
 		<select name="job">
 			<option th:each="state : ${T(hu.wirthandras.shifts.domain.Job).values()}"
@@ -15,7 +15,7 @@
 			</option>
 		</select>
 		<br>
-		<input type="submit" th:value="#{add}">
+		<input type="submit" th:value="#{common.add}">
 	</form>
 </body>
 </html>

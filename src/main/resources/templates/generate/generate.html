@@ -2,12 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title th:utext="#{generate}">Generate</title>
+	<title th:utext="#{scheduling.generate}">Generate</title>
 </head>
 <body>
 	<div th:insert="fragments/nav.html"></div>
 	<form id="clear" class="box" th:action="@{/spreadsheet}" method="get">
-		<button id="clear" type="submit" th:text="#{generate} + ' ' + #{and} + ' ' + #{download}">Generate and Download</button>
+		<button id="clear" type="submit" th:text="#{scheduling.generate} + ' ' + #{scheduling.and} + ' ' + #{scheduling.download}">Generate and Download</button>
 	</form>
 </body>
 </html>

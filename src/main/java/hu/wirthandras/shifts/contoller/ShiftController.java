@@ -79,12 +79,12 @@ public class ShiftController extends AbstractControllerBase {
 		} catch (ShiftIntervalAlreadyExistException e) {
 			model.addAttribute("cars", shiftService.getCars());
 			model.addAttribute("intervals", shiftService.getIntervals());
-			model.addAttribute("errorKey", "shiftIsAlreadyExist");
+			model.addAttribute("errorKey", "error.shiftIsAlreadyExist");
 			return getTempateFolder() + "shiftplanner";
 		} catch (CarLockedException e) {
 			model.addAttribute("cars", shiftService.getCars());
 			model.addAttribute("intervals", shiftService.getIntervals());
-			model.addAttribute("errorKey", "carIsLocked");
+			model.addAttribute("errorKey", "error.carIsLocked");
 			return getTempateFolder() + "shiftplanner";
 		}
 		return "redirect:shiftplanner";

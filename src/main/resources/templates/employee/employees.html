@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 <meta charset="UTF-8">
-<title th:utext="#{employees}">Employees</title>
+<title th:utext="#{navigation.employees}">Employees</title>
 </head>
 <body>
 	<div th:insert="fragments/nav.html"></div>
@@ -10,7 +10,7 @@
 		<article th:each="employee : ${employees}" class="box">
 			<span th:utext="${employee.name}">Name</span><br>
 			<span th:utext="#{${employee.job}}">Job</span>
-			<a th:href="@{/employee/} + ${employee.id}" th:utext="#{details}">Details</a>
+			<a th:href="@{/employee/} + ${employee.id}" th:utext="#{common.details}">Details</a>
 		</article>
 	</div>
 </body>

@@ -58,7 +58,7 @@ public class CarController extends AbstractControllerBase {
 				service.save(car);
 				return "redirect:newcar";
 			} catch (PlateNumberAlreadyExist e) {
-				model.addAttribute("errorKey", "plateNumberAlreadyExist");
+				model.addAttribute("errorKey", "error.plateNumberAlreadyExist");
 				return getTempateFolder() + "newcar";
 			}
 		}

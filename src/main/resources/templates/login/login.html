@@ -8,10 +8,10 @@
 <body>
 	<div class="center">
 		<form>
-			<span th:utext="#{loginMessage}">Log in to your account</span>
-			<input type="text" name="email" placeholder="E-mail address" th:placeholder="#{emailAddress}">
-			<input type="text" name="password" placeholder="Password" th:placeholder="#{password}">
-			<input type="submit" th:value="#{login}">
+			<span th:utext="#{login.loginMessage}">Log in to your account</span>
+			<input type="text" name="email" placeholder="E-mail address" th:placeholder="#{login.emailAddress}">
+			<input type="text" name="password" placeholder="Password" th:placeholder="#{login.password}">
+			<input type="submit" th:value="#{login.button}">
 		</form>
 	</div>
 </body>
