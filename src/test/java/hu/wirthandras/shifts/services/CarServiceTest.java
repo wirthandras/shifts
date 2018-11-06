@@ -11,6 +11,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import hu.wirthandras.shifts.domain.car.Car;
 import hu.wirthandras.shifts.domain.car.CarType;
@@ -18,35 +19,38 @@ import hu.wirthandras.shifts.repository.CarRepository;
 
 public class CarServiceTest {
 	
+	private static final String PLATE_NUMBER = "AAA-001";
+
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
-	
+
 	private CarService service;
-	private CarRepository repo;
 	
+	private CarRepository repo;
+
 	@Before
 	public void setUp() {
 		service = new CarService();
 		repo = Mockito.mock(CarRepository.class);
-		service.setRepository(repo);
+		ReflectionTestUtils.setField(service, "repository", repo);
 	}
-	
+
 	@Test
 	public void testGetShouldBeWorkOnWhenGetElement() {
-		Optional<Car> value = Optional.of(new Car("AAA-001", CarType.ONE));
+		Optional<Car> value = Optional.of(new Car(PLATE_NUMBER, CarType.ONE));
 		Mockito.when(repo.findById(0l)).thenReturn(value);
-				
-		assertThat("AAA-001", is(service.getCar("0").getPlateNumber()));
+
+		assertThat(PLATE_NUMBER, is(service.getCar("0").getPlateNumber()));
 		assertThat(CarType.ONE, is(service.getCar("0").getCarType()));
-		
+
 		Mockito.verify(repo, times(2)).findById(0l);
 	}
-	
+
 	@Test
 	public void testGetShouldBeNumberFormatExceptionWhenParameterIsNotLong() {
 		thrown.expect(NumberFormatException.class);
-		
-		assertThat("AAA-001", is(service.getCar("a").getPlateNumber()));		
+
+		assertThat(PLATE_NUMBER, is(service.getCar("a").getPlateNumber()));
 	}
-	
+
 }

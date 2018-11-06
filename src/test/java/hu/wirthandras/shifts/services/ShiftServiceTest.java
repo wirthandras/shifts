@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import hu.wirthandras.shifts.domain.car.Car;
 import hu.wirthandras.shifts.domain.car.CarType;
@@ -36,7 +37,7 @@ public class ShiftServiceTest {
 		
 		when(carServiceMock.getCars()).thenReturn(cars);
 		
-		classToTest.setCarService(carServiceMock);
+		ReflectionTestUtils.setField(classToTest, "carService", carServiceMock);
 	}
 	
 	private void createTestCars() {

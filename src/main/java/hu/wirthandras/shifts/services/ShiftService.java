@@ -31,31 +31,17 @@ import hu.wirthandras.shifts.services.interval.ShiftIntervalAlreadyExistExceptio
 @Service
 public class ShiftService {
 
+	@Autowired
 	private ShiftRepository shiftRepository;
 
+	@Autowired
 	private CarService carService;
+
+	@Autowired
 	private IntervalService intervalService;
+
+	@Autowired
 	private ShiftWishService shiftWishService;
-
-	@Autowired
-	public void setShiftRepository(ShiftRepository shiftRepository) {
-		this.shiftRepository = shiftRepository;
-	}
-
-	@Autowired
-	public void setCarService(CarService carService) {
-		this.carService = carService;
-	}
-
-	@Autowired
-	public void setIntervalService(IntervalService intervalService) {
-		this.intervalService = intervalService;
-	}
-
-	@Autowired
-	public void setShiftWishService(ShiftWishService shiftWishService) {
-		this.shiftWishService = shiftWishService;
-	}
 
 	public List<ShiftForDisplay> getAll() {
 		List<Shift> shifts = getPersistedShifts();

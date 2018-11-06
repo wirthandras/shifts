@@ -16,6 +16,8 @@ import hu.wirthandras.shifts.services.interval.ShiftIntervalAlreadyExistExceptio
 
 public class IntervalServiceTest {
 
+	private static String PLATE_NUMBER ="AAA-111";
+
 	private IntervalService service;
 	private Car carMock;
 
@@ -26,7 +28,7 @@ public class IntervalServiceTest {
 	public void setUp() {
 		service = new IntervalService();
 		carMock = Mockito.mock(Car.class);
-		when(carMock.getPlateNumber()).thenReturn("AAA-111");
+		when(carMock.getPlateNumber()).thenReturn(PLATE_NUMBER);
 	}
 
 	@Test

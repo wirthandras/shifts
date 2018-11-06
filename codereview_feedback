@@ -2,7 +2,6 @@ Handlebars alkalmzása a js-ben
 Thymeleaf kitalálja a mezőnév alapján a gettert
 PlanService concurrenthasmap vagy session annotáció
 Random helyett valami irányított összerendelés
-ReflectionTestUtils a Service setterek helyett
 getTemplateFolder függvény helyett final String field
 Car és Employee lehetőségek összevonásra
 
