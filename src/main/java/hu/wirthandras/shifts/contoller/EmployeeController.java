@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import hu.wirthandras.shifts.domain.Employee;
-import hu.wirthandras.shifts.domain.day.AjaxResponseBody;
+import hu.wirthandras.shifts.domain.day.EmployeeEventResponse;
+import hu.wirthandras.shifts.domain.employee.Employee;
 import hu.wirthandras.shifts.services.EmployeeService;
 import hu.wirthandras.shifts.services.EventService;
 import hu.wirthandras.shifts.services.MonthService;
@@ -33,7 +33,7 @@ public class EmployeeController extends AbstractControllerBase {
 		model.addAttribute("employee", service.getEmployee(id));
 		model.addAttribute("month", serviceMonth.getMonthName());
 		model.addAttribute("days", serviceMonth.getDaysInCurrentMonth());
-		model.addAttribute("method", "UpdateStatus(\"#container\", this.id)");
+		model.addAttribute("method", "UpdateStatus(\"#container\", this.id, " + id + ")");
 
 		return getTempateFolder() + "employee";
 	}
@@ -56,8 +56,8 @@ public class EmployeeController extends AbstractControllerBase {
 	}
 
 	@PostMapping(value = "/api/employees")
-	public ResponseEntity<?> api(@RequestParam("dayId") String dayId) {
-		AjaxResponseBody result = new AjaxResponseBody(eventService.getEmployeeEvents(dayId));
+	public ResponseEntity<?> api(@RequestParam("dayId") String dayId, @RequestParam("employee") String employee) {
+		EmployeeEventResponse result = new EmployeeEventResponse(eventService.getEmployeeEvents(dayId, employee));
 		return ResponseEntity.ok(result);
 	}
 

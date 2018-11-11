@@ -1,4 +1,4 @@
-function UpdateCar(field, id) {
+function UpdateCar(field, id, car) {
 	$.ajax({
 				url : '/api/cars/',
 				method : 'POST',
@@ -7,12 +7,13 @@ function UpdateCar(field, id) {
 				cache : false,
 				timeout : 5000,
 				data : {
-					"dayId" : id
+					"dayId" : id,
+					"car" : car
 				},
 				success : function(responses) {
 					$(field).empty();
 					responses.result.forEach(function(response) {
-						$(field).append("<p>" + response + "</p>");
+						$(field).append("<p>" + response.type + "</p>");
 					});
 				},
 				error : function(XMLHttpRequest, textStatus, errorThrown) {

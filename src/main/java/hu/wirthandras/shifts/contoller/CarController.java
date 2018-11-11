@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import hu.wirthandras.shifts.domain.car.Car;
-import hu.wirthandras.shifts.domain.day.AjaxResponseBody;
+import hu.wirthandras.shifts.domain.day.CarEventResponse;
 import hu.wirthandras.shifts.services.CarService;
 import hu.wirthandras.shifts.services.EventService;
 import hu.wirthandras.shifts.services.MonthService;
@@ -37,7 +37,7 @@ public class CarController extends AbstractControllerBase {
 		model.addAttribute("car", service.getCar(id));
 		model.addAttribute("month", serviceMonth.getMonthName());
 		model.addAttribute("days", serviceMonth.getDaysInCurrentMonth());
-		model.addAttribute("method", "UpdateCar(\"#container\", this.id)");
+		model.addAttribute("method", "UpdateCar(\"#container\", this.id, " + id + ")");
 		return getTempateFolder() + "car";
 	}
 
@@ -68,8 +68,8 @@ public class CarController extends AbstractControllerBase {
 	}
 
 	@PostMapping("/api/cars")
-	public ResponseEntity<AjaxResponseBody> api(@RequestParam("dayId") String dayId) {
-		AjaxResponseBody result = new AjaxResponseBody(eventService.getCarEvents(dayId));
+	public ResponseEntity<CarEventResponse> api(@RequestParam("dayId") String dayId, @RequestParam("car") String car) {
+		CarEventResponse result = new CarEventResponse(eventService.getCarEvents(dayId, car));
 		return ResponseEntity.ok(result);
 	}
 

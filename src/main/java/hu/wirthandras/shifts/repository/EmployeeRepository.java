@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import hu.wirthandras.shifts.domain.Employee;
+import hu.wirthandras.shifts.domain.employee.Employee;
 
 @Repository
 public interface EmployeeRepository extends CrudRepository<Employee, Long> {

@@ -8,8 +8,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import hu.wirthandras.shifts.domain.Employee;
 import hu.wirthandras.shifts.domain.Shift;
+import hu.wirthandras.shifts.domain.employee.Employee;
 
 @Service
 public class PlanService {

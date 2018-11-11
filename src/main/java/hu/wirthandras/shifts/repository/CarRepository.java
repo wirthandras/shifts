@@ -10,9 +10,9 @@ import hu.wirthandras.shifts.domain.car.Car;
 
 @Repository
 public interface CarRepository extends CrudRepository<Car, Long> {
-	
+
 	public Optional<Car> findById(Long id);
-	
+
 	public List<Car> findAll();
 
 	public Optional<Car> findByPlateNumber(String plateNumber);

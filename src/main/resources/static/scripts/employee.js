@@ -1,4 +1,4 @@
-function UpdateStatus(field, id) {
+function UpdateStatus(field, id, employee) {
 	$.ajax({
 				url : '/api/employees/',
 				method : 'POST',
@@ -7,12 +7,13 @@ function UpdateStatus(field, id) {
 				cache : false,
 				timeout : 5000,
 				data : {
-					"dayId" : id
+					"dayId" : id,
+					"employee": employee
 				},
 				success : function(responses) {
 					$(field).empty();
 					responses.result.forEach(function(response) {
-						$(field).append("<p>" + response + "</p>");
+						$(field).append("<p>" + response.type + "</p>");
 					});
 				},
 				error : function(XMLHttpRequest, textStatus, errorThrown) {
