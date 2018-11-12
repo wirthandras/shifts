@@ -29,6 +29,13 @@ public class EmployeeEvent {
 		super();
 	}
 
+	public EmployeeEvent(Employee employee, LocalDate date, EmployeeEventType type) {
+		super();
+		this.employee = employee;
+		this.date = date;
+		this.type = type;
+	}
+
 	public Long getId() {
 		return id;
 	}
