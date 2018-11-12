@@ -11,7 +11,7 @@
 	<div class="box cal flow">
 		<span th:text="#{calendar}">Calendar</span>
 		<div th:utext="${month}">January</div>
-		<div th:id="${day.id}" th:onclick="${method}" class="flow tile" th:classappend="${#lists.contains(eventDays, day.id)} ? event"
+		<div tabindex="-1" th:id="${day.id}" th:onclick="${method}" class="flow tile" th:classappend="${#lists.contains(eventDays, day.id)} ? event"
 			th:each="day : ${days}">
 			<span th:utext="${day.id}">Day</span>
 		</div>

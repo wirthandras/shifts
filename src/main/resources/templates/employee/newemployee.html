@@ -10,7 +10,7 @@
 		<input type="text" name="name" th:placeholder="#{employee.name}" autocomplete="off" autofocus="autofocus">
 		<br>
 		<select name="job">
-			<option th:each="state : ${T(hu.wirthandras.shifts.domain.Job).values()}"
+			<option th:each="state : ${T(hu.wirthandras.shifts.domain.employee.Job).values()}"
 				th:value="${state}"	th:text="#{${state}}">
 			</option>
 		</select>

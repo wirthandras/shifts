@@ -28,6 +28,10 @@
 	box-shadow: 2px 2px 2px 1px #77a886;
 }
 
+.tile:focus {
+	box-shadow: 2px 2px 2px 1px #0000ff;
+}
+
 .flow {
 	float: left;
 }
