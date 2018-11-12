@@ -33,6 +33,7 @@ public class EmployeeController extends AbstractControllerBase {
 		model.addAttribute("employee", service.getEmployee(id));
 		model.addAttribute("month", serviceMonth.getMonthName());
 		model.addAttribute("days", serviceMonth.getDaysInCurrentMonth());
+		model.addAttribute("eventDays", eventService.getEmployeeEventsDays(id));
 		model.addAttribute("method", "UpdateStatus(\"#container\", this.id, " + id + ")");
 
 		return getTempateFolder() + "employee";

@@ -12,6 +12,8 @@ public interface CarEmployeeRepository extends CrudRepository<CarEvent, Long> {
 
 	public List<CarEvent> findAll();
 
-	public List<CarEvent> findByCarAndDate(Car employee, LocalDate date);
+	public List<CarEvent> findByCarAndDate(Car car, LocalDate date);
+
+	public List<CarEvent> findByCar(Car car);
 
 }

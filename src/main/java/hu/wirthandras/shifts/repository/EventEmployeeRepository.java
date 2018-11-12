@@ -16,4 +16,6 @@ public interface EventEmployeeRepository extends CrudRepository<EmployeeEvent, L
 
 	public List<EmployeeEvent> findByEmployeeAndDate(Employee employee, LocalDate date);
 
+	public List<EmployeeEvent> findByEmployee(Employee e);
+
 }
