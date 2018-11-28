@@ -12,5 +12,17 @@
 			th:utext="${car.carType}">Type</span>
 	</article>
 	<div th:insert="fragments/calendar.html"></div>
+	<div class="box">
+		<form th:action="@{/carevent}" th:object="${newevent}" method="post">
+		<select name="eventType">
+			<option th:each="state : ${T(hu.wirthandras.shifts.domain.car.CarEventType).values()}"
+				th:value="${state}"	th:text="#{${state}}">
+			</option>
+		</select>
+		<input type="hidden" id="dayId" name="dayId" value="-1">
+		<input type="hidden" id="carId" name="carId" th:value="${car.id}">
+		<input type="submit" th:value="#{common.add}">
+	</form>
+	</div>
 </body>
 </html>

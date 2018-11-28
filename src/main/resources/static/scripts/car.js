@@ -11,6 +11,7 @@ function UpdateCar(field, id, car) {
 					"car" : car
 				},
 				success : function(responses) {
+					$(dayId).val(id);
 					$(field).empty();
 					responses.result.forEach(function(response) {
 						$(field).append("<p>" + response.type + "</p>");

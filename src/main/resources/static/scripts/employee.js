@@ -11,6 +11,7 @@ function UpdateStatus(field, id, employee) {
 					"employee": employee
 				},
 				success : function(responses) {
+					$(dayId).val(id);
 					$(field).empty();
 					responses.result.forEach(function(response) {
 						$(field).append("<p>" + response.type + "</p>");

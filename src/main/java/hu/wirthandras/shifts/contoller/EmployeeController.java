@@ -1,5 +1,7 @@
 package hu.wirthandras.shifts.contoller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import hu.wirthandras.shifts.domain.day.EmployeeEventResponse;
 import hu.wirthandras.shifts.domain.employee.Employee;
+import hu.wirthandras.shifts.domain.employee.EmployeeEventInput;
 import hu.wirthandras.shifts.services.EmployeeService;
 import hu.wirthandras.shifts.services.EventService;
 import hu.wirthandras.shifts.services.MonthService;
@@ -54,6 +57,13 @@ public class EmployeeController extends AbstractControllerBase {
 	public String newEmployeeSave(@ModelAttribute Employee e) {
 		service.save(e);
 		return "redirect:newemployee";
+	}
+
+	@PostMapping(value = "/employeeevent")
+	public String newEmployeeEvent(@ModelAttribute("newevent") EmployeeEventInput e, HttpServletRequest request) {
+		eventService.addEmployeEvent(e.getEmployeeId(), e.getDayId(), e.getEventType());
+		String referer = request.getHeader("Referer");
+		return "redirect:" + referer;
 	}
 
 	@PostMapping(value = "/api/employees")

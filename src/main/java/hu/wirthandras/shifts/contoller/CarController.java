@@ -1,5 +1,6 @@
 package hu.wirthandras.shifts.contoller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import hu.wirthandras.shifts.domain.car.Car;
+import hu.wirthandras.shifts.domain.car.CarEventInput;
 import hu.wirthandras.shifts.domain.day.CarEventResponse;
 import hu.wirthandras.shifts.services.CarService;
 import hu.wirthandras.shifts.services.EventService;
@@ -66,6 +68,13 @@ public class CarController extends AbstractControllerBase {
 				return getTempateFolder() + "newcar";
 			}
 		}
+	}
+
+	@PostMapping(value = "/carevent")
+	public String newEmployeeEvent(@ModelAttribute("newevent") CarEventInput e, HttpServletRequest request) {
+		eventService.addCarEvent(e.getCarId(), e.getDayId(), e.getEventType());
+		String referer = request.getHeader("Referer");
+		return "redirect:" + referer;
 	}
 
 	@PostMapping("/api/cars")

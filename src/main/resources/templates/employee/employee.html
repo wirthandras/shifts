@@ -12,6 +12,17 @@
 		<div th:utext="#{${employee.job}}">Job</div>
 	</article>
 	<div th:insert="fragments/calendar.html"></div>
-	
+	<div class="box">
+		<form th:action="@{/employeeevent}" th:object="${newevent}" method="post">
+		<select name="eventType">
+			<option th:each="state : ${T(hu.wirthandras.shifts.domain.employee.EmployeeEventType).values()}"
+				th:value="${state}"	th:text="#{${state}}">
+			</option>
+		</select>
+		<input type="hidden" id="dayId" name="dayId" value="-1">
+		<input type="hidden" id="employeeId" name="employeeId" th:value="${employee.id}">
+		<input type="submit" th:value="#{common.add}">
+	</form>
+	</div>
 </body>
 </html>

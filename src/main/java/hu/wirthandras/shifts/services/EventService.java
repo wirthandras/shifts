@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import hu.wirthandras.shifts.domain.car.Car;
 import hu.wirthandras.shifts.domain.car.CarEvent;
+import hu.wirthandras.shifts.domain.car.CarEventType;
 import hu.wirthandras.shifts.domain.employee.Employee;
 import hu.wirthandras.shifts.domain.employee.EmployeeEvent;
 import hu.wirthandras.shifts.domain.employee.EmployeeEventType;
@@ -64,6 +65,13 @@ public class EventService {
 		Employee e = employeeService.getEmployee(employeeId);
 		EmployeeEvent event = new EmployeeEvent(e, dayDate, type);
 		eventEmployeeRepository.save(event);
+	}
+
+	public void addCarEvent(String carId, String dayId, CarEventType type) {
+		LocalDate dayDate = resolveDateFromDayId(dayId);
+		Car c = carService.getCar(carId);
+		CarEvent event = new CarEvent(c, dayDate, type);
+		eventCarRepository.save(event);
 	}
 
 	private LocalDate resolveDateFromDayId(String dayId) {

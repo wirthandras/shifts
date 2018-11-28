@@ -14,10 +14,10 @@ import javax.persistence.ManyToOne;
 public class CarEvent {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne(optional=false)
+	@ManyToOne(optional = false)
 	private Car car;
 
 	private LocalDate date;
@@ -27,6 +27,12 @@ public class CarEvent {
 
 	public CarEvent() {
 		super();
+	}
+
+	public CarEvent(Car car, LocalDate dayDate, CarEventType type) {
+		this.car = car;
+		this.date = dayDate;
+		this.type = type;
 	}
 
 	public Long getId() {
