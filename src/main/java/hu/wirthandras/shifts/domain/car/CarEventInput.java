@@ -6,6 +6,13 @@ public class CarEventInput {
 	private String dayId;
 	private CarEventType eventType;
 
+	public CarEventInput(String carId, String dayId, CarEventType eventType) {
+		super();
+		this.carId = carId;
+		this.dayId = dayId;
+		this.eventType = eventType;
+	}
+
 	public String getCarId() {
 		return carId;
 	}

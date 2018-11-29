@@ -21,40 +21,40 @@ import hu.wirthandras.shifts.repository.EventEmployeeRepository;
 public class EventService {
 
 	@Autowired
-	private EventEmployeeRepository eventEmployeeRepository;
+	private EventEmployeeRepository repositoryEventEmployee;
 
 	@Autowired
-	private CarEmployeeRepository eventCarRepository;
+	private CarEmployeeRepository repositoryEventCar;
 
 	@Autowired
-	private EmployeeService employeeService;
+	private EmployeeService serviceEmployee;
 
 	@Autowired
-	private CarService carService;
+	private CarService serviceCar;
 
 	public List<CarEvent> getCarEvents(String dayId, String car) {
 		LocalDate dayDate = resolveDateFromDayId(dayId);
-		Car c = carService.getCar(car);
-		return eventCarRepository.findByCarAndDate(c, dayDate);
+		Car c = serviceCar.getCar(car);
+		return repositoryEventCar.findByCarAndDate(c, dayDate);
 	}
 
 	public List<EmployeeEvent> getEmployeeEvents(String dayId, String employee) {
 		LocalDate dayDate = resolveDateFromDayId(dayId);
-		Employee emp = employeeService.getEmployee(employee);
-		return eventEmployeeRepository.findByEmployeeAndDate(emp, dayDate);
+		Employee emp = serviceEmployee.getEmployee(employee);
+		return repositoryEventEmployee.findByEmployeeAndDate(emp, dayDate);
 	}
 
 	public Set<Integer> getCarEventsDays(String carId) {
-		Car c = carService.getCar(carId);
-		List<CarEvent> events = eventCarRepository.findByCar(c);
+		Car c = serviceCar.getCar(carId);
+		List<CarEvent> events = repositoryEventCar.findByCar(c);
 		return events.stream()
 				.map(o -> o.getDate().getDayOfMonth())
 				.collect(Collectors.toSet());
 	}
 
 	public Set<Integer> getEmployeeEventsDays(String employeeId) {
-		Employee e = employeeService.getEmployee(employeeId);
-		List<EmployeeEvent> events = eventEmployeeRepository.findByEmployee(e);
+		Employee e = serviceEmployee.getEmployee(employeeId);
+		List<EmployeeEvent> events = repositoryEventEmployee.findByEmployee(e);
 		return events.stream()
 				.map(o -> o.getDate().getDayOfMonth())
 				.collect(Collectors.toSet());
@@ -62,38 +62,38 @@ public class EventService {
 
 	public void addEmployeEvent(EmployeeEventInput input) {
 		LocalDate dayDate = resolveDateFromDayId(input.getDayId());
-		Employee e = employeeService.getEmployee(input.getEmployeeId());
+		Employee e = serviceEmployee.getEmployee(input.getEmployeeId());
 		EmployeeEvent event = new EmployeeEvent(e, dayDate, input.getEventType());
-		eventEmployeeRepository.save(event);
+		repositoryEventEmployee.save(event);
 	}
 
 	public void addCarEvent(CarEventInput input) {
 		LocalDate dayDate = resolveDateFromDayId(input.getDayId());
-		Car c = carService.getCar(input.getCarId());
+		Car c = serviceCar.getCar(input.getCarId());
 		CarEvent event = new CarEvent(c, dayDate, input.getEventType());
-		eventCarRepository.save(event);
+		repositoryEventCar.save(event);
 	}
 
-	private LocalDate resolveDateFromDayId(String dayId) {
+	LocalDate resolveDateFromDayId(String dayId) {
 		int dayNumber = Integer.parseInt(dayId);
 		return LocalDate.now().withDayOfMonth(dayNumber);
 	}
 
 	public void removeEmployeEvent(EmployeeEventInput input) {
-		Employee e = employeeService.getEmployee(input.getEmployeeId());
+		Employee e = serviceEmployee.getEmployee(input.getEmployeeId());
 		LocalDate dayDate = resolveDateFromDayId(input.getDayId());
-		List<EmployeeEvent> list = eventEmployeeRepository.findByEmployeeAndDate(e, dayDate);
+		List<EmployeeEvent> list = repositoryEventEmployee.findByEmployeeAndDate(e, dayDate);
 		for (EmployeeEvent ee : list) {
-			eventEmployeeRepository.delete(ee);
+			repositoryEventEmployee.delete(ee);
 		}
 	}
 
 	public void removeCarEvent(CarEventInput input) {
-		Car c = carService.getCar(input.getCarId());
+		Car c = serviceCar.getCar(input.getCarId());
 		LocalDate dayDate = resolveDateFromDayId(input.getDayId());
-		List<CarEvent> list = eventCarRepository.findByCarAndDate(c, dayDate);
+		List<CarEvent> list = repositoryEventCar.findByCarAndDate(c, dayDate);
 		for (CarEvent ce : list) {
-			eventCarRepository.delete(ce);
+			repositoryEventCar.delete(ce);
 		}
 	}
 
