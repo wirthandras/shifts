@@ -59,11 +59,17 @@ public class EmployeeController extends AbstractControllerBase {
 		return "redirect:newemployee";
 	}
 
-	@PostMapping(value = "/employeeevent")
-	public String newEmployeeEvent(@ModelAttribute("newevent") EmployeeEventInput e, HttpServletRequest request) {
-		eventService.addEmployeEvent(e.getEmployeeId(), e.getDayId(), e.getEventType());
-		String referer = request.getHeader("Referer");
-		return "redirect:" + referer;
+	@PostMapping(value = "/employeeevent", params = "actionAdd")
+	public String newEmployeeEvent(@ModelAttribute("newevent") EmployeeEventInput input, HttpServletRequest request) {
+		eventService.addEmployeEvent(input);
+		return "redirect:" + request.getHeader(REFERER);
+	}
+
+	@PostMapping(value = "/employeeevent", params = "actionRemove")
+	public String removeEmployeeEvent(@ModelAttribute("newevent") EmployeeEventInput input,
+			HttpServletRequest request) {
+		eventService.removeEmployeEvent(input);
+		return "redirect:" + request.getHeader(REFERER);
 	}
 
 	@PostMapping(value = "/api/employees")

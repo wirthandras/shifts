@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 
 import hu.wirthandras.shifts.domain.car.Car;
 import hu.wirthandras.shifts.domain.car.CarEvent;
-import hu.wirthandras.shifts.domain.car.CarEventType;
+import hu.wirthandras.shifts.domain.car.CarEventInput;
 import hu.wirthandras.shifts.domain.employee.Employee;
 import hu.wirthandras.shifts.domain.employee.EmployeeEvent;
-import hu.wirthandras.shifts.domain.employee.EmployeeEventType;
+import hu.wirthandras.shifts.domain.employee.EmployeeEventInput;
 import hu.wirthandras.shifts.repository.CarEmployeeRepository;
 import hu.wirthandras.shifts.repository.EventEmployeeRepository;
 
@@ -60,23 +60,41 @@ public class EventService {
 				.collect(Collectors.toSet());
 	}
 
-	public void addEmployeEvent(String employeeId, String dayId, EmployeeEventType type) {
-		LocalDate dayDate = resolveDateFromDayId(dayId);
-		Employee e = employeeService.getEmployee(employeeId);
-		EmployeeEvent event = new EmployeeEvent(e, dayDate, type);
+	public void addEmployeEvent(EmployeeEventInput input) {
+		LocalDate dayDate = resolveDateFromDayId(input.getDayId());
+		Employee e = employeeService.getEmployee(input.getEmployeeId());
+		EmployeeEvent event = new EmployeeEvent(e, dayDate, input.getEventType());
 		eventEmployeeRepository.save(event);
 	}
 
-	public void addCarEvent(String carId, String dayId, CarEventType type) {
-		LocalDate dayDate = resolveDateFromDayId(dayId);
-		Car c = carService.getCar(carId);
-		CarEvent event = new CarEvent(c, dayDate, type);
+	public void addCarEvent(CarEventInput input) {
+		LocalDate dayDate = resolveDateFromDayId(input.getDayId());
+		Car c = carService.getCar(input.getCarId());
+		CarEvent event = new CarEvent(c, dayDate, input.getEventType());
 		eventCarRepository.save(event);
 	}
 
 	private LocalDate resolveDateFromDayId(String dayId) {
 		int dayNumber = Integer.parseInt(dayId);
 		return LocalDate.now().withDayOfMonth(dayNumber);
+	}
+
+	public void removeEmployeEvent(EmployeeEventInput input) {
+		Employee e = employeeService.getEmployee(input.getEmployeeId());
+		LocalDate dayDate = resolveDateFromDayId(input.getDayId());
+		List<EmployeeEvent> list = eventEmployeeRepository.findByEmployeeAndDate(e, dayDate);
+		for (EmployeeEvent ee : list) {
+			eventEmployeeRepository.delete(ee);
+		}
+	}
+
+	public void removeCarEvent(CarEventInput input) {
+		Car c = carService.getCar(input.getCarId());
+		LocalDate dayDate = resolveDateFromDayId(input.getDayId());
+		List<CarEvent> list = eventCarRepository.findByCarAndDate(c, dayDate);
+		for (CarEvent ce : list) {
+			eventCarRepository.delete(ce);
+		}
 	}
 
 }

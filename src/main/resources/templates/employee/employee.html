@@ -21,7 +21,8 @@
 		</select>
 		<input type="hidden" id="dayId" name="dayId" value="-1">
 		<input type="hidden" id="employeeId" name="employeeId" th:value="${employee.id}">
-		<input type="submit" th:value="#{common.add}">
+		<input type="submit" name="actionAdd" th:value="#{common.add}">
+		<input type="submit" name="actionRemove" th:value="#{common.remove}">
 	</form>
 	</div>
 </body>

@@ -56,7 +56,7 @@ public class CarController extends AbstractControllerBase {
 	}
 
 	@PostMapping("/newcar")
-	public String newCarSave(@Valid @ModelAttribute(name="newcar") Car car, BindingResult result) {
+	public String newCarSave(@Valid @ModelAttribute(name = "newcar") Car car, BindingResult result) {
 		if (result.hasErrors()) {
 			return getTempateFolder() + "newcar";
 		} else {
@@ -70,11 +70,16 @@ public class CarController extends AbstractControllerBase {
 		}
 	}
 
-	@PostMapping(value = "/carevent")
-	public String newEmployeeEvent(@ModelAttribute("newevent") CarEventInput e, HttpServletRequest request) {
-		eventService.addCarEvent(e.getCarId(), e.getDayId(), e.getEventType());
-		String referer = request.getHeader("Referer");
-		return "redirect:" + referer;
+	@PostMapping(value = "/carevent", params = "actionAdd")
+	public String newCarEvent(@ModelAttribute("newevent") CarEventInput input, HttpServletRequest request) {
+		eventService.addCarEvent(input);
+		return "redirect:" + request.getHeader(REFERER);
+	}
+
+	@PostMapping(value = "/carevent", params = "actionRemove")
+	public String removeCarEvent(@ModelAttribute("newevent") CarEventInput input, HttpServletRequest request) {
+		eventService.removeCarEvent(input);
+		return "redirect:" + request.getHeader(REFERER);
 	}
 
 	@PostMapping("/api/cars")
