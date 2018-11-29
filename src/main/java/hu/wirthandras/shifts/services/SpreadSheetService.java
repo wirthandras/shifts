@@ -4,26 +4,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CreationHelper;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFCellStyle;
-import org.apache.poi.xssf.usermodel.XSSFFont;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import hu.wirthandras.shifts.domain.Shift;
-import hu.wirthandras.shifts.domain.employee.Employee;
+import hu.wirthandras.shifts.services.generator.ExcelGenerator;
 
 @Service
 public class SpreadSheetService {
@@ -33,44 +21,11 @@ public class SpreadSheetService {
 	private static Logger LOGGER = Logger.getLogger(SpreadSheetService.class.getName());
 
 	@Autowired
-	private PlanService planService;
-	@Autowired
-	private EmployeeService emloyeeService;
-	@Autowired
-	private ShiftService shiftService;
+	private ExcelGenerator generator;
 
-	public void generate() {
-		planService.doPlan(emloyeeService.getEmployees(), shiftService.getPersistedShifts());
-
-		Map<Shift, Employee> plan = planService.getPlan();
-
-		createExcelFile(reverse(plan));
-	}
-
-	private Map<Employee, List<Shift>> reverse(Map<Shift, Employee> plan) {
-		Map<Employee, List<Shift>> reversed = new HashMap<>();
-		for (Shift s : plan.keySet()) {
-			if (reversed.containsKey(plan.get(s))) {
-				reversed.get(plan.get(s)).add(s);
-			} else {
-				List<Shift> shifts = new ArrayList<Shift>();
-				shifts.add(s);
-				reversed.put(plan.get(s), shifts);
-			}
-		}
-		return reversed;
-	}
-
-	private void createExcelFile(Map<Employee, List<Shift>> plan) {
-
+	private void createExcelFile(HSSFWorkbook wb) {
 		removePreviousIfExist();
-
-		XSSFWorkbook workbook = new XSSFWorkbook();
-		for (Employee e : plan.keySet()) {
-			createSheet(workbook, e, plan.get(e));
-		}
-
-		save(workbook);
+		save(wb);
 	}
 
 	private void removePreviousIfExist() {
@@ -80,7 +35,7 @@ public class SpreadSheetService {
 		}
 	}
 
-	private void save(XSSFWorkbook workbook) {
+	private void save(HSSFWorkbook workbook) {
 		try {
 			FileOutputStream outputStream = new FileOutputStream(EXCEL_FILE_NAME);
 			workbook.write(outputStream);
@@ -94,55 +49,9 @@ public class SpreadSheetService {
 		LOGGER.log(Level.INFO, "Spreadsheet is created");
 	}
 
-	private void createSheet(XSSFWorkbook workbook, Employee e, List<Shift> list) {
-		LOGGER.log(Level.INFO, "Creating excel sheet with name: " + e.getName());
-
-		// To avoid the create duplicated sheet name (exception occurred)
-		XSSFSheet sheet = workbook.getSheet(e.getName());
-		if (sheet == null) {
-			sheet = workbook.createSheet(e.getName());
-		}
-
-		XSSFFont font = workbook.createFont();
-		font.setFontName("Calibri");
-		XSSFCellStyle style = workbook.createCellStyle();
-		CreationHelper createHelper = workbook.getCreationHelper();
-		style.setFont(font);
-		style.setDataFormat(createHelper.createDataFormat().getFormat("m/d/yy"));
-
-		drawTable(list, sheet, style);
-
-		alignColumns(sheet);
-	}
-
-	private void alignColumns(XSSFSheet sheet) {
-		for (int i = 0; i < 3; i++) {
-			sheet.autoSizeColumn(i);
-			sheet.setColumnWidth(0, 3000);
-		}
-	}
-
-	private void drawTable(List<Shift> list, XSSFSheet sheet, XSSFCellStyle style) {
-		int rowNum = 0;
-		for (Shift datatype : list) {
-			Row row = sheet.createRow(rowNum++);
-			int colNum = 0;
-			for (Object field : datatype.toObjectArray()) {
-				Cell cell = row.createCell(colNum++);
-				if (field instanceof String) {
-					cell.setCellValue((String) field);
-				} else if (field instanceof Integer) {
-					cell.setCellValue((Integer) field);
-				} else if (field instanceof Date) {
-					cell.setCellStyle(style);
-					cell.setCellValue((Date) field);
-				}
-			}
-		}
-	}
-
 	public File downloadPlan() {
-		generate();
+		HSSFWorkbook wb = generator.generate();
+		createExcelFile(wb);
 		File f = new File(EXCEL_FILE_NAME);
 		return f;
 	}

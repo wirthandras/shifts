@@ -55,7 +55,7 @@ public class EventServiceTest {
 		Car mockCar = mock(Car.class);
 		when(mockCar.getId()).thenReturn(1l);
 		when(mockCarService.getCar(CAR_ID)).thenReturn(mockCar);
-		LocalDate date = service.resolveDateFromDayId(DAY_ID);
+		LocalDate date = ServiceUtil.resolveDateFromDayId(DAY_ID);
 		List<CarEvent> list = new ArrayList<CarEvent>();
 		list.add(new CarEvent(mockCar, date, null));
 		when(mockEventCarRepository.findByCar(mockCar)).thenReturn(list);

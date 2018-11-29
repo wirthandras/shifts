@@ -1,6 +1,6 @@
 package hu.wirthandras.shifts.domain;
 
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -99,6 +99,14 @@ public class Shift {
 	
 	public Object[] toObjectArray() {
 		return new Object[] {date, start, end};
+	}
+
+	public int duration() {
+		if (getStart() > getEnd()) {
+			return getStart() - getEnd();
+		} else {
+			return getStart() - getEnd();
+		}
 	}
 
 }

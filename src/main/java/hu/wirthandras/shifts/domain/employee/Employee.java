@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Employee {
+public class Employee implements Comparable<Employee> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,6 +58,11 @@ public class Employee {
 
 	public void setJob(Job job) {
 		this.job = job;
+	}
+
+	@Override
+	public int compareTo(Employee o) {
+		return this.name.compareTo(o.name);
 	}
 
 }
