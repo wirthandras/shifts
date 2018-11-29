@@ -78,7 +78,7 @@ public class ShiftService {
 	public void generate() {
 		LocalDate now = LocalDate.now();
 		LocalDate nextMonth = now.with(firstDayOfNextMonth());
-		for (LocalDate d : getD(nextMonth)) {
+		for (LocalDate d : generateDays(nextMonth)) {
 			for (ShiftInterval i : intervalService.getIntervals()) {
 				shiftRepository.save(new Shift(Date.valueOf(d), i.getFrom(), i.getTo(), i.getCar()));
 			}
@@ -89,7 +89,7 @@ public class ShiftService {
 		shiftRepository.deleteAll();
 	}
 
-	private List<LocalDate> getD(LocalDate now) {
+	private List<LocalDate> generateDays(LocalDate now) {
 		LocalDate start = now.with(firstDayOfMonth());
 		LocalDate end = now.with(lastDayOfMonth());
 		return getDatesBetween(start, end);
