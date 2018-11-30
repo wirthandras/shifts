@@ -83,11 +83,6 @@ public class PlanService {
 		return serviceEvent.getNumberOfHolidays(emp) * WORK_DAY_HOURS;
 	}
 
-	public boolean isNormalShiftDay(Employee emp, int dayId) {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
 	public String getTime(Employee emp, int actDay) {
 		LocalDate date = ServiceUtil.resolveNextMonthDateFromDayId(actDay);
 
@@ -98,7 +93,7 @@ public class PlanService {
 
 		for (Shift shift : shifts) {
 			if (plan.get(shift).contains(emp)) {
-				return shift.getStart() + "-" + shift.getEnd();
+				return shift.toInterval();
 			}
 		}
 		return null;

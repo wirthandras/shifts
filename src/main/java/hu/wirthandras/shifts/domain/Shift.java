@@ -12,16 +12,18 @@ import hu.wirthandras.shifts.domain.car.Car;
 
 @Entity
 public class Shift {
-	
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+
+	private static final String SEPARATOR = "-";
+
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	protected Long id;
 	protected Date date;
 	protected int start;
 	protected int end;
-	@ManyToOne(optional=false)
+	@ManyToOne(optional = false)
 	protected Car car;
-	
+
 	public Shift(Date date, int start, int end, Car car) {
 		super();
 		this.date = date;
@@ -96,9 +98,9 @@ public class Shift {
 			return false;
 		return true;
 	}
-	
+
 	public Object[] toObjectArray() {
-		return new Object[] {date, start, end};
+		return new Object[] { date, start, end };
 	}
 
 	public int duration() {
@@ -107,6 +109,10 @@ public class Shift {
 		} else {
 			return getEnd() - getStart();
 		}
+	}
+
+	public String toInterval() {
+		return getStart() + SEPARATOR + getEnd();
 	}
 
 }

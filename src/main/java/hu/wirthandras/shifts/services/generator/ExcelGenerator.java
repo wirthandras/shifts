@@ -118,9 +118,7 @@ public class ExcelGenerator {
 				if (serviceEvent.isOnHoliday(emp, j)) {
 					cell.setCellValue(HOLIDAY_SHORT);
 				} else {
-					if (plan.isNormalShiftDay(emp, j)) {
-						setCellValue(emp, cell, j);
-					}
+					setCellValue(emp, cell, j);
 				}
 			}
 			setCellStyle(workbook, cell, j);
