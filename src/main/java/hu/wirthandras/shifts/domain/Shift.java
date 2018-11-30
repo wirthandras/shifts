@@ -105,7 +105,7 @@ public class Shift {
 		if (getStart() > getEnd()) {
 			return getStart() - getEnd();
 		} else {
-			return getStart() - getEnd();
+			return getEnd() - getStart();
 		}
 	}
 
