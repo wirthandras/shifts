@@ -108,8 +108,7 @@ public class EventService {
 	private boolean isEventOnDay(Employee emp, int dayId, EmployeeEventType type) {
 		LocalDate dayDate = ServiceUtil.resolveDateFromDayId(dayId);
 		List<EmployeeEvent> events = repositoryEventEmployee.findByEmployeeAndDate(emp, dayDate);
-		//TODO replace filter with anyMatch
-		return events.stream().filter(x -> x.getType().equals(type)).count() > 0;
+		return events.stream().anyMatch(x -> x.getType().equals(type));
 	}
 
 }
