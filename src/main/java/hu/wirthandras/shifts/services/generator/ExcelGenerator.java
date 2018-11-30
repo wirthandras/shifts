@@ -109,9 +109,9 @@ public class ExcelGenerator {
 			if (j == 0) {
 				cell.setCellValue(emp.getName());
 			} else if (j == day + 1) {
-				cell.setCellValue(plan.sumWorkingHours(emp));
-			} else if (j == day + 2) {
 				cell.setCellValue(plan.getHolidayHours(emp));
+			} else if (j == day + 2) {
+				cell.setCellValue(plan.sumWorkingHours(emp));
 			} else if (serviceEvent.isSick(emp, j)) {
 				cell.setCellValue(SICK_SHORT);
 			} else {
