@@ -35,7 +35,7 @@ public class PlanService {
 
 	public void doPlan() {
 		for (Shift s : serviceShift.getPersistedShifts()) {
-			Optional<Employee> o = getRandomEmployee(serviceEmployee.getEmployees());
+			Optional<Employee> o = getAnEmployee(s);
 			if (o.isPresent()) {
 				Set<Employee> set = plan.get(s);
 				if (set == null) {
@@ -52,21 +52,10 @@ public class PlanService {
 		}
 	}
 
-	private Optional<Employee> getRandomEmployee(List<Employee> employees) {
+	private Optional<Employee> getAnEmployee(Shift s) {
+		List<Employee> employees = serviceEmployee.getEmployees();
 		Collections.shuffle(employees);
 		return employees.stream().findAny();
-	}
-
-	public void clear() {
-		plan.clear();
-	}
-
-	/**
-	 *
-	 * @return copy of the plan
-	 */
-	public Map<Shift, Set<Employee>> getPlan() {
-		return new HashMap<>(plan);
 	}
 
 	public int sumWorkingHours(Employee emp) {
