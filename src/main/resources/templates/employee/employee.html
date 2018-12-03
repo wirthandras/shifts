@@ -11,6 +11,11 @@
 		<div th:utext="${employee.name}">Name</div>
 		<div th:utext="#{${employee.job}}">Job</div>
 		<div th:utext="${employee.night} ? #{employee.night.yes} : #{employee.night.no}">Operate at night</div>
+		<div>
+			<span th:text="#{employee.monthlyHours}">Monthly Hours</span>
+			<span>:</span>
+			<span th:utext="${employee.monthlyHours}">160</span>
+		</div>
 	</article>
 	<div th:insert="fragments/calendar.html"></div>
 	<div class="box">

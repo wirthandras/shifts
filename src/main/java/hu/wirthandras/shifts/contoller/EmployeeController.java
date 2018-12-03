@@ -22,6 +22,8 @@ import hu.wirthandras.shifts.services.MonthService;
 @Controller
 public class EmployeeController extends AbstractControllerBase {
 
+	private static final int DEFAULT_MONTHLY_HOURS = 160;
+
 	@Autowired
 	private EventService eventService;
 
@@ -76,6 +78,11 @@ public class EmployeeController extends AbstractControllerBase {
 	public ResponseEntity<?> api(@RequestParam("dayId") String dayId, @RequestParam("employee") String employee) {
 		EmployeeEventResponse result = new EmployeeEventResponse(eventService.getEmployeeEvents(dayId, employee));
 		return ResponseEntity.ok(result);
+	}
+
+	@ModelAttribute("defaultMonthlyHours")
+	public int getDefaultMonthlyHour() {
+		return DEFAULT_MONTHLY_HOURS;
 	}
 
 	@Override
