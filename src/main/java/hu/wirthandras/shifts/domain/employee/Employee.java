@@ -23,6 +23,8 @@ public class Employee implements Comparable<Employee> {
 	@Enumerated(EnumType.STRING)
 	private Job job;
 
+	private boolean night;
+
 	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
 	private Set<EmployeeEvent> events;
 
@@ -58,6 +60,14 @@ public class Employee implements Comparable<Employee> {
 
 	public void setJob(Job job) {
 		this.job = job;
+	}
+
+	public boolean isNight() {
+		return night;
+	}
+
+	public void setNight(boolean night) {
+		this.night = night;
 	}
 
 	@Override
