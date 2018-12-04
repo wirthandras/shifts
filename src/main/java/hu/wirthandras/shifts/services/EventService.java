@@ -6,11 +6,17 @@ import static java.time.temporal.TemporalAdjusters.firstDayOfNextMonth;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import hu.wirthandras.shifts.domain.EventDuplicatedException;
 import hu.wirthandras.shifts.domain.car.Car;
 import hu.wirthandras.shifts.domain.car.CarEvent;
 import hu.wirthandras.shifts.domain.car.CarEventInput;
@@ -23,6 +29,8 @@ import hu.wirthandras.shifts.repository.EventEmployeeRepository;
 
 @Service
 public class EventService {
+
+	private static Logger LOGGER = Logger.getLogger(EventService.class.getName());
 
 	@Autowired
 	private EventEmployeeRepository repositoryEventEmployee;
@@ -66,18 +74,30 @@ public class EventService {
 				.collect(Collectors.toSet());
 	}
 
+	@Transactional
 	public void addEmployeEvent(EmployeeEventInput input) {
 		LocalDate dayDate = ServiceUtil.resolveDateFromDayId(input.getDayId());
 		Employee e = serviceEmployee.getEmployee(input.getEmployeeId());
 		EmployeeEvent event = new EmployeeEvent(e, dayDate, input.getEventType());
-		repositoryEventEmployee.save(event);
+		try {
+			repositoryEventEmployee.save(event);
+		} catch (DataIntegrityViolationException ex) {
+			LOGGER.log(Level.OFF, ex.getMessage(), ex);
+			throw new EventDuplicatedException();
+		}
 	}
 
+	@Transactional
 	public void addCarEvent(CarEventInput input) {
 		LocalDate dayDate = ServiceUtil.resolveDateFromDayId(input.getDayId());
 		Car c = serviceCar.getCar(input.getCarId());
 		CarEvent event = new CarEvent(c, dayDate, input.getEventType());
-		repositoryEventCar.save(event);
+		try {
+			repositoryEventCar.save(event);
+		} catch (DataIntegrityViolationException e) {
+			LOGGER.log(Level.OFF, e.getMessage(), e);
+			throw new EventDuplicatedException();
+		}
 	}
 
 	public void removeEmployeEvent(EmployeeEventInput input) {
