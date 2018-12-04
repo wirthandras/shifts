@@ -56,10 +56,12 @@ public class EventService {
 		return repositoryEventEmployee.findByEmployeeAndDate(emp, dayDate);
 	}
 
-	public Set<Integer> getCarEventsDays(String carId) {
+	public Set<Integer> getCarEventsDays(String carId, LocalDate currentMonth) {
 		Car c = serviceCar.getCar(carId);
 		List<CarEvent> events = repositoryEventCar.findByCar(c);
 		return events.stream()
+				.filter(o -> o.getDate().isAfter(currentMonth.with(firstDayOfMonth())))
+				.filter(o -> o.getDate().isBefore(currentMonth.with(firstDayOfNextMonth())))
 				.map(o -> o.getDate().getDayOfMonth())
 				.collect(Collectors.toSet());
 	}

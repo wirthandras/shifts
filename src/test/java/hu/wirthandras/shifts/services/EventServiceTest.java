@@ -20,7 +20,9 @@ import hu.wirthandras.shifts.repository.EventEmployeeRepository;
 public class EventServiceTest {
 
 	private static final String CAR_ID = "1";
-	private static final String DAY_ID = "20";
+	private static final int DAY_ID_INT = 20;
+	private static final String DAY_ID = DAY_ID_INT + "";
+	private LocalDate date = LocalDate.of(2000, 1, DAY_ID_INT);
 
 	private EventService service;
 
@@ -46,8 +48,8 @@ public class EventServiceTest {
 
 	@Test
 	public void testGetCarEventsDaysMethodShouldReturnEmptySet() {
-		Assert.assertNotNull(service.getCarEventsDays(DAY_ID));
-		Assert.assertTrue(service.getCarEventsDays(DAY_ID).isEmpty());
+		Assert.assertNotNull(service.getCarEventsDays(DAY_ID, date));
+		Assert.assertTrue(service.getCarEventsDays(DAY_ID, date).isEmpty());
 	}
 
 	@Test
@@ -60,8 +62,8 @@ public class EventServiceTest {
 		list.add(new CarEvent(mockCar, date, null));
 		when(mockEventCarRepository.findByCar(mockCar)).thenReturn(list);
 
-		Assert.assertNotNull(service.getCarEventsDays(CAR_ID));
-		Assert.assertEquals(1, service.getCarEventsDays(CAR_ID).size());
+		Assert.assertNotNull(service.getCarEventsDays(CAR_ID, date));
+		Assert.assertEquals(1, service.getCarEventsDays(CAR_ID, date).size());
 
 		verify(mockCarService, times(2)).getCar(anyString());
 	}

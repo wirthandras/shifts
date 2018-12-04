@@ -46,7 +46,7 @@ public class CarController extends AbstractControllerBase {
 		model.addAttribute("car", service.getCar(id));
 		model.addAttribute("month", serviceMonth.getMonthName());
 		model.addAttribute("days", serviceMonth.getDaysInCurrentMonth());
-		model.addAttribute("eventDays", eventService.getCarEventsDays(id));
+		model.addAttribute("eventDays", eventService.getCarEventsDays(id, serviceMonth.getCurrentMonth()));
 		model.addAttribute("method", "UpdateCar(\"#container\", this.id, " + id + ")");
 		return getTempateFolder() + "car";
 	}
