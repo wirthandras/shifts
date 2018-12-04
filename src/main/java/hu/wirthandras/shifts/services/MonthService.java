@@ -20,6 +20,10 @@ public class MonthService {
 		return list;
 	}
 
+	public LocalDate getCurrentMonth() {
+		return LocalDate.now();
+	}
+
 	public int getCurrentMonthDays() {
 		LocalDate date = LocalDate.now();
 		boolean leapYear = date.isLeapYear();

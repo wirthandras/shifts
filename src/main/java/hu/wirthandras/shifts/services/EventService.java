@@ -1,5 +1,8 @@
 package hu.wirthandras.shifts.services;
 
+import static java.time.temporal.TemporalAdjusters.firstDayOfMonth;
+import static java.time.temporal.TemporalAdjusters.firstDayOfNextMonth;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
@@ -53,10 +56,12 @@ public class EventService {
 				.collect(Collectors.toSet());
 	}
 
-	public Set<Integer> getEmployeeEventsDays(String employeeId) {
+	public Set<Integer> getEmployeeEventsDays(String employeeId, LocalDate currentMonth) {
 		Employee e = serviceEmployee.getEmployee(employeeId);
 		List<EmployeeEvent> events = repositoryEventEmployee.findByEmployee(e);
 		return events.stream()
+				.filter(o -> o.getDate().isAfter(currentMonth.with(firstDayOfMonth())))
+				.filter(o -> o.getDate().isBefore(currentMonth.with(firstDayOfNextMonth())))
 				.map(o -> o.getDate().getDayOfMonth())
 				.collect(Collectors.toSet());
 	}
@@ -94,7 +99,8 @@ public class EventService {
 	}
 
 	public long getNumberOfHolidays(Employee emp) {
-		return repositoryEventEmployee.findByEmployee(emp).stream().filter(x -> x.getType().equals(EmployeeEventType.HOLIDAY)).count();
+		return repositoryEventEmployee.findByEmployee(emp).stream()
+				.filter(x -> x.getType().equals(EmployeeEventType.HOLIDAY)).count();
 	}
 
 	public boolean isSick(Employee emp, int dayId) {
