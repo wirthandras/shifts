@@ -12,11 +12,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import hu.wirthandras.shifts.domain.Event;
+
 @Entity
 @Table(uniqueConstraints={
 	    @UniqueConstraint(columnNames = {"EMPLOYEE_ID", "DATE", "TYPE"})
 	})
-public class EmployeeEvent {
+public class EmployeeEvent implements Event {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -71,6 +73,11 @@ public class EmployeeEvent {
 
 	public void setDate(LocalDate date) {
 		this.date = date;
+	}
+
+	@Override
+	public String getTypeString() {
+		return getType().toString();
 	}
 
 }

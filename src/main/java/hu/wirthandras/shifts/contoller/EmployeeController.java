@@ -1,5 +1,7 @@
 package hu.wirthandras.shifts.contoller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +14,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import hu.wirthandras.shifts.domain.day.EmployeeEventResponse;
+import hu.wirthandras.shifts.domain.day.EventResponse;
 import hu.wirthandras.shifts.domain.employee.Employee;
+import hu.wirthandras.shifts.domain.employee.EmployeeEvent;
 import hu.wirthandras.shifts.domain.employee.EmployeeEventInput;
 import hu.wirthandras.shifts.services.EmployeeService;
 import hu.wirthandras.shifts.services.EventService;
+import hu.wirthandras.shifts.services.LocalizationService;
 import hu.wirthandras.shifts.services.MonthService;
 
 @Controller
@@ -32,6 +36,9 @@ public class EmployeeController extends AbstractControllerBase {
 
 	@Autowired
 	private MonthService serviceMonth;
+
+	@Autowired
+	private LocalizationService serviceLocalization;
 
 	@GetMapping("employee/{id}")
 	public String employee(@PathVariable String id, Model model) {
@@ -76,7 +83,8 @@ public class EmployeeController extends AbstractControllerBase {
 
 	@PostMapping(value = "/api/employees")
 	public ResponseEntity<?> api(@RequestParam("dayId") String dayId, @RequestParam("employee") String employee) {
-		EmployeeEventResponse result = new EmployeeEventResponse(eventService.getEmployeeEvents(dayId, employee));
+		List<EmployeeEvent> employeeEvents = eventService.getEmployeeEvents(dayId, employee);
+		EventResponse result = new EventResponse(serviceLocalization.localizeEmployeeEvents(employeeEvents));
 		return ResponseEntity.ok(result);
 	}
 

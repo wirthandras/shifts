@@ -1,5 +1,7 @@
 package hu.wirthandras.shifts.contoller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -15,10 +17,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import hu.wirthandras.shifts.domain.car.Car;
+import hu.wirthandras.shifts.domain.car.CarEvent;
 import hu.wirthandras.shifts.domain.car.CarEventInput;
-import hu.wirthandras.shifts.domain.day.CarEventResponse;
+import hu.wirthandras.shifts.domain.day.EventResponse;
 import hu.wirthandras.shifts.services.CarService;
 import hu.wirthandras.shifts.services.EventService;
+import hu.wirthandras.shifts.services.LocalizationService;
 import hu.wirthandras.shifts.services.MonthService;
 import hu.wirthandras.shifts.services.PlateNumberAlreadyExist;
 
@@ -33,6 +37,9 @@ public class CarController extends AbstractControllerBase {
 
 	@Autowired
 	private MonthService serviceMonth;
+
+	@Autowired
+	private LocalizationService serviceLocalization;
 
 	@GetMapping("/car/{id}")
 	public String car(@PathVariable String id, Model model) {
@@ -83,8 +90,9 @@ public class CarController extends AbstractControllerBase {
 	}
 
 	@PostMapping("/api/cars")
-	public ResponseEntity<CarEventResponse> api(@RequestParam("dayId") String dayId, @RequestParam("car") String car) {
-		CarEventResponse result = new CarEventResponse(eventService.getCarEvents(dayId, car));
+	public ResponseEntity<EventResponse> api(@RequestParam("dayId") String dayId, @RequestParam("car") String car) {
+		List<CarEvent> carEvents = eventService.getCarEvents(dayId, car);
+		EventResponse result = new EventResponse(serviceLocalization.localizeCarEvents(carEvents));
 		return ResponseEntity.ok(result);
 	}
 
