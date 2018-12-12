@@ -24,7 +24,7 @@
 			</div>
 			<div>
 				<span th:text="#{car.type}">Car type</span>:
-				<span th:utext="${shift.car.carType}">Car type</span>
+				<span th:utext="${shift.car.carType.name}">Car type</span>
 			</div>
 		<form th:action="@{/shift/} + ${shift.id} + @{/action/remove}" method="post">
 			<button type="submit"><i class="fa fa-calendar-minus-o w3-xxxtiny" th:text="#{common.remove}">Remove</i></button>

@@ -9,7 +9,7 @@
 	<div>
 		<article th:each="car : ${cars}" class="box">
 			<span th:utext="${car.plateNumber}">Plate number</span><br>
-			<span th:utext="${car.carType}">Type</span><br>
+			<span th:utext="${car.carType.name}">Type</span><br>
 			<a th:href="@{/car/} + ${car.id}" th:utext="#{common.details}">Details</a>
 		</article>
 	</div>

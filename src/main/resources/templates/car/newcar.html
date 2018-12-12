@@ -19,11 +19,10 @@
 			</ul>
 		</div>
 		<div>
-			<span th:utext="#{car.type}">Type</span>:<br> <select
-				id="carTypeDropdown" name="carType">
-				<option
-					th:each="state : ${T(hu.wirthandras.shifts.domain.car.CarType).values()}"
-					th:value="${state}" th:text="${state}"></option>
+			<span th:utext="#{car.type}">Type</span>:<br>
+			<select	th:field="*{carType.id}" id="carTypeDropdown">
+				<option	th:each="type : ${carTypes}"
+					th:value="${type.id}" th:text="${type.name}"></option>
 			</select>
 		</div>
 		<input id="submit" type="submit" th:value="#{common.add}">

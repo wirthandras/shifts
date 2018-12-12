@@ -9,7 +9,7 @@
 	<div th:insert="fragments/nav.html"></div>
 	<article class="box">
 		<span th:utext="${car.plateNumber}">Plate number</span> <span
-			th:utext="${car.carType}">Type</span>
+			th:utext="${car.carType.name}">Type</span>
 	</article>
 	<div th:insert="fragments/calendar.html"></div>
 	<div class="box">

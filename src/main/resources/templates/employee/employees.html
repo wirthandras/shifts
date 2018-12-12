@@ -9,7 +9,7 @@
 	<div>
 		<article th:each="employee : ${employees}" class="box">
 			<span th:utext="${employee.name}">Name</span><br>
-			<span th:utext="#{${employee.job}}">Job</span>
+			<span th:utext="#{${employee.job.name}}">Job</span>
 			<a th:href="@{/employee/} + ${employee.id}" th:utext="#{common.details}">Details</a>
 		</article>
 	</div>

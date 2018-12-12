@@ -4,12 +4,13 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import hu.wirthandras.shifts.domain.job.Job;
 
 @Entity
 public class Employee implements Comparable<Employee> {
@@ -20,7 +21,7 @@ public class Employee implements Comparable<Employee> {
 
 	private String name;
 
-	@Enumerated(EnumType.STRING)
+	@OneToOne
 	private Job job;
 
 	private boolean night;

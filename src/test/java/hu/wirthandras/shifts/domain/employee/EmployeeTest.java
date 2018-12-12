@@ -4,13 +4,15 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import hu.wirthandras.shifts.domain.job.Job;
+
 public class EmployeeTest {
 
 	@Test
 	public void testCompareTo() {
-		Employee a = new Employee("A", Job.DOCTOR);
-		Employee b = new Employee("B", Job.DRIVER);
-		Employee a2 = new Employee("A", Job.DRIVER);
+		Employee a = new Employee("A", new Job("DOCTOR"));
+		Employee b = new Employee("B", new Job("DRIVER"));
+		Employee a2 = new Employee("A", new Job("DRIVER"));
 		
 		assertEquals(-1, a.compareTo(b));
 		assertEquals(1, b.compareTo(a));

@@ -18,6 +18,7 @@ import hu.wirthandras.shifts.domain.day.EventResponse;
 import hu.wirthandras.shifts.domain.employee.Employee;
 import hu.wirthandras.shifts.domain.employee.EmployeeEvent;
 import hu.wirthandras.shifts.domain.employee.EmployeeEventInput;
+import hu.wirthandras.shifts.domain.job.Job;
 import hu.wirthandras.shifts.services.EmployeeService;
 import hu.wirthandras.shifts.services.EventService;
 import hu.wirthandras.shifts.services.LocalizationService;
@@ -91,6 +92,11 @@ public class EmployeeController extends AbstractControllerBase {
 	@ModelAttribute("defaultMonthlyHours")
 	public int getDefaultMonthlyHour() {
 		return DEFAULT_MONTHLY_HOURS;
+	}
+
+	@ModelAttribute("jobs")
+	public List<Job> getJobs() {
+		return service.getJobs();
 	}
 
 	@Override

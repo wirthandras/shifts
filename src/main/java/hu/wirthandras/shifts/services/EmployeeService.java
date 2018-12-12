@@ -8,36 +8,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import hu.wirthandras.shifts.domain.employee.Employee;
-import hu.wirthandras.shifts.domain.employee.Job;
+import hu.wirthandras.shifts.domain.job.Job;
 import hu.wirthandras.shifts.repository.EmployeeRepository;
 
 @Service
 public class EmployeeService {
 
-	private EmployeeRepository repository;
+	@Autowired
+	private EmployeeRepository repositoryEmployee;
 
 	@Autowired
-	public void setEmployeeRepository(EmployeeRepository repo) {
-		this.repository = repo;
-	}
+	private JobRepository repositoryJob;
 
 	public Employee getEmployee(String idAsString) {
 		long id = Long.parseLong(idAsString);
-		return repository.findById(id).get();
+		return repositoryEmployee.findById(id).get();
 	}
 
 	public List<Employee> getEmployees() {
-		return repository.findAll();
+		return repositoryEmployee.findAll();
 	}
 
 	public void save(Employee e) {
-		repository.save(e);
+		repositoryEmployee.save(e);
 	}
 
-	public Set<Employee> filter(Job job) {
+	public Set<Employee> filter(String jobName) {
 		return getEmployees().stream()
-		.filter(x -> x.getJob().equals(job))
+		.filter(x -> x.getJob().getName().equals(jobName))
 		.collect(Collectors.toSet());
+	}
+
+	public List<Job> getJobs() {
+		return repositoryJob.findAll();
 	}
 
 }

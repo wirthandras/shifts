@@ -9,9 +9,9 @@
 	<form class="box" th:action="@{/newemployee}" th:object="${newemployee}" method="post">
 		<input type="text" name="name" th:placeholder="#{employee.name}" autocomplete="off" autofocus="autofocus">
 		<br>
-		<select name="job">
-			<option th:each="state : ${T(hu.wirthandras.shifts.domain.employee.Job).values()}"
-				th:value="${state}"	th:text="#{${state}}">
+		<select th:field="*{job.id}">
+			<option th:each="job : ${jobs}"
+				th:value="${job.id}"	th:text="#{${job.name}}">
 			</option>
 		</select>
 		<br>

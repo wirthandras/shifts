@@ -2,12 +2,13 @@ package hu.wirthandras.shifts.domain.car;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
+
+import hu.wirthandras.shifts.domain.car.type.CarType;
 
 @Entity
 public class Car implements Comparable<Car>{
@@ -19,7 +20,7 @@ public class Car implements Comparable<Car>{
 	@Column(unique=true)
 	@PlateNumberConstraint
 	private String plateNumber;
-	@Enumerated(EnumType.STRING)
+	@OneToOne
 	private CarType carType;
 
 	public Car() {

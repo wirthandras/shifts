@@ -17,7 +17,7 @@
 					name="to" min="0" max="24" value="18"><span th:text="#{unit.hour}">Hour</span></span></li>
 				<li><span th:text="#{shift.typeAndPlateNumber}">Type and (Plate number)</span>:<select th:field="*{car}">
 						<option th:each="c : ${cars}" th:value="${c.id}"
-							th:text="${c.carType} + '(' + ${c.plateNumber} + ')'"></option>
+							th:text="${c.carType.name} + '(' + ${c.plateNumber} + ')'"></option>
 				</select></li>
 				<li>
 					<button id="submit" type="submit"><i class="fa fa fa-calendar-plus-o w3-xxxtiny" th:text="#{common.add}">Add</i></button>
@@ -55,7 +55,7 @@
 			</div>
 			<div>
 				<span th:utext="#{car.type}">Type</span>:
-				<span th:utext="${interval.car.carType}">Roko</span>
+				<span th:utext="${interval.car.carType.name}">Roko</span>
 			</div>
 			<div>
 				<span th:utext="#{car.plateNumber}">Plate number</span>:

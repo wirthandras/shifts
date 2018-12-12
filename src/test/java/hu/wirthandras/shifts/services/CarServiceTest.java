@@ -14,18 +14,20 @@ import org.mockito.Mockito;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import hu.wirthandras.shifts.domain.car.Car;
-import hu.wirthandras.shifts.domain.car.CarType;
+import hu.wirthandras.shifts.domain.car.type.CarType;
 import hu.wirthandras.shifts.repository.CarRepository;
 
 public class CarServiceTest {
-	
+
 	private static final String PLATE_NUMBER = "AAA-001";
+
+	private CarType one = new CarType("ONE");
 
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 
 	private CarService service;
-	
+
 	private CarRepository repo;
 
 	@Before
@@ -37,11 +39,11 @@ public class CarServiceTest {
 
 	@Test
 	public void testGetShouldBeWorkOnWhenGetElement() {
-		Optional<Car> value = Optional.of(new Car(PLATE_NUMBER, CarType.ONE));
+		Optional<Car> value = Optional.of(new Car(PLATE_NUMBER, one));
 		Mockito.when(repo.findById(0l)).thenReturn(value);
 
 		assertThat(PLATE_NUMBER, is(service.getCar("0").getPlateNumber()));
-		assertThat(CarType.ONE, is(service.getCar("0").getCarType()));
+		assertThat(one, is(service.getCar("0").getCarType()));
 
 		Mockito.verify(repo, times(2)).findById(0l);
 	}

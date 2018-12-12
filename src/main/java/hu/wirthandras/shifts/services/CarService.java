@@ -7,13 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import hu.wirthandras.shifts.domain.car.Car;
+import hu.wirthandras.shifts.domain.car.type.CarType;
 import hu.wirthandras.shifts.repository.CarRepository;
+import hu.wirthandras.shifts.repository.CarTypeRepository;
 
 @Service
 public class CarService {
 
 	@Autowired
 	private CarRepository repository;
+
+	@Autowired
+	private CarTypeRepository repositoryCarType;
 
 	public Car getCar(String idAsString) {
 		long id = Long.parseLong(idAsString);
@@ -31,6 +36,10 @@ public class CarService {
 		} else {
 			throw new PlateNumberAlreadyExist();
 		}
+	}
+
+	public List<CarType> getCarTypes() {
+		return repositoryCarType.findAll();
 	}
 
 }

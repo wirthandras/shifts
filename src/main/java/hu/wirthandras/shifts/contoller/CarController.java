@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import hu.wirthandras.shifts.domain.car.Car;
 import hu.wirthandras.shifts.domain.car.CarEvent;
 import hu.wirthandras.shifts.domain.car.CarEventInput;
+import hu.wirthandras.shifts.domain.car.type.CarType;
 import hu.wirthandras.shifts.domain.day.EventResponse;
 import hu.wirthandras.shifts.services.CarService;
 import hu.wirthandras.shifts.services.EventService;
@@ -94,6 +95,11 @@ public class CarController extends AbstractControllerBase {
 		List<CarEvent> carEvents = eventService.getCarEvents(dayId, car);
 		EventResponse result = new EventResponse(serviceLocalization.localizeCarEvents(carEvents));
 		return ResponseEntity.ok(result);
+	}
+
+	@ModelAttribute("carTypes")
+	public List<CarType> types() {
+		return service.getCarTypes();
 	}
 
 	@Override

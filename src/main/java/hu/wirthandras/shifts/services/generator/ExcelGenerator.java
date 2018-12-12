@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import hu.wirthandras.shifts.domain.employee.Employee;
-import hu.wirthandras.shifts.domain.employee.Job;
 import hu.wirthandras.shifts.services.EmployeeService;
 import hu.wirthandras.shifts.services.EventService;
 import hu.wirthandras.shifts.services.MonthService;
@@ -50,14 +49,14 @@ public class ExcelGenerator {
 		plan.doPlan();
 		HSSFWorkbook workbook = new HSSFWorkbook();
 
-		generateSheet(workbook, Job.MEDIC);
-		generateSheet(workbook, Job.DOCTOR);
-		generateSheet(workbook, Job.DRIVER);
+		generateSheet(workbook, "MEDIC");
+		generateSheet(workbook, "DOCTOR");
+		generateSheet(workbook, "DRIVER");
 
 		return workbook;
 	}
 
-	private void generateSheet(HSSFWorkbook workbook, Job job) {
+	private void generateSheet(HSSFWorkbook workbook, String job) {
 
 		Set<Employee> filteredEmployees = employeeService.filter(job);
 		generateOneSheet(workbook, filteredEmployees, job.toString());
