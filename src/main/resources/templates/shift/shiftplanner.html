@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="/css/style.css">
-<title th:utext="#{navigation.dailyShifts}">Daily Shifts</title>
+<head th:replace="fragments/head.html :: header (pageTitle='navigation.dailyShifts')">
 </head>
 <body>
-	<div th:insert="fragments/nav.html"></div>
+	<div th:replace="fragments/nav.html :: navigation"></div>
 	<div class="main">
 		<form class="box" id="formShift" th:action="@{/shiftplanner}"
 			th:object="${shiftinterval}" method="post">

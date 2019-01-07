@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-<meta charset="UTF-8">
-<title th:utext="#{navigation.cars}">Cars</title>
+<head th:replace="fragments/head.html :: header (pageTitle='navigation.cars')">
 </head>
 <body>
-	<div th:insert="fragments/nav.html"></div>
+	<div th:replace="fragments/nav.html :: navigation"></div>
 	<div>
 		<article th:each="car : ${cars}" class="box">
 			<span th:utext="${car.plateNumber}">Plate number</span><br>

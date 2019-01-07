@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="/css/calendar.css">
-<title th:utext="#{title.car}">Car</title>
+<head th:replace="fragments/head.html :: header (pageTitle='title.car')">
 </head>
 <body>
-	<div th:insert="fragments/nav.html"></div>
+	<div th:replace="fragments/nav.html :: navigation"></div>
 	<article class="box">
 		<span th:utext="${car.plateNumber}">Plate number</span> <span
 			th:utext="${car.carType.name}">Type</span>
@@ -14,16 +11,15 @@
 	<div th:insert="fragments/calendar.html"></div>
 	<div class="box">
 		<form th:action="@{/carevent}" th:object="${newevent}" method="post">
-		<select name="eventType">
-			<option th:each="state : ${T(hu.wirthandras.shifts.domain.car.CarEventType).values()}"
-				th:value="${state}"	th:text="#{${state}}">
-			</option>
-		</select>
-		<input type="hidden" id="dayId" name="dayId" value="-1">
-		<input type="hidden" id="carId" name="carId" th:value="${car.id}">
-		<input type="submit" name="actionAdd" th:value="#{common.add}">
-		<input type="submit" name="actionRemove" th:value="#{common.remove}">
-	</form>
+			<select name="eventType">
+				<option
+					th:each="state : ${T(hu.wirthandras.shifts.domain.car.CarEventType).values()}"
+					th:value="${state}" th:text="#{${state}}"></option>
+			</select> <input type="hidden" id="dayId" name="dayId" value="-1"> <input
+				type="hidden" id="carId" name="carId" th:value="${car.id}">
+			<input type="submit" name="actionAdd" th:value="#{common.add}">
+			<input type="submit" name="actionRemove" th:value="#{common.remove}">
+		</form>
 	</div>
 </body>
 </html>

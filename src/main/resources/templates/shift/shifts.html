@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="/css/style.css">
-<title th:utext="#{shifts}">Shifts</title>
+<head th:replace="fragments/head.html :: header (pageTitle='shifts')">
 </head>
 <body>
-	<div th:insert="fragments/nav.html"></div>
+	<div th:replace="fragments/nav.html :: navigation"></div>
 	<div class="main">
 		<article class="box" th:each="shift : ${shifts}">
 			<div>

@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-<meta charset="UTF-8">
-<title th:utext="#{title.newEmployee}">New Employee</title>
+<head th:replace="fragments/head.html :: header (pageTitle='title.newEmployee')">
 </head>
 <body>
-	<div th:insert="fragments/nav.html"></div>
+	<div th:replace="fragments/nav.html :: navigation"></div>
 	<form class="box" th:action="@{/newemployee}" th:object="${newemployee}" method="post">
 		<input type="text" name="name" th:placeholder="#{employee.name}" autocomplete="off" autofocus="autofocus">
 		<br>

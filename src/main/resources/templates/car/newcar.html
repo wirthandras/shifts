@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-<meta charset="UTF-8">
-<title th:utext="#{title.newCar}">New Car</title>
+<head th:replace="fragments/head.html :: header (pageTitle='title.newCar')">
 </head>
 <body>
-	<div th:insert="fragments/nav.html"></div>
+	<div th:replace="fragments/nav.html :: navigation"></div>
 	<form id="newCarForm" class="box" th:action="@{/newcar}"
 		th:object="${newcar}" method="post">
 		<input id="plateNumber" type="text" name="plateNumber"

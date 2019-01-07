@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="/css/style.css">
-<title th:utext="#{navigation.home}">Home</title>
+<head th:replace="fragments/head.html :: header (pageTitle='navigation.home')">
+	<title th:utext="#{navigation.home}">Home</title>
 </head>
 <body>
-	<div th:insert="fragments/nav.html"></div>
+	<div th:replace="fragments/nav.html :: navigation"></div>
 	<h1 class="home-center">Shifts</h1>
 	<div class="home-center">
 		<span th:text="#{home.welcome}">Welcome message</span>

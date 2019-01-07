@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title th:utext="#{scheduling.generate}">Generate</title>
+<head th:replace="fragments/head.html :: header (pageTitle='scheduling.generate')">
 </head>
 <body>
-	<div th:insert="fragments/nav.html"></div>
+	<div th:replace="fragments/nav.html :: navigation"></div>
 	<form id="clear" class="box" th:action="@{/spreadsheet}" method="get">
 		<button id="clear" type="submit" th:text="#{scheduling.generate} + ' ' + #{scheduling.and} + ' ' + #{scheduling.download}">Generate and Download</button>
 	</form>
