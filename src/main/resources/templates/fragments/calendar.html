@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="/scripts/employee.js"></script>
-<script type="text/javascript" src="/scripts/car.js"></script>
 </head>
 <body>
-	<div th:fragment="calendar" class="box cal flow">
-		<span th:text="#{calendar}">Calendar</span>
-		<div th:utext="${month}">January</div>
-		<div tabindex="-1" th:id="${day.id}" th:onclick="${method}" class="flow tile" th:classappend="${#lists.contains(eventDays, day.id)} ? event"
-			th:each="day : ${days}">
-			<span th:utext="${day.id}">Day</span>
+	<div th:fragment="calendar">
+		<div class="box cal flow">
+			<span th:text="#{calendar}">Calendar</span>
+			<div th:utext="${month}">January</div>
+			<div tabindex="-1" th:id="${day.id}" th:onclick="${method}"
+				class="flow tile"
+				th:classappend="${#lists.contains(eventDays, day.id)} ? event"
+				th:each="day : ${days}">
+				<span th:utext="${day.id}">Day</span>
+			</div>
 		</div>
+		<div class="box flow" id="container" th:text="#{events}">Events</div>
+		<div class="flow" id="userInfo"></div>
 	</div>
-	<div class="box flow" id="container" th:text="#{events}">Events</div>
-	<div class="flow" id="userInfo"></div>
 </body>
+</html>

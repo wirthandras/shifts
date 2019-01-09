@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="fragments/head.html :: header (pageTitle='shifts')">
+<head th:replace="base :: common_header (~{::title}, ~{}, ~{})">
+	<title th:text="#{shift}">Shift</title>
 </head>
 <body>
 	<article class="box">

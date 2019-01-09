@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="fragments/head.html :: header (pageTitle='title.employee')">
+<head th:replace="base :: common_header (~{::title}, ~{}, ~{::script})">
+	<title th:text="#{title.employee}">Employee</title>
+	<script type="text/javascript" src="/scripts/employee.js"></script>
 </head>
 <body>
 	<div th:replace="fragments/nav.html :: navigation"></div>
