@@ -14,7 +14,7 @@
 			<span th:utext="${employee.monthlyHours}">160</span>
 		</div>
 	</article>
-	<div th:insert="fragments/calendar.html"></div>
+	<div th:replace="fragments/calendar.html :: calendar"></div>
 	<div class="box">
 		<form th:action="@{/employeeevent}" th:object="${newevent}" method="post">
 		<select name="eventType">
