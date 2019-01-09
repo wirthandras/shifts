@@ -6,7 +6,7 @@
 <script type="text/javascript" src="/scripts/car.js"></script>
 </head>
 <body>
-	<div class="box cal flow">
+	<div th:fragment="calendar" class="box cal flow">
 		<span th:text="#{calendar}">Calendar</span>
 		<div th:utext="${month}">January</div>
 		<div tabindex="-1" th:id="${day.id}" th:onclick="${method}" class="flow tile" th:classappend="${#lists.contains(eventDays, day.id)} ? event"
