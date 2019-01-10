@@ -16,11 +16,7 @@ public class IntervalService {
 
 	private Set<ShiftInterval> intervals = new HashSet<>();
 
-	public void addInterval(ShiftInterval interval) throws ShiftIntervalAlreadyExistException, CarLockedException{
-		
-		if(carAlreadyLocked(interval)) {
-			throw new CarLockedException();
-		}
+	public void addInterval(ShiftInterval interval) throws ShiftIntervalAlreadyExistException {
 		if(!intervals.add(interval)) {
 			throw new ShiftIntervalAlreadyExistException();
 		} else {
@@ -34,15 +30,6 @@ public class IntervalService {
 			i.setDayId(dailyId);
 			dailyId++;
 		}
-	}
-	
-	private boolean carAlreadyLocked(ShiftInterval interval) {
-		for(ShiftInterval i : intervals) {
-			if (i.isCarLocked(interval)) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	public List<ShiftInterval> getIntervals() {

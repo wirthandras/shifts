@@ -8,7 +8,6 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -21,10 +20,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import hu.wirthandras.shifts.domain.Shift;
 import hu.wirthandras.shifts.domain.ShiftForDisplay;
-import hu.wirthandras.shifts.domain.car.Car;
+import hu.wirthandras.shifts.domain.car.type.CarType;
 import hu.wirthandras.shifts.domain.shift.ShiftInterval;
+import hu.wirthandras.shifts.repository.CarTypeRepository;
 import hu.wirthandras.shifts.repository.ShiftRepository;
-import hu.wirthandras.shifts.services.interval.CarLockedException;
 import hu.wirthandras.shifts.services.interval.IntervalService;
 import hu.wirthandras.shifts.services.interval.ShiftIntervalAlreadyExistException;
 
@@ -35,7 +34,7 @@ public class ShiftService {
 	private ShiftRepository shiftRepository;
 
 	@Autowired
-	private CarService carService;
+	private CarTypeRepository carTypeRepository;
 
 	@Autowired
 	private IntervalService intervalService;
@@ -61,7 +60,7 @@ public class ShiftService {
 		return shiftRepository.findById(id).get();
 	}
 
-	public void addInterval(ShiftInterval interval) throws ShiftIntervalAlreadyExistException, CarLockedException {
+	public void addInterval(ShiftInterval interval) throws ShiftIntervalAlreadyExistException {
 		intervalService.addInterval(interval);
 	}
 
@@ -69,18 +68,12 @@ public class ShiftService {
 		return intervalService.getIntervals();
 	}
 
-	public List<Car> getCars() {
-		List<Car> cars = carService.getCars();
-		Collections.sort(cars);
-		return cars;
-	}
-
 	public void generate() {
 		LocalDate now = LocalDate.now();
 		LocalDate nextMonth = now.with(firstDayOfNextMonth());
 		for (LocalDate d : generateDays(nextMonth)) {
 			for (ShiftInterval i : intervalService.getIntervals()) {
-				shiftRepository.save(new Shift(Date.valueOf(d), i.getFrom(), i.getTo(), i.getCar()));
+				shiftRepository.save(new Shift(Date.valueOf(d), i.getFrom(), i.getTo(), i.getCarType()));
 			}
 		}
 	}
@@ -112,7 +105,6 @@ public class ShiftService {
 		} else {
 			throw new NoSuchElementException();
 		}
-
 	}
 
 	public void removeInterval(String id) {
@@ -137,6 +129,10 @@ public class ShiftService {
 
 	public List<Shift> getPersistedShifts() {
 		return shiftRepository.findAll();
+	}
+
+	public List<CarType> getCarTypes() {
+		return carTypeRepository.findAll();
 	}
 
 }

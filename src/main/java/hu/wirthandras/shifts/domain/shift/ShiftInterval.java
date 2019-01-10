@@ -1,16 +1,11 @@
 package hu.wirthandras.shifts.domain.shift;
 
-import java.util.NavigableSet;
-import java.util.Set;
-import java.util.TreeSet;
-
 import javax.validation.constraints.NotNull;
 
-import hu.wirthandras.shifts.domain.car.Car;
+import hu.wirthandras.shifts.domain.car.type.CarType;
 
 public class ShiftInterval implements Comparable<ShiftInterval> {
 
-	private static final int ACCEPTABLE_BOUND_LIMIT = 1;
 	private static final int HOUR24 = 24;
 
 	private int dayId;
@@ -18,18 +13,18 @@ public class ShiftInterval implements Comparable<ShiftInterval> {
 	private int from = 6;
 	@NotNull
 	private int to = 18;
-	private Car car;
+	private CarType carType;
 
 	public ShiftInterval() {
 		this.from = 6;
 		this.to = 18;
 	}
 
-	public ShiftInterval(@NotNull int from, @NotNull int to, Car car) {
+	public ShiftInterval(@NotNull int from, @NotNull int to, CarType carType) {
 		super();
 		this.from = from;
 		this.to = to;
-		this.car = car;
+		this.carType = carType;
 	}
 
 	public int getDayId() {
@@ -56,12 +51,12 @@ public class ShiftInterval implements Comparable<ShiftInterval> {
 		this.to = to;
 	}
 
-	public Car getCar() {
-		return car;
+	public CarType getCarType() {
+		return carType;
 	}
 
-	public void setCar(Car car) {
-		this.car = car;
+	public void setCarType(CarType carType) {
+		this.carType = carType;
 	}
 
 	@Override
@@ -86,65 +81,37 @@ public class ShiftInterval implements Comparable<ShiftInterval> {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof ShiftInterval) {
-			ShiftInterval s = (ShiftInterval) obj;
-			if (s.from == this.from && s.to == this.to) {
-				return car == null && s.getCar() == null || car.equals(s.getCar());
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
-	}
-
-	@Override
 	public int hashCode() {
-		int hashCode = this.from * HOUR24 + this.to;
-		if (car != null) {
-			hashCode += car.getPlateNumber().hashCode();
-		}
-		return hashCode;
-	}
-
-	public boolean isCarLocked(ShiftInterval interval) {
-		if (interval.getCar().equals(car)) {
-			return hasConflict(interval);
-		}
-		return false;
-	}
-
-	private boolean hasConflict(ShiftInterval other) {
-		if (hasSameEndPoint(other)) {
-			return true;
-		}
-		return checkBoundaries(other);
-	}
-
-	private boolean checkBoundaries(ShiftInterval other) {
-		NavigableSet<Integer> set = new TreeSet<>();
-		set.addAll(generateIntervalInnerHours(from, getDuration()));
-
-		int of = other.getFrom();
-		int od = other.getDuration();
-
-		Set<Integer> sorted = set.subSet(of, of + od);
-
-		return sorted.size() > ACCEPTABLE_BOUND_LIMIT;
-	}
-	
-	private Set<Integer> generateIntervalInnerHours(int from, int duration) {
-		Set<Integer> result = new TreeSet<>();
-		for(int i = from; i < from + duration; i++) {
-			result.add(i);
-		}
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((carType == null) ? 0 : carType.hashCode());
+		result = prime * result + dayId;
+		result = prime * result + from;
+		result = prime * result + to;
 		return result;
 	}
 
-	private boolean hasSameEndPoint(ShiftInterval other) {
-		return from == other.getFrom() || to == other.getTo();
-
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ShiftInterval other = (ShiftInterval) obj;
+		if (carType == null) {
+			if (other.carType != null)
+				return false;
+		} else if (!carType.equals(other.carType))
+			return false;
+		if (dayId != other.dayId)
+			return false;
+		if (from != other.from)
+			return false;
+		if (to != other.to)
+			return false;
+		return true;
 	}
 
 }

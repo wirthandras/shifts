@@ -13,9 +13,9 @@
 					name="from" min="0" max="24" value="6" /><span th:text="#{unit.hour}">Hour</span></li>
 				<li><span><span th:utext="#{shift.end}">Finish</span>:<input class="number-input" type="number"
 					name="to" min="0" max="24" value="18"><span th:text="#{unit.hour}">Hour</span></span></li>
-				<li><span th:text="#{shift.typeAndPlateNumber}">Type and (Plate number)</span>:<select th:field="*{car}">
-						<option th:each="c : ${cars}" th:value="${c.id}"
-							th:text="${c.carType.name} + '(' + ${c.plateNumber} + ')'"></option>
+				<li><span th:text="#{shift.type}">Type</span>:<select th:field="*{carType}">
+						<option th:each="c : ${carTypes}" th:value="${c.id}"
+							th:text="${c.name}"></option>
 				</select></li>
 				<li>
 					<button id="submit" type="submit"><i class="fa fa fa-calendar-plus-o w3-xxxtiny" th:text="#{common.add}">Add</i></button>
@@ -52,12 +52,8 @@
 				th:utext="${interval.to}">Finish</span>
 			</div>
 			<div>
-				<span th:utext="#{car.type}">Type</span>:
-				<span th:utext="${interval.car.carType.name}">Roko</span>
-			</div>
-			<div>
-				<span th:utext="#{car.plateNumber}">Plate number</span>:
-				<span th:utext="${interval.car.plateNumber}">Car</span>
+				<span th:utext="#{shift.type}">Type</span>:
+				<span th:utext="${interval.carType.name}">Roko</span>
 			</div>
 			<form th:action="@{/shiftplanner/} + ${interval.dayId} + @{/action/remove}" method="post">
 				<button type="submit"><i class="fa fa fa-calendar-minus-o w3-xxxtiny" th:text="#{common.remove}">Remove</i></button>

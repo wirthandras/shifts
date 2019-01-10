@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import hu.wirthandras.shifts.domain.car.Car;
+import hu.wirthandras.shifts.domain.car.type.CarType;
 
 @Entity
 public class Shift {
@@ -22,14 +22,14 @@ public class Shift {
 	protected int start;
 	protected int end;
 	@ManyToOne(optional = false)
-	protected Car car;
+	protected CarType carType;
 
-	public Shift(Date date, int start, int end, Car car) {
+	public Shift(Date date, int start, int end, CarType carType) {
 		super();
 		this.date = date;
 		this.start = start;
 		this.end = end;
-		this.car = car;
+		this.carType = carType;
 	}
 
 	public Shift() {
@@ -113,6 +113,14 @@ public class Shift {
 
 	public String toInterval() {
 		return getStart() + SEPARATOR + getEnd();
+	}
+
+	public CarType getCarType() {
+		return carType;
+	}
+
+	public void setCarType(CarType carType) {
+		this.carType = carType;
 	}
 
 }
