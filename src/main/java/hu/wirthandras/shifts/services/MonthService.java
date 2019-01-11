@@ -5,12 +5,18 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import hu.wirthandras.shifts.domain.MonthlyWorkingHours;
 import hu.wirthandras.shifts.domain.day.Day;
+import hu.wirthandras.shifts.repository.MonthlyWorkingHoursRepository;
 
 @Service
 public class MonthService {
+
+	@Autowired
+	private MonthlyWorkingHoursRepository repository;
 
 	public List<Day> getDaysInCurrentMonth() {
 		List<Day> list = new ArrayList<>();
@@ -34,6 +40,10 @@ public class MonthService {
 	public Month getMonthName() {
 		LocalDate date = LocalDate.now();
 		return date.getMonth();
+	}
+
+	public List<MonthlyWorkingHours> getAll() {
+		return repository.findAll();
 	}
 
 }

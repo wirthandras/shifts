@@ -8,16 +8,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class MontlyWorkingHours {
+public class MonthlyWorkingHours {
 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	private Long id;
 	private LocalDate month;
-	private int montlyWorkingHour;
+	private int monthlyWorkingHour;
 
-	public MontlyWorkingHours() {
+	public MonthlyWorkingHours() {
 		super();
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public LocalDate getMonth() {
@@ -28,12 +36,12 @@ public class MontlyWorkingHours {
 		this.month = month;
 	}
 
-	public int getMontlyWorkingHour() {
-		return montlyWorkingHour;
+	public int getMonthlyWorkingHour() {
+		return monthlyWorkingHour;
 	}
 
-	public void setMontlyWorkingHour(int montlyWorkingHour) {
-		this.montlyWorkingHour = montlyWorkingHour;
+	public void setMonthlyWorkingHour(int monthlyWorkingHour) {
+		this.monthlyWorkingHour = monthlyWorkingHour;
 	}
 
 }
