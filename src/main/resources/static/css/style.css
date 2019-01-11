@@ -1,3 +1,31 @@
+/*Basic styles*/
+body{
+	width: 100%;
+	min-height: 100%;
+	margin: 0;
+	padding: 0;
+}
+.clear{
+	clear:both;
+}
+/*Main element styles*/
+.content{
+	width:100%;
+	box-sizing: border-box;
+}
+.main{
+	width: 75%;
+	float:left;
+	margin:10px;
+	box-sizing: border-box;
+}
+.side{
+	width: 25%;
+	float:left;
+	box-sizing: border-box;
+	margin:10px;
+}
+/*Other*/
 .box {
     background-color: #333;
     padding: 0.5em;
