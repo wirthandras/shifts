@@ -49,9 +49,10 @@
 		<div th:utext="#{${employee.job.name}}">Job</div>
 		<div th:utext="${employee.night} ? #{employee.night.yes} : #{employee.night.no}">Operate at night</div>
 		<div>
-			<span th:text="#{employee.monthlyHours}">Monthly Hours</span>
+			<span th:text="#{employee.monthlyWorkingPercent}">Contract Working Percent</span>
 			<span>:</span>
-			<span th:utext="${employee.monthlyHours}">160</span>
+			<span th:utext="${employee.contractPercent}">100</span>
+			<span th:text="#{unit.percent}">%</span>
 		</div>
 	</article>
 	<div th:replace="fragments/calendar.html :: calendar"></div>

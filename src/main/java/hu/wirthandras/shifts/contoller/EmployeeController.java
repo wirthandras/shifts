@@ -27,7 +27,7 @@ import hu.wirthandras.shifts.services.MonthService;
 @Controller
 public class EmployeeController extends AbstractControllerBase {
 
-	private static final int DEFAULT_MONTHLY_HOURS = 160;
+	private static final int DEFAULT_FULL_TIME_PERCENT = 100;
 
 	@Autowired
 	private EventService eventService;
@@ -89,9 +89,9 @@ public class EmployeeController extends AbstractControllerBase {
 		return ResponseEntity.ok(result);
 	}
 
-	@ModelAttribute("defaultMonthlyHours")
-	public int getDefaultMonthlyHour() {
-		return DEFAULT_MONTHLY_HOURS;
+	@ModelAttribute("defaultFullTimePercent")
+	public int getDefaultFullTimePercent() {
+		return DEFAULT_FULL_TIME_PERCENT;
 	}
 
 	@ModelAttribute("jobs")

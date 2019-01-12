@@ -26,7 +26,7 @@ public class Employee implements Comparable<Employee> {
 
 	private boolean night;
 
-	private int monthlyHours;
+	private int contractPercent;
 
 	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
 	private Set<EmployeeEvent> events;
@@ -73,12 +73,12 @@ public class Employee implements Comparable<Employee> {
 		this.night = night;
 	}
 
-	public int getMonthlyHours() {
-		return monthlyHours;
+	public int getContractPercent() {
+		return contractPercent;
 	}
 
-	public void setMonthlyHours(int monthlyHours) {
-		this.monthlyHours = monthlyHours;
+	public void setContractPercent(int contractPercent) {
+		this.contractPercent = contractPercent;
 	}
 
 	@Override

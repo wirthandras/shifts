@@ -16,10 +16,10 @@
 		<br>
 		<input type="checkbox" name="night" value="true" th:text="#{employee.night}">
 		<div>
-			<span th:text="#{employee.monthlyHours}">Default Monthly hours:</span>
+			<span th:text="#{employee.monthlyWorkingPercent}">Default full time percent:</span>
 			<span>:</span>
-			<input type="number" name="monthlyHours" th:value="${defaultMonthlyHours}">
-			<span th:text="#{unit.hour}">Hour</span>
+			<input type="number" name="contractPercent" th:value="${defaultFullTimePercent}">
+			<span th:text="#{unit.percent}">%</span>
 		</div>
 		<input type="submit" th:value="#{common.add}">
 	</form>

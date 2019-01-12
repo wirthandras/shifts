@@ -15,12 +15,12 @@ insert into MONTHLY_WORKING_HOURS (month, monthly_working_hour) values ('2019-10
 insert into MONTHLY_WORKING_HOURS (month, monthly_working_hour) values ('2019-11-01', 160)
 insert into MONTHLY_WORKING_HOURS (month, monthly_working_hour) values ('2019-12-01', 160)
 
-insert into EMPLOYEE (name,job_id,night,monthly_hours) values ('Vizi Marci', select id from JOB where name='DRIVER', false, 160)
-insert into EMPLOYEE (name,job_id,night,monthly_hours) values ('Hegyi Józsi', select id from JOB where name='DOCTOR', false, 160)
-insert into EMPLOYEE (name,job_id,night,monthly_hours) values ('Kuti Béla', select id from JOB where name='MEDIC', false, 160)
-insert into EMPLOYEE (name,job_id,night,monthly_hours) values ('Tanyasi Zoli', select id from JOB where name='DRIVER', false, 160)
-insert into EMPLOYEE (name,job_id,night,monthly_hours) values ('Városi Matyi', select id from JOB where name='DOCTOR', false, 160)
-insert into EMPLOYEE (name,job_id,night,monthly_hours) values ('Földi Elek', select id from JOB where name='MEDIC', false, 160)
+insert into EMPLOYEE (name,job_id,night,contract_percent) values ('Vizi Marci', select id from JOB where name='DRIVER', false, 100)
+insert into EMPLOYEE (name,job_id,night,contract_percent) values ('Hegyi Józsi', select id from JOB where name='DOCTOR', false, 100)
+insert into EMPLOYEE (name,job_id,night,contract_percent) values ('Kuti Béla', select id from JOB where name='MEDIC', false, 100)
+insert into EMPLOYEE (name,job_id,night,contract_percent) values ('Tanyasi Zoli', select id from JOB where name='DRIVER', false, 100)
+insert into EMPLOYEE (name,job_id,night,contract_percent) values ('Városi Matyi', select id from JOB where name='DOCTOR', false, 100)
+insert into EMPLOYEE (name,job_id,night,contract_percent) values ('Földi Elek', select id from JOB where name='MEDIC', false, 100)
 
 insert into CAR_TYPE (name) values ('KIM')
 insert into CAR_TYPE (name) values ('ROKO')
