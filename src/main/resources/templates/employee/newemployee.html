@@ -18,9 +18,10 @@
 		<div>
 			<span th:text="#{employee.monthlyWorkingPercent}">Default full time percent:</span>
 			<span>:</span>
-			<input type="number" name="contractPercent" th:value="${defaultFullTimePercent}">
+			<input type="number" name="contractPercent" th:field="*{contractPercent}" th:value="${defaultFullTimePercent}">
 			<span th:text="#{unit.percent}">%</span>
 		</div>
+		<div th:if="${#fields.hasErrors('contractPercent')}" th:errors="*{contractPercent}">Name Error</div>
 		<input type="submit" th:value="#{common.add}">
 	</form>
 </body>

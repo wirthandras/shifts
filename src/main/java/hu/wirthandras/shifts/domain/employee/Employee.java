@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 import hu.wirthandras.shifts.domain.job.Job;
 
@@ -26,6 +28,8 @@ public class Employee implements Comparable<Employee> {
 
 	private boolean night;
 
+	@Min(0)
+	@Max(100)
 	private int contractPercent;
 
 	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
