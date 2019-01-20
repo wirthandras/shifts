@@ -41,6 +41,7 @@ insert into SHIFT (date,start,end,car_type_id) values (CURRENT_DATE(),9,17, sele
 insert into SHIFT (date,start,end,car_type_id) values (CURRENT_DATE(),6,18, select id from CAR_TYPE where name='KIM')
 insert into SHIFT (date,start,end,car_type_id) values (CURRENT_DATE(),18,6, select id from CAR_TYPE where name='KIM')
 
-insert into EMPLOYEE_EVENT (DATE,TYPE,EMPLOYEE_ID) values ('2018-11-5','SICK', select id from EMPLOYEE where name='Tanyasi Zoli')
-insert into EMPLOYEE_EVENT (DATE,TYPE,EMPLOYEE_ID) values ('2018-11-11','HOLIDAY', select id from EMPLOYEE where name='Tanyasi Zoli')
-insert into EMPLOYEE_EVENT (DATE,TYPE,EMPLOYEE_ID) values ('2018-11-12','HOLIDAY', select id from EMPLOYEE where name='Tanyasi Zoli')
+insert into EMPLOYEE_EVENT (DATE,TYPE,EMPLOYEE_ID) values ('2019-01-5','SICK', select id from EMPLOYEE where name='Tanyasi Zoli')
+insert into EMPLOYEE_EVENT (DATE,TYPE,EMPLOYEE_ID) values ('2019-01-11','HOLIDAY', select id from EMPLOYEE where name='Tanyasi Zoli')
+insert into EMPLOYEE_EVENT (DATE,TYPE,EMPLOYEE_ID) values ('2019-01-12','HOLIDAY', select id from EMPLOYEE where name='Tanyasi Zoli')
+insert into EMPLOYEE_EVENT (DATE,TYPE,EMPLOYEE_ID,HOUR_START,HOUR_END) values ('2019-01-13','REST', select id from EMPLOYEE where name='Tanyasi Zoli', 11, 14)
