@@ -12,9 +12,7 @@ public class ScreenMapper {
 		map.put("Home", "home");
 		map.put("Generate", "generate");
 		map.put("Employees", "employees");
-		map.put("Cars", "cars");
 		map.put("Shifts", "shifts");
-		map.put("New Car", "newCar");
 		map.put("New Employee", "newEmployee");
 		map.put("Details", "details");
 		map.put("New", "newsDropdown");
@@ -24,8 +22,7 @@ public class ScreenMapper {
 		map.put("Shift", "formShift");
 		map.put("new shift element", "shiftElement");
 		map.put("Error", "errorMessage");
-		map.put("Plate Number", "plateNumber");
-		map.put("NewCarForm", "newCarForm");
+		map.put("Monthly Hours", "monthlyWorkingHours");
 	}
 	
 	public String getId(String screenName) {
