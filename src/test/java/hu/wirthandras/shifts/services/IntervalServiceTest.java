@@ -10,7 +10,6 @@ import org.mockito.Mockito;
 import hu.wirthandras.shifts.domain.car.type.CarType;
 import hu.wirthandras.shifts.domain.shift.ShiftInterval;
 import hu.wirthandras.shifts.services.interval.IntervalService;
-import hu.wirthandras.shifts.services.interval.ShiftIntervalAlreadyExistException;
 
 public class IntervalServiceTest {
 
@@ -27,29 +26,26 @@ public class IntervalServiceTest {
 	}
 
 	@Test
-	public void testAddTwoDifferentInterval() throws ShiftIntervalAlreadyExistException {
+	public void testAddSameAsTwice() {
 		ShiftInterval si = new ShiftInterval(6, 18, carTypeMock);
-		ShiftInterval si2 = new ShiftInterval(18, 6, carTypeMock);
 		service.addInterval(si);
-		service.addInterval(si2);
+
+		Assert.assertEquals(1, service.numberOfShifts());
+
+		service.addInterval(si);
+		Assert.assertEquals(2, service.numberOfShifts());
+
+		service.remove("1");
+		Assert.assertEquals(2, service.numberOfShifts());
+
+		service.remove("2");
+		Assert.assertEquals(1, service.numberOfShifts());
 	}
 
 	@Test
-	public void testAddSameAsTwice() throws ShiftIntervalAlreadyExistException {
-
-		expected.expect(ShiftIntervalAlreadyExistException.class);
-
-		ShiftInterval si = new ShiftInterval(6, 18, carTypeMock);
-		service.addInterval(si);
-		service.addInterval(si);
-	}
-
-	@Test
-	public void testAddTwoIntervalAndRemoveOneInterval() throws ShiftIntervalAlreadyExistException {
+	public void testAddTwoIntervalAndRemoveOneInterval() {
 		ShiftInterval si1 = new ShiftInterval(6, 18, carTypeMock);
-		si1.setDayId(1);
 		ShiftInterval si2 = new ShiftInterval(18, 6, carTypeMock);
-		si2.setDayId(2);
 
 		Assert.assertEquals(0, service.numberOfShifts());
 

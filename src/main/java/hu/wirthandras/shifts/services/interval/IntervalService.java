@@ -2,10 +2,8 @@ package hu.wirthandras.shifts.services.interval;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
@@ -14,14 +12,11 @@ import hu.wirthandras.shifts.domain.shift.ShiftInterval;
 @Service
 public class IntervalService {
 
-	private Set<ShiftInterval> intervals = new HashSet<>();
+	private List<ShiftInterval> intervals = new ArrayList<>();
 
-	public void addInterval(ShiftInterval interval) throws ShiftIntervalAlreadyExistException {
-		if(!intervals.add(interval)) {
-			throw new ShiftIntervalAlreadyExistException();
-		} else {
-			recalculateDailyIds();
-		}
+	public void addInterval(ShiftInterval interval) {
+		intervals.add(interval);
+		recalculateDailyIds();
 	}
 	
 	private void recalculateDailyIds() {
@@ -35,13 +30,14 @@ public class IntervalService {
 	public List<ShiftInterval> getIntervals() {
 		List<ShiftInterval> copy = new ArrayList<>(intervals);
 		Collections.sort(copy);
-		return copy;
+		return Collections.unmodifiableList(copy);
 	}
 
 	public void remove(String id) {
 		int dayId = Integer.parseInt(id);
 		ShiftInterval i = find(dayId);
 		intervals.remove(i);
+		recalculateDailyIds();
 	}
 	
 	private ShiftInterval find(int dayId) {

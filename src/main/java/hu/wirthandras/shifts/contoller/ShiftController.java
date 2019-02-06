@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import hu.wirthandras.shifts.domain.car.type.CarType;
 import hu.wirthandras.shifts.domain.shift.ShiftInterval;
 import hu.wirthandras.shifts.services.ShiftService;
-import hu.wirthandras.shifts.services.interval.ShiftIntervalAlreadyExistException;
 
 @Controller
 public class ShiftController extends AbstractControllerBase {
@@ -80,13 +79,7 @@ public class ShiftController extends AbstractControllerBase {
 
 	@PostMapping("shiftplanner")
 	public String shiftPlannerAdd(@ModelAttribute("shiftinterval") ShiftInterval interval, Model model) {
-		try {
-			shiftService.addInterval(interval);
-		} catch (ShiftIntervalAlreadyExistException e) {
-			model.addAttribute("intervals", shiftService.getIntervals());
-			model.addAttribute("errorKey", "error.shiftIsAlreadyExist");
-			return getTempateFolder() + "shiftplanner";
-		}
+		shiftService.addInterval(interval);
 		return "redirect:shiftplanner";
 	}
 
