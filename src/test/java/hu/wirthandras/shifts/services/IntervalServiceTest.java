@@ -36,6 +36,9 @@ public class IntervalServiceTest {
 
 	@Test
 	public void testAddSameAsTwice() throws ShiftIntervalAlreadyExistException {
+
+		expected.expect(ShiftIntervalAlreadyExistException.class);
+
 		ShiftInterval si = new ShiftInterval(6, 18, carTypeMock);
 		service.addInterval(si);
 		service.addInterval(si);
