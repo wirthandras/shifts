@@ -56,4 +56,8 @@ public class IntervalService {
 		return e;
 	}
 
+	public int numberOfShifts() {
+		return intervals.size();
+	}
+
 }
