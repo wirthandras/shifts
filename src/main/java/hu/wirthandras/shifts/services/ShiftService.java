@@ -22,6 +22,7 @@ import hu.wirthandras.shifts.domain.Shift;
 import hu.wirthandras.shifts.domain.ShiftForDisplay;
 import hu.wirthandras.shifts.domain.car.type.CarType;
 import hu.wirthandras.shifts.domain.shift.ShiftInterval;
+import hu.wirthandras.shifts.exception.ShiftNotFoundException;
 import hu.wirthandras.shifts.repository.CarTypeRepository;
 import hu.wirthandras.shifts.repository.ShiftRepository;
 import hu.wirthandras.shifts.services.interval.IntervalService;
@@ -54,9 +55,13 @@ public class ShiftService {
 		return shiftDisplayed;
 	}
 
-	public Shift getShift(String idAsString) {
+	public Shift getShift(String idAsString) throws ShiftNotFoundException {
 		Long id = Long.parseLong(idAsString);
-		return shiftRepository.findById(id).get();
+		Optional<Shift> op = shiftRepository.findById(id);
+		if (op.isPresent()) {
+			return op.get();
+		}
+		throw new ShiftNotFoundException();
 	}
 
 	public void addInterval(ShiftInterval interval) {

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import hu.wirthandras.shifts.domain.car.type.CarType;
 import hu.wirthandras.shifts.domain.shift.ShiftInterval;
+import hu.wirthandras.shifts.exception.ShiftNotFoundException;
 import hu.wirthandras.shifts.services.ShiftService;
 
 @Controller
@@ -56,7 +57,7 @@ public class ShiftController extends AbstractControllerBase {
 	}
 
 	@RequestMapping("shift/{id}")
-	public String shift(@PathVariable String id, Model model) {
+	public String shift(@PathVariable String id, Model model) throws ShiftNotFoundException {
 		model.addAttribute("shift", shiftService.getShift(id));
 		return getTempateFolder() + "shift";
 	}

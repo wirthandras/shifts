@@ -1,6 +1,7 @@
 package hu.wirthandras.shifts.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import hu.wirthandras.shifts.domain.employee.Employee;
 import hu.wirthandras.shifts.domain.job.Job;
+import hu.wirthandras.shifts.exception.EmployeeNotFoundException;
 import hu.wirthandras.shifts.repository.EmployeeRepository;
 
 @Service
@@ -20,9 +22,13 @@ public class EmployeeService {
 	@Autowired
 	private JobRepository repositoryJob;
 
-	public Employee getEmployee(String idAsString) {
+	public Employee getEmployee(String idAsString) throws EmployeeNotFoundException {
 		long id = Long.parseLong(idAsString);
-		return repositoryEmployee.findById(id).get();
+		Optional<Employee> op = repositoryEmployee.findById(id);
+		if (op.isPresent()) {
+			return op.get();
+		}
+		throw new EmployeeNotFoundException();
 	}
 
 	public List<Employee> getEmployees() {

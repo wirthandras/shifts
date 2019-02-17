@@ -21,6 +21,7 @@ import hu.wirthandras.shifts.domain.employee.Employee;
 import hu.wirthandras.shifts.domain.employee.EmployeeEvent;
 import hu.wirthandras.shifts.domain.employee.EmployeeEventInput;
 import hu.wirthandras.shifts.domain.job.Job;
+import hu.wirthandras.shifts.exception.EmployeeNotFoundException;
 import hu.wirthandras.shifts.services.EmployeeService;
 import hu.wirthandras.shifts.services.EventService;
 import hu.wirthandras.shifts.services.LocalizationService;
@@ -44,7 +45,7 @@ public class EmployeeController extends AbstractControllerBase {
 	private LocalizationService serviceLocalization;
 
 	@GetMapping("employee/{id}")
-	public String employee(@PathVariable String id, Model model) {
+	public String employee(@PathVariable String id, Model model) throws EmployeeNotFoundException {
 		model.addAttribute("employee", service.getEmployee(id));
 		model.addAttribute("month", serviceMonth.getMonthName());
 		model.addAttribute("days", serviceMonth.getDaysInCurrentMonth());
@@ -77,20 +78,22 @@ public class EmployeeController extends AbstractControllerBase {
 	}
 
 	@PostMapping(value = "/employeeevent", params = "actionAdd")
-	public String newEmployeeEvent(@ModelAttribute("newevent") EmployeeEventInput input, HttpServletRequest request) {
+	public String newEmployeeEvent(@ModelAttribute("newevent") EmployeeEventInput input, HttpServletRequest request)
+			throws EmployeeNotFoundException {
 		eventService.addEmployeEvent(input);
 		return "redirect:" + request.getHeader(REFERER);
 	}
 
 	@PostMapping(value = "/employeeevent", params = "actionRemove")
-	public String removeEmployeeEvent(@ModelAttribute("newevent") EmployeeEventInput input,
-			HttpServletRequest request) {
+	public String removeEmployeeEvent(@ModelAttribute("newevent") EmployeeEventInput input, HttpServletRequest request)
+			throws EmployeeNotFoundException {
 		eventService.removeEmployeEvent(input);
 		return "redirect:" + request.getHeader(REFERER);
 	}
 
 	@PostMapping(value = "/api/employees")
-	public ResponseEntity<?> api(@RequestParam("dayId") String dayId, @RequestParam("employee") String employee) {
+	public ResponseEntity<?> api(@RequestParam("dayId") String dayId, @RequestParam("employee") String employee)
+			throws EmployeeNotFoundException {
 		List<EmployeeEvent> employeeEvents = eventService.getEmployeeEvents(dayId, employee);
 		EventResponse result = new EventResponse(serviceLocalization.localizeEmployeeEvents(employeeEvents));
 		return ResponseEntity.ok(result);

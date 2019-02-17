@@ -21,6 +21,7 @@ import hu.wirthandras.shifts.domain.employee.Employee;
 import hu.wirthandras.shifts.domain.employee.EmployeeEvent;
 import hu.wirthandras.shifts.domain.employee.EmployeeEventInput;
 import hu.wirthandras.shifts.domain.employee.EmployeeEventType;
+import hu.wirthandras.shifts.exception.EmployeeNotFoundException;
 import hu.wirthandras.shifts.repository.EventEmployeeRepository;
 
 @Service
@@ -34,13 +35,14 @@ public class EventService {
 	@Autowired
 	private EmployeeService serviceEmployee;
 
-	public List<EmployeeEvent> getEmployeeEvents(String dayId, String employee) {
+	public List<EmployeeEvent> getEmployeeEvents(String dayId, String employee) throws EmployeeNotFoundException {
 		LocalDate dayDate = ServiceUtil.resolveDateFromDayId(dayId);
 		Employee emp = serviceEmployee.getEmployee(employee);
 		return repositoryEventEmployee.findByEmployeeAndDate(emp, dayDate);
 	}
 
-	public Set<Integer> getEmployeeEventsDays(String employeeId, LocalDate currentMonth) {
+	public Set<Integer> getEmployeeEventsDays(String employeeId, LocalDate currentMonth)
+			throws EmployeeNotFoundException {
 		Employee e = serviceEmployee.getEmployee(employeeId);
 		List<EmployeeEvent> events = repositoryEventEmployee.findByEmployee(e);
 		return events.stream()
@@ -51,7 +53,7 @@ public class EventService {
 	}
 
 	@Transactional
-	public void addEmployeEvent(EmployeeEventInput input) {
+	public void addEmployeEvent(EmployeeEventInput input) throws EmployeeNotFoundException {
 		LocalDate dayDate = ServiceUtil.resolveDateFromDayId(input.getDayId());
 		Employee e = serviceEmployee.getEmployee(input.getEmployeeId());
 		EmployeeEvent event = new EmployeeEvent(e, dayDate, input.getEventType());
@@ -63,7 +65,7 @@ public class EventService {
 		}
 	}
 
-	public void removeEmployeEvent(EmployeeEventInput input) {
+	public void removeEmployeEvent(EmployeeEventInput input) throws EmployeeNotFoundException {
 		Employee e = serviceEmployee.getEmployee(input.getEmployeeId());
 		LocalDate dayDate = ServiceUtil.resolveDateFromDayId(input.getDayId());
 		List<EmployeeEvent> list = repositoryEventEmployee.findByEmployeeAndDate(e, dayDate);
