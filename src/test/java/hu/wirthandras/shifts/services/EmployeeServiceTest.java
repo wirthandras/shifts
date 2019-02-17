@@ -34,7 +34,7 @@ public class EmployeeServiceTest {
 	@Rule
 	public ExpectedException expected = ExpectedException.none();
 
-	private EmployeeService service = new EmployeeService();
+	private EmployeeService service;
 
 	private EmployeeRepository mockEmployeeRepository;
 
