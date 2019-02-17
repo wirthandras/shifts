@@ -53,10 +53,8 @@ public class EmployeeServiceTest {
 		Job job = mock(Job.class);
 		when(job.getName()).thenReturn(JOB_MEDIC);
 		when(mockEmployee.getJob()).thenReturn(job);
+		when(mockEmployeeRepository.findById(1l)).thenReturn(Optional.of(mockEmployee));
 
-		Optional<Employee> optional = Optional.of(mockEmployee);
-
-		when(mockEmployeeRepository.findById(1l)).thenReturn(optional);
 		List<Employee> listEmployees = new ArrayList<Employee>();
 		listEmployees.add(mockEmployee);
 		when(mockEmployeeRepository.findAll()).thenReturn(listEmployees);
