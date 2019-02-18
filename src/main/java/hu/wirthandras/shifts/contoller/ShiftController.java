@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import hu.wirthandras.shifts.domain.car.type.CarType;
 import hu.wirthandras.shifts.domain.shift.ShiftInterval;
@@ -26,37 +25,37 @@ public class ShiftController extends AbstractControllerBase {
 		this.shiftService = shiftService;
 	}
 
-	@RequestMapping("shifts")
+	@GetMapping("shifts")
 	public String shifts(Model model) {
 		model.addAttribute("shifts", shiftService.getAll());
 		return getTempateFolder() + "shifts";
 	}
 
-	@RequestMapping("shift/{id}/action/remove")
+	@GetMapping("shift/{id}/action/remove")
 	public String removeSpecifiedShift(@PathVariable("id") String id) {
 		shiftService.remove(id);
 		return "redirect:/shifts";
 	}
 
-	@RequestMapping("shift/{id}/action/wish")
+	@GetMapping("shift/{id}/action/wish")
 	public String addShiftWish(@PathVariable("id") String id) {
 		shiftService.addWish(id);
 		return "redirect:/shifts";
 	}
 
-	@RequestMapping("shift/{id}/action/wishclear")
+	@GetMapping("shift/{id}/action/wishclear")
 	public String removeShiftWish(@PathVariable("id") String id) {
 		shiftService.removeWish(id);
 		return "redirect:/shifts";
 	}
 
-	@RequestMapping("shiftplanner/{id}/action/remove")
+	@GetMapping("shiftplanner/{id}/action/remove")
 	public String removeSpecifiedShiftInterval(@PathVariable("id") String id) {
 		shiftService.removeInterval(id);
 		return "redirect:/shiftplanner";
 	}
 
-	@RequestMapping("shift/{id}")
+	@GetMapping("shift/{id}")
 	public String shift(@PathVariable String id, Model model) throws ShiftNotFoundException {
 		model.addAttribute("shift", shiftService.getShift(id));
 		return getTempateFolder() + "shift";
