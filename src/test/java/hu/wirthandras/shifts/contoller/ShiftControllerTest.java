@@ -18,7 +18,7 @@ import hu.wirthandras.shifts.services.ShiftService;
 public class ShiftControllerTest {
 
 	@Rule
-	public Timeout timeout = new Timeout(1, TimeUnit.SECONDS);
+	public Timeout timeout = new Timeout(10, TimeUnit.SECONDS);
 
 	private ShiftController controller;
 
