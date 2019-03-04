@@ -90,4 +90,12 @@ public class Employee implements Comparable<Employee> {
 		return this.name.compareTo(o.name);
 	}
 
+	public Set<EmployeeEvent> getEvents() {
+		return events;
+	}
+
+	public void setEvents(Set<EmployeeEvent> events) {
+		this.events = events;
+	}
+
 }
